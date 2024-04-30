@@ -1,10 +1,37 @@
 
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import { FaCheck } from "react-icons/fa6";
+import Swal from 'sweetalert2';
 import useStore from "../userStore";
 export default function DetalleReserva({ user }) {
   const deleteUser = useStore((state)=>state.deleteUser)
+  const getUserById = useStore((state) => state.getUserById); 
+
+
+  const handleEliminar = () => {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Esta acción eliminará la reserva',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteUser(user.id);
+        Swal.fire(
+          'Eliminado!',
+          'La reserva ha sido eliminada.',
+          'success'
+        );
+      }
+    });
+  };
+
+
+
   return (
     <div className="bg-white rounded-xl mx-5 my-10 px-5 py-10">
     <div className='flex items-center justify-around  '>
@@ -37,8 +64,8 @@ export default function DetalleReserva({ user }) {
 
   
 <div class=" flex justify-between py-2 gap-3  mt-10">
-<button type="button" className=" flex gap-2 items-center py-2 px-6 bg-indigo-500 hover:bg-indigo-800 text-white font-bold uppercase rounded-lg text-sm" ><FaEdit /> Editar Reserva</button>
-<button type="button" className=" flex gap-2 items-center py-2 px-6 bg-red-500 hover:bg-red-800 text-white font-bold uppercase rounded-lg text-sm" onClick={()=>deleteUser(user.id)}><MdDelete /> Eliminar Reserva</button>
+<button type="button" className=" flex gap-2 items-center py-2 px-6 bg-indigo-500 hover:bg-indigo-800 text-white font-bold uppercase rounded-lg text-sm" onClick={()=>getUserById(user.id)}><FaEdit/> Editar Reserva</button>
+<button type="button" className=" flex gap-2 items-center py-2 px-6 bg-red-500 hover:bg-red-800 text-white font-bold uppercase rounded-lg text-sm" onClick={()=>handleEliminar(user.id)}><MdDelete /> Eliminar Reserva</button>
 </div>
 
 <div className="w-full text-center py-6">

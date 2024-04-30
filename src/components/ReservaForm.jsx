@@ -2,21 +2,43 @@ import { useForm } from "react-hook-form";
 import userStore from "../userStore";
 import { v4 as uuidv4 } from 'uuid';
 import Error from "./Error";
+import { useEffect } from "react";
 
 export default function ReservaForm() {
-  const { register, handleSubmit, formState: { errors }, reset } = useForm();
+  const { register, handleSubmit, setValue, formState: { errors }, reset } = useForm();
   const setFormData = userStore((state) => state.setFormData);
+  const activeId = userStore((state) => state.activeId);
+  const users = userStore((state) => state.formData);
+  const updateUsers = userStore((state) => state.updateUsers);
+
+  useEffect(()=>{
+if (activeId){
+  const activeUser = users.filter(users => users.id === activeId)[0]
+setValue('name', activeUser.name)
+setValue('email', activeUser.email)
+setValue('telefono', activeUser.telefono)
+setValue('cancha', activeUser.cancha)
+setValue('tipo', activeUser.tipo)
+setValue('date', activeUser.date)
+}
+  },[activeId])
+
 
   const onSubmit = (data) => {
     const id = uuidv4(); // Genera un nuevo ID
-    console.log(data, id); // Muestra los datos en la consola
-    setFormData({ ...data, id }); // Almacena los datos en el store global junto con el ID generado
+    // Almacena los datos en el store global junto con el ID generado
+    if(activeId){
+      updateUsers(data)
+    }
+    else{
+      setFormData({ ...data, id });
+    }
     reset(); // Reinicia el formulario después de enviar
   };
 
   return (
     <div className="md:w-1/2 lg:w-2/5 mx-5 ">
-      <h2 className="font-black text-3xl text-center text-acentColor">Tu Reserva</h2>
+      <h2 className="font-black text-3xl text-center text-acentColor">Tu Reserva </h2>
 
       <p className="text-lg mt-5 text-center mb-10 text-white">
         Añade tus datos para realizar {' '}
