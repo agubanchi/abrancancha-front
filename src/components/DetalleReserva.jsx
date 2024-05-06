@@ -1,12 +1,13 @@
 
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import { useState } from "react";
 import Swal from 'sweetalert2';
 import useStore from "../userStore";
 export default function DetalleReserva({ user }) {
   const deleteUser = useStore((state)=>state.deleteUser)
   const getUserById = useStore((state) => state.getUserById); 
-
+  const [showReservation, setShowReservation] = useState(true);
 
   const handleEliminar = () => {
     Swal.fire({
@@ -30,9 +31,19 @@ export default function DetalleReserva({ user }) {
     });
   };
 
-
+  const confirmarReserva = () => {
+    Swal.fire({
+      title: "Reserva confirmada!",
+      text: "Su Reserva ha sido confirmada con éxito",
+      icon: "success"
+    });
+    
+    setShowReservation(false);
+  };
 
   return (
+    <>
+    {showReservation ? (
     <div className="bg-white rounded-xl mx-5 my-10 px-5 py-10">
     <div className='flex items-center justify-around  '>
     <div className='  text-2xl '>
@@ -69,11 +80,13 @@ export default function DetalleReserva({ user }) {
 </div>
 
 <div className="w-full text-center py-6">
-<button type="button" className=" w-full   text-center py-3 px-6 bg-textColor hover:bg-acentColor text-white font-bold uppercase rounded-lg text-sm"> Confirmar Reserva</button>
+<button type="button" className=" w-full   text-center py-3 px-6 bg-textColor hover:bg-acentColor text-white font-bold uppercase rounded-lg text-sm" onClick={confirmarReserva}> Confirmar Reserva</button>
 </div>
 
 </div>
-
+  ) : <button type="button" className="w-full text-center py-3 px-6 bg-acentColor text-white hover:bg-white hover:text-textColor font-bold uppercase rounded-lg text-sm" onClick={() => setShowReservation(true)}>Ver mis Reserva</button>
+}
+  </>
    
   );
 }
