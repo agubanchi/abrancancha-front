@@ -8,7 +8,7 @@ import { RiFootballFill } from "react-icons/ri";
 const Header = () => {
   const [sticky, setSticky] = useState(false);
   const [open, setOpen] = useState(false);
-  const [openModal, setOpenModal] = useState(false);
+
   
 
   useEffect(() => {
@@ -21,24 +21,18 @@ const Header = () => {
     };
   }, []);
 
-  const handleOpenModal = () => {
-    setOpenModal(true);
-  };
 
-  const handleCloseModal = () => {
-    setOpenModal(false);
-  };
 
   return (
-    <header className="bg-textColor shadow-md fixed w-full z-[9999]">
+    <header className="bg-textColor shadow-md fixed lef-0 top-0 mb-10 w-full z-[9999]">
       <div className="mx-auto container px-5 py-0">
         <div className="flex justify-between items-center">
           <div className="z-[999]">
-            <NavLink to="/"><img className="w-full max-w-52" src="/logo_white.svg" alt="Abrancancha" /></NavLink>
+            <NavLink to="/"><img className="w-full max-w-40" src="/logo_white.svg" alt="Abrancancha" /></NavLink>
           </div>
           <nav className='w-full md:flex hidden items-center gap-6 justify-around text-white font-Bebas text-2xl'>
             <div className='w-full items-center gap-6 text-center flex justify-center'>
-              <NavLink to="#" onClick={handleOpenModal} className="hover:text-acentColor border-b-2 border-acentColor"> Reservar Cancha </NavLink>
+              <NavLink to="/reservas" className="hover:text-acentColor border-b-2 border-acentColor"> Reservar Cancha </NavLink>
               <a href="#inicio" className="hover:text-acentColor"> Inicio </a>
               <a href="#galeria" className="hover:text-acentColor"> Galería </a>
               <a href="#contacto" className="hover:text-acentColor"> Contacto </a>
@@ -71,7 +65,7 @@ const Header = () => {
                      <nav className='flex flex-col justify-center h-full text-white font-Bebas text-2xl '  onClick={() => setOpen(false)}
                >
                   <div className='pt-40  flex flex-col justify-center gap-6  '>
-                  <NavLink to="#" onClick={handleOpenModal} className="hover:text-acentColor border-b-2 border-acentColor"> Reservar Cancha </NavLink>
+                  <NavLink to="/reservas" className="hover:text-acentColor border-b-2 border-acentColor"> Reservar Cancha </NavLink>
                     <a href="#inicio"  className="hover:text-acentColor"> Inicio </a>
                     <a href="#galeria"  className="hover:text-acentColor"> Galería </a>
                     <a href="#contacto"  className="hover:text-acentColor"> Contacto </a>
@@ -87,7 +81,7 @@ const Header = () => {
            
         </div>
       </div>
-      <Modal onClose={handleCloseModal} visible={openModal} />
+     
     </header>
   );
 };

@@ -6,7 +6,7 @@ function Galeria() {
   const { loading, pages, totalPages, currentPage, setCurrentPage } = DataGallery();
 
   return (
-    <section id='galeria' className='mt-[16rem]'>
+    <section id='galeria' className=' py-10'>
       {loading ? (
         <div className='text-center text-Bebas text-5xl text-acentColor'>
           Cargando...

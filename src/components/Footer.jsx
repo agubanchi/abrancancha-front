@@ -9,17 +9,13 @@ export default function Footer() {
 
 <div className=' container mx-auto px-8 md:flex  justify-between items-center'>
 
-    <div className='contact'>
-        <h3 className='text-textColor font-Bebas text-2xl py-3'>Contacto</h3>
-        <div className='  flex flex-col justify-center gap-2 text-[.8rem]'>
-                <p className='flex items-center font-bold gap-2 '><MdPhoneAndroid /> Teléfono:    <a href="#"  className="hover:text-white">1234-567-890 </a></p> 
-                <p className='flex items-center font-bold gap-2'><IoMail /> E-Mail:    <a href="#"  className="hover:text-white ">contacto.abrancancha@gmail.com </a></p> 
-                    </div>
+    <div>
+    <img className="w-32" src="/logo_black.svg" alt="Abrancancha" />
     </div>
 
     <div className='reserva gap-3 py-3 items-center '>
-        <p className='text-center'>Abrancancha 2024 | Todos los derechos reservados©.</p>
-        <p className='flex  justify-center gap-2 text-[.8rem] md:flex hidden'> <span className='font-bold'>Desarrollado por:</span>
+        <p className='text-center font-bold'> Abrancancha 2024 | Todos los derechos reservados©.</p>
+        <p className='  justify-center gap-2 text-[.8rem] md:flex hidden'> <span className='font-bold'>Desarrollado por:</span>
          <span className='flex gap-2 items-center'> <a href="#" className='flex gap-2 items-center hover:text-white'> <FaGithub /> Agustin Banchi</a></span> 
          <span className='flex gap-2 items-center'> <a href="#" className='flex gap-2 items-center hover:text-white'><FaGithub /> Nicolas Mansilla</a></span>
          <span className='flex gap-2 items-center'> <a href="#" className='flex gap-2 items-center hover:text-white'><FaGithub /> Mario Patronelli</a></span>
@@ -28,8 +24,10 @@ export default function Footer() {
     </div>
 
     <div className="social gap-3 flex ">
-   <a href="#"> <FaFacebookF  className='w-8 text-white hover:text-textColor ' /></a>
-   <a href="#"> <FaInstagram className='w-8 text-white hover:text-textColor'/></a>
+   <a href="#"> <FaFacebookF  className='w-8 text-textColor hover:text-white ' /></a>
+   <a href="#"> <FaInstagram className='w-8 text-textColor hover:text-white'/></a>
+   <a href="#"> <MdPhoneAndroid  className='w-8 text-textColor hover:text-white ' /></a>
+   <a href="#"> <IoMail className='w-8 text-textColor hover:text-white'/></a>
     </div>
 </div>
 

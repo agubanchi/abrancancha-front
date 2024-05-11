@@ -11,15 +11,20 @@ export default function ReservaForm() {
   const users = userStore((state) => state.formData);
   const updateUsers = userStore((state) => state.updateUsers);
 
+  const today = new Date();
+const maxDate = new Date(today);
+maxDate.setDate(today.getDate() + 7);
+
+
+
   useEffect(()=>{
 if (activeId){
   const activeUser = users.filter(users => users.id === activeId)[0]
-setValue('name', activeUser.name)
-setValue('email', activeUser.email)
 setValue('telefono', activeUser.telefono)
 setValue('cancha', activeUser.cancha)
 setValue('tipo', activeUser.tipo)
 setValue('date', activeUser.date)
+setValue('hour', activeUser.hour)
 }
   },[activeId])
 
@@ -49,65 +54,6 @@ setValue('date', activeUser.date)
         className="bg-white shadow-md rounded-lg py-10 px-5 mb-10"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="mb-5">
-          <label htmlFor="name" className="text-sm uppercase font-bold">
-            Nombre y Apellido
-          </label>
-          <input
-            id="name"
-            className="w-full p-3  rounded-md border-acentColor border-2"
-            type="text"
-            placeholder="Nombre y Apellido"
-            {...register('name', {
-              required: 'El Nombre de usuario es Obligatorio',
-                minLength:{
-                  value:4,
-                  message:'Minimo 4 caracteres'
-                },
-
-                maxLength:{
-                  value:45,
-                  message:'Máximo 45 caracteres'
-                }
-              
-            })}
-          />
-          {errors.name && (
-            <Error>{errors.name?.message.toString()}</Error>
-          )}
-
-{errors.minLength && (
-            <Error>{errors.minLength?.message.toString()}</Error>
-          )}
-
-{errors.maxLength && (
-            <Error>{errors.maxLength?.message.toString()}</Error>
-          )}
-
-        </div>
-
-        <div className="mb-5">
-          <label htmlFor="email" className="text-sm uppercase font-bold">
-            Email
-          </label>
-          <input
-            id="email"
-            className="w-full p-3  rounded-md border-acentColor border-2"
-            type="email"
-            placeholder="Email"
-            {...register("email", {
-              required: "El Email es Obligatorio",
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: 'Email No Válido'
-              }
-            })}
-          />
-          {errors.email && (
-            <Error>{errors.email?.message.toString()}</Error>
-          )}
-        </div>
-
         <div className="mb-5">
           <label htmlFor="telefono" className="text-sm uppercase font-bold">
             Teléfono
@@ -139,6 +85,7 @@ setValue('date', activeUser.date)
             <option value="Cancha 1">Cancha 1</option>
             <option value="Cancha 2">Cancha 2</option>
             <option value="Cancha 3">Cancha 3</option>
+            
           </select>
           {errors.cancha && (
             <Error>{errors.cancha?.message.toString()}</Error>
@@ -166,15 +113,43 @@ setValue('date', activeUser.date)
             Fecha
           </label>
           <input
-            id="date"
-            className="w-full p-3  rounded-md border-acentColor border-2"
-            type="date"
-            {...register('date', {
-              required: 'La fecha es Obligatoria'
-            })}
-          />
+  id="date"
+  className="w-full p-3  rounded-md border-acentColor border-2"
+  type="date"
+  min={new Date().toISOString().split('T')[0]}
+  max={maxDate.toISOString().split('T')[0]}
+  {...register('date', {
+    required: 'La fecha es Obligatoria'
+  })}
+/>
           {errors.date && (
             <Error>{errors.date?.message.toString()}</Error>
+          )}
+        </div>
+
+        <div className="mb-5">
+          <label htmlFor="hour" className="text-sm uppercase font-bold">
+            Hora
+          </label>
+          <select id="hour" className="w-full p-3  rounded-md border-acentColor border-2"
+           {...register("hour", { required: "Selecciona una hora" })}>
+            <option disabled selected value> -- selecciona una opción -- </option>
+            <option value="8:00">8:00hs</option>
+            <option value="8:30">8:30hs</option>
+            <option value="09:00">09:00hs</option>
+            <option value="09:30">09:30hs</option>
+            <option value="10:00">10:00hs</option>
+            <option value="10:30">10:30hs</option>
+            <option value="11:00">11:00hs</option>
+            <option value="11:30">11:30hs</option>
+            <option value="12:00">12:00hs</option>
+            <option value="12:30">12:30hs</option>
+            <option value="13:00">13:00hs</option>
+            <option value="13:30">13:30hs</option>
+            <option value="14:00">13:00hs</option>
+          </select>
+          {errors.hour && (
+            <Error>{errors.hour?.message.toString()}</Error>
           )}
         </div>
 

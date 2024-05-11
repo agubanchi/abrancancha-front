@@ -1,6 +1,6 @@
 import React from 'react'
 
-import LoginSignup from './LoginSignup'
+import LoginSignup from './LoginUser'
 import Modal from './Modal'
 
 export default function Login() {

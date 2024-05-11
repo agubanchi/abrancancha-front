@@ -1,22 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
+import data from '../data/db.json'; // Importar el archivo JSON directamente
 
 function DataGallery() {
-  const datagallery = 'https://jsonplaceholder.typicode.com/photos';
-  const totalPages = 10; 
+  const totalPages = Math.ceil(data.gallery.length / 9); // Mostrando 9 imágenes por página
   const [loading, setLoading] = useState(true);
   const [pages, setPages] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const page = Math.min(currentPage + 1, totalPages);
-      const result = await fetch(`${datagallery}?_page=${page}`);
-      const data = await result.json();
-      setPages(data);
+    const fetchData = () => {
+      const startIndex = currentPage * 9;
+      const endIndex = Math.min(startIndex + 9, data.gallery.length);
+      const slicedPages = data.gallery.slice(startIndex, endIndex);
+      setPages(slicedPages);
       setLoading(false);
     };
     fetchData();
-  }, [currentPage, totalPages]); // Corregido: Se agregó totalPages como dependencia
+  }, [currentPage]);
+  
 
   return {
     loading,
