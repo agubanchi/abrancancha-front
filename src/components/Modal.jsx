@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { IoIosCloseCircle } from "react-icons/io";
+
 import ReservaForm from './ReservaForm';
 
 const Modal = ({ visible, onClose }) => {

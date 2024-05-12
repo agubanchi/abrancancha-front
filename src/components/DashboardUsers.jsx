@@ -2,33 +2,62 @@ import React, { useState } from "react";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import Modal from './Modal';
-const DashboardUsers = ({ user }) => {
-  
-  const [showModal,setShowModal] = useState(false);
+import useStore from "../userStore";
+import Swal from "sweetalert2";
 
+const DashboardUsers = ({ user }) => {
+  const [showModal, setShowModal] = useState(false);
+  const deleteUser = useStore((state) => state.deleteUser);
+  const getUserById = useStore((state) => state.getUserById);
+  
   const handleOpenModal = () => {
     setShowModal(true);
+    getUserById(user.id); // Obtener los detalles de la reserva seleccionada
   };
 
   const handleCloseModal = () => {
     setShowModal(false);
   };
 
+  const handleEliminar = () => {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Esta acción eliminará la reserva',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteUser(user.id);
+        Swal.fire(
+          'Eliminado!',
+          'La reserva ha sido eliminada.',
+          'success'
+        );
+      }
+    });
+  };
+
   return (
     <>
-    <tr className='text-center text-white font-medium'>
-      <td>{user.name}</td>
-      <td>{user.email}</td>
-      <td>{user.telefono}</td>
-      <td>{user.cancha}</td>
-      <td>{user.tipo}</td>
-      <td>{user.date}</td>
-      <td className='flex justify-around py-2 gap-2  items-center'>
-      <FaEdit className="cursor-pointer"  onClick={handleOpenModal}/>
-      <MdDelete className="cursor-pointer"  onClick={handleOpenModal}/>
-      </td>
-    </tr>
-    <Modal onClose={handleCloseModal} visible={showModal}/>
+      <tr className='text-center text-white font-medium'>
+        <td>{user.name}</td>
+        <td>{user.email}</td>
+        <td>{user.telefono}</td>
+        <td>{user.cancha}</td>
+        <td>{user.tipo}</td>
+        <td>{user.date}</td>
+        <td className='flex justify-around py-2 gap-2  items-center'>
+          {/* Modifica el manejo de eventos para abrir el modal y obtener los detalles de la reserva */}
+          <FaEdit className="cursor-pointer" onClick={handleOpenModal} />
+          <MdDelete className="cursor-pointer" onClick={() => handleEliminar(user.id)} />
+        </td>
+      </tr>
+      {/* Pasa la reserva seleccionada al modal */}
+      <Modal reserva={user} onClose={handleCloseModal} visible={showModal} />
     </>
   );
 };

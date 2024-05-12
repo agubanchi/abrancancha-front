@@ -33,6 +33,9 @@ export default function LoginUser() {
             alert('Correcto!');
             navigate('/reservas');
           }
+          else{
+            alert('Error!');
+          }
         });
        
        

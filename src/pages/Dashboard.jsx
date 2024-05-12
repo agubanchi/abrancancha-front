@@ -19,6 +19,7 @@ export default function Dashboard({ user }) {
             <th>Cancha</th>
             <th>Tipo de Cancha</th>
             <th>Fecha</th>
+            <th>Hora</th>
             <th>Acciones</th>
           </tr>
         </thead>

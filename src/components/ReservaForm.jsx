@@ -42,13 +42,8 @@ setValue('hour', activeUser.hour)
   };
 
   return (
-    <div className="md:w-1/2 lg:w-2/5 mx-5 ">
-      <h2 className="font-black text-3xl text-center text-acentColor">Tu Reserva </h2>
-
-      <p className="text-lg mt-5 text-center mb-10 text-white">
-        Añade tus datos para realizar {' '}
-        <span className="text-acentColor font-bold">la Reserva</span>
-      </p>
+    <div className="md:w-full  mx-5 ">
+     
 
       <form
         className="bg-white shadow-md rounded-lg py-10 px-5 mb-10"
@@ -76,37 +71,46 @@ setValue('hour', activeUser.hour)
           )}
         </div>
 
-        <div className="mb-5">
-          <label htmlFor="cancha" className="text-sm uppercase font-bold">
-            Cancha
-          </label>
-          <select id="cancha" className="w-full p-3  rounded-md border-acentColor border-2" {...register("cancha", { required: "Selecciona una Cancha" })}>
-            <option disabled selected value> -- selecciona una opción -- </option>
-            <option value="Cancha 1">Cancha 1</option>
-            <option value="Cancha 2">Cancha 2</option>
-            <option value="Cancha 3">Cancha 3</option>
-            
-          </select>
-          {errors.cancha && (
-            <Error>{errors.cancha?.message.toString()}</Error>
-          )}
-        </div>
+     <div className="mb-5">
+  <label htmlFor="cancha" className="text-sm uppercase font-bold">
+    Cancha
+  </label>
+  <select
+    id="cancha"
+    className="w-full p-3 rounded-md border-acentColor border-2"
+    {...register("cancha", { required: "Selecciona una Cancha" })}
+  >
+    <option disabled selected value=""> -- selecciona una opción -- </option>
+    <option value="Cancha 1">Cancha 1</option>
+    <option value="Cancha 2">Cancha 2</option>
+    <option value="Cancha 3">Cancha 3</option>
+  </select>
+  {errors.cancha && (
+    <Error>{errors.cancha?.message.toString()}</Error>
+  )}
+</div>
+
 
         <div className="mb-5">
-          <label htmlFor="tipo" className="text-sm uppercase font-bold">
-            Tipo
-          </label>
-          <select id="tipo" className="w-full p-3  rounded-md border-acentColor border-2" {...register("tipo", { required: "Selecciona un Tipo" })}>
-            <option disabled selected value> -- selecciona una opción -- </option>
-            <option value="Futbol 5" className="">Futbol 5</option>
-            <option value="Futbol 7">Futbol 7</option>
-            <option value="Futbol 9">Futbol 9</option>
-            <option value="Futbol 11">Futbol 11</option>
-          </select>
-          {errors.tipo && (
-            <Error>{errors.tipo?.message.toString()}</Error>
-          )}
-        </div>
+  <label htmlFor="tipo" className="text-sm uppercase font-bold">
+    Tipo
+  </label>
+  <select
+    id="tipo"
+    className="w-full p-3 rounded-md border-acentColor border-2"
+    {...register("tipo", { required: "Selecciona un Tipo de Cancha" })}
+  >
+    <option disabled selected value=""> -- selecciona una opción -- </option>
+    <option value="Futbol 5">Futbol 5</option>
+    <option value="Futbol 7">Futbol 7</option>
+    <option value="Futbol 9">Futbol 9</option>
+    <option value="Futbol 11">Futbol 11</option>
+  </select>
+  {errors.tipo && (
+    <Error>{errors.tipo?.message.toString()}</Error>
+  )}
+</div>
+
 
         <div className="mb-5">
           <label htmlFor="date" className="text-sm uppercase font-bold">

@@ -16,10 +16,10 @@ export default function Footer() {
     <div className='reserva gap-3 py-3 items-center '>
         <p className='text-center font-bold'> Abrancancha 2024 | Todos los derechos reservados©.</p>
         <p className='  justify-center gap-2 text-[.8rem] md:flex hidden'> <span className='font-bold'>Desarrollado por:</span>
-         <span className='flex gap-2 items-center'> <a href="#" className='flex gap-2 items-center hover:text-white'> <FaGithub /> Agustin Banchi</a></span> 
-         <span className='flex gap-2 items-center'> <a href="#" className='flex gap-2 items-center hover:text-white'><FaGithub /> Nicolas Mansilla</a></span>
-         <span className='flex gap-2 items-center'> <a href="#" className='flex gap-2 items-center hover:text-white'><FaGithub /> Mario Patronelli</a></span>
-         <span className='flex gap-2 items-center'> <a href="#" className='flex gap-2 items-center hover:text-white'><FaGithub /> Juan Tomas Lacave</a></span>
+         <span className='flex gap-2 items-center'> <a href="https://github.com/agubanchi" target='_blank' className='flex gap-2 items-center hover:text-white'> <FaGithub /> Agustin Banchi</a></span> 
+         <span className='flex gap-2 items-center'> <a href="https://github.com/Nicolas-Mansilla" target='_blank' className='flex gap-2 items-center hover:text-white'><FaGithub /> Nicolas Mansilla</a></span>
+         <span className='flex gap-2 items-center'> <a href="https://github.com/elMarito" target='_blank' className='flex gap-2 items-center hover:text-white'><FaGithub /> Mario Patronelli</a></span>
+         <span className='flex gap-2 items-center'> <a href="https://github.com/JuanTomasL" target='_blank' className='flex gap-2 items-center hover:text-white'><FaGithub /> Juan Tomas Lacave</a></span>
          </p>
     </div>
 

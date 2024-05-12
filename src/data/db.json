@@ -55,79 +55,13 @@
   ],
   "users": [
     {
-      "id": "13d6",
+      "id": "4ceb",
       "name": "Agustin",
       "email": "correo@correo.com",
       "password": "Milanga"
     },
     {
-      "id": "6545",
-      "name": "Agustin",
-      "email": "pepebanchi77@hotmail.com",
-      "password": "Cococho"
-    },
-    {
-      "id": "b227",
-      "name": "Augusto",
-      "email": "augustor@gmail.com",
-      "password": "Sorento"
-    },
-    {
-      "id": "bbf7",
-      "name": "Luca",
-      "email": "luca@gmail.com",
-      "password": "lucaku"
-    },
-    {
-      "id": "fd66",
-      "name": "Freddie",
-      "email": "freddu@gmail.com",
-      "password": "Fredungo"
-    },
-    {
-      "id": "16fa",
-      "name": "Milo",
-      "email": "Milom@gmail.com",
-      "password": "Milonga"
-    },
-    {
-      "id": "823d",
-      "name": "Fredo",
-      "email": "correo@correo.com",
-      "password": "Fredox"
-    },
-    {
-      "id": "c1c9",
-      "name": "Mirko",
-      "email": "mirko@gmail.com",
-      "password": "Mirkonga"
-    },
-    {
-      "id": "1fcc",
-      "name": "Antonella",
-      "email": "antomor91@gmail.com",
-      "password": "MiloFreddie"
-    },
-    {
-      "id": "460e",
-      "name": "Agustin",
-      "email": "correo@correo.com",
-      "password": "Milonga"
-    },
-    {
-      "id": "f4e1",
-      "name": "Agustin",
-      "email": "correo@correo.com",
-      "password": "Milanga"
-    },
-    {
-      "id": "30ac",
-      "name": "Agustin",
-      "email": "correo@correo.com",
-      "password": "Milanga"
-    },
-    {
-      "id": "1952",
+      "id": "419d",
       "name": "Agustin",
       "email": "correo@correo.com",
       "password": "Milanga"
