@@ -55,16 +55,36 @@
   ],
   "users": [
     {
-      "id": "4ceb",
+      "id": "fab3",
       "name": "Agustin",
       "email": "correo@correo.com",
       "password": "Milanga"
     },
     {
-      "id": "419d",
+      "id": "0b69",
       "name": "Agustin",
       "email": "correo@correo.com",
       "password": "Milanga"
+    },
+    {
+      "id": "43b4",
+      "name": "Carlos",
+      "email": "carlos@correo.com",
+      "password": "Carlos123"
+    }
+  ],
+  "admin": [
+    {
+      "role": "admin",
+      "email": "admin@abrancancha.com",
+      "password": "ab1234",
+      "id": "8aca"
+    },
+    {
+      "role": "admin",
+      "email": "admin@correo.com",
+      "password": "admin123",
+      "id": "8aca"
     }
   ]
 }

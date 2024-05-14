@@ -1,32 +1,33 @@
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import Home from './pages/Home'
-import Reservas from './pages/Reservas'
-import Logueo from './Layouts/Logueo'
-import LoginUser from './components/LoginUser'
-import RegisterUser from './components/RegisterUser'
-import Layout from './Layouts/Layout'
-import Dashboard from './pages/Dashboard'
-import ProtectedRoute from './components/utils/ProtectedRoute'
-import { useLocalStorage } from 'react-use'
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
+import RegisterUser from "./components/RegisterUser";
+import LoginUser from "./components/LoginUser";
+import Dashboard from "./pages/Dashboard";
+import Reservas from "./pages/Reservas";
+import ProtectedRoute from "./components/utils/ProtectedRoute"; // Importar ProtectedRoute
+import Home from "./pages/Home";
+import Logueo from "./Layouts/Logueo";
+import PrivateRoute from "./components/utils/PrivateRoute";
 
-export default function AppRouter() {
-
-  const [user, setUser] = useLocalStorage('user');
-
+const AppRouter = () => {
   return (
-   <BrowserRouter>
-   <Routes>
+    <AuthProvider>
+      <BrowserRouter>
+      <Routes>
     <Route path='/' element={<Home/>} index/>
     <Route element={<Logueo/>}>
     <Route path='/login' element={<LoginUser />} />
-          <Route path='/registrar' element={<RegisterUser />} />
-    <Route element={<ProtectedRoute userActived={user}/>}>
-    <Route path='/reservas' element={<Reservas/>}/>
-    <Route path='/dashboard' element={<Dashboard/>}/>
+    <Route path='/registrar' element={<RegisterUser />} />
+    <Route element={<PrivateRoute roles={["user", "admin"]}/>}>
+    <Route path='/reservas' element={<Reservas/>} roles={["user"]}/>
+    <Route path='/dashboard' element={<Dashboard/>} roles={["admin"]}/>
     </Route>
     </Route>
    </Routes>
-   
-   </BrowserRouter>
-  )
-}
+      </BrowserRouter>
+    </AuthProvider>
+  );
+};
+
+export default AppRouter;

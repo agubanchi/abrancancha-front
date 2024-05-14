@@ -2,7 +2,8 @@ import Header from "../components/Header";
 import Hero from "../components/Hero";
 import Galeria from "../components/Galeria";
 import Contacto from "../components/Contacto";
-export default function Home() {
+import Footer from "../components/Footer";
+export default function Home(props) {
   return (
     <>
     
@@ -10,6 +11,7 @@ export default function Home() {
     <Hero/>
       <Galeria/>
       <Contacto/>
+      <Footer/>
     </>
   )
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import ReservaForm from '../components/ReservaForm'
 import ListadoUsuarios from '../components/ListadoUsuarios'
 
-export default function Reservas() {
+export default function Reservas(props) {
   return (
     <>
   <div className='container mx-auto mt-20'>

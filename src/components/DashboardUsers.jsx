@@ -44,12 +44,13 @@ const DashboardUsers = ({ user }) => {
   return (
     <>
       <tr className='text-center text-white font-medium'>
-        <td>{user.name}</td>
-        <td>{user.email}</td>
-        <td>{user.telefono}</td>
-        <td>{user.cancha}</td>
-        <td>{user.tipo}</td>
-        <td>{user.date}</td>
+        <td  className="content-start">{user.name}</td>
+        <td  className="content-start">{user.email}</td>
+        <td className="content-start">{user.telefono}</td>
+        <td className="content-start">{user.cancha}</td>
+        <td className="content-start">{user.tipo}</td>
+        <td className="content-start">{user.date}</td>
+        <td className="content-start">{user.hour}</td>
         <td className='flex justify-around py-2 gap-2  items-center'>
           {/* Modifica el manejo de eventos para abrir el modal y obtener los detalles de la reserva */}
           <FaEdit className="cursor-pointer" onClick={handleOpenModal} />
