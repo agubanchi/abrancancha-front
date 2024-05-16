@@ -55,21 +55,15 @@
   ],
   "users": [
     {
-      "id": "fab3",
+      "id": "0199",
       "name": "Agustin",
       "email": "correo@correo.com",
       "password": "Milanga"
     },
     {
-      "id": "0b69",
-      "name": "Agustin",
-      "email": "correo@correo.com",
-      "password": "Milanga"
-    },
-    {
-      "id": "43b4",
+      "id": "ab17",
       "name": "Carlos",
-      "email": "carlos@correo.com",
+      "email": "carlosc@gmail.com",
       "password": "Carlos123"
     }
   ],

@@ -1,12 +1,12 @@
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
-import { v4 as uuidv4 } from 'uuid';
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
+import { v4 as uuidv4 } from "uuid";
 
 const useStore = create(
   persist(
     (set) => ({
       formData: [],
-      activeId: '',
+      activeId: "",
       setFormData: (userData) =>
         set((state) => ({
           formData: [...state.formData, { ...userData, id: uuidv4() }],
@@ -28,7 +28,7 @@ const useStore = create(
       },
     }),
     {
-      name: 'userStore', // Nombre para identificar el store en localStorage
+      name: "userStore", // Nombre para identificar el store en localStorage
       getStorage: () => localStorage, // Especifica el método de almacenamiento (localStorage en este caso)
     }
   )

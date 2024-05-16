@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { FaUser, FaLock, FaEnvelope } from "react-icons/fa";
+import Swal from "sweetalert2";
 import Error from "./Error";
 import { useState } from "react";
 
@@ -30,7 +31,14 @@ export default function RegisterUser() {
     if (!response.ok) {
       throw new Error('Error al enviar los datos al servidor');
     }
-    alert('Usuario registrado exitosamente');
+    Swal.fire({
+      title: "Usuario registrado!",
+      text: "Usuario registrado exitosamente",
+      icon: "success",
+      color:"#1d1d1d",
+      iconColor:"#77da7e",
+      confirmButtonColor:"#77da7e"
+    });
      // Almacenar datos del usuario en localStorage
      localStorage.setItem("user", JSON.stringify(formData));
     // Cambiar a la vista de inicio de sesión

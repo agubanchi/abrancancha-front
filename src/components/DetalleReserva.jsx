@@ -15,18 +15,23 @@ export default function DetalleReserva({ user }) {
       text: 'Esta acción eliminará la reserva',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#d33',
-      cancelButtonColor: '#3085d6',
+      color:"#1d1d1d",
+      iconColor:"#1d1d1d",
+      confirmButtonColor:"#77da7e",
+      cancelButtonColor: '#1d1d1d',
       confirmButtonText: 'Sí, eliminar',
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
         deleteUser(user.id);
-        Swal.fire(
-          'Eliminado!',
-          'La reserva ha sido eliminada.',
-          'success'
-        );
+        Swal.fire({
+          title: "Reserva Eliminada!",
+          text: "La reserva ha sido eliminada.",
+          icon: "success",
+          color:"#1d1d1d",
+          iconColor:"#77da7e",
+          confirmButtonColor:"#77da7e"
+        });
       }
     });
   };
@@ -35,7 +40,10 @@ export default function DetalleReserva({ user }) {
     Swal.fire({
       title: "Reserva confirmada!",
       text: "Su Reserva ha sido confirmada con éxito",
-      icon: "success"
+      icon: "success",
+      color:"#1d1d1d",
+      iconColor:"#77da7e",
+      confirmButtonColor:"#77da7e"
     });
     
     setShowReservation(false);

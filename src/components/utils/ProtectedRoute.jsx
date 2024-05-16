@@ -11,11 +11,8 @@ const ProtectedRouter = () => {
     return <Navigate to="/login" />;
   }
 
-  if (user.role === "admin") {
-    return <Dashboard />;
-  } else {
-    return <Reservas />;
-  }
+  return <Outlet/>
+
 };
 
 export default ProtectedRouter;

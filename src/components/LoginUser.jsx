@@ -28,8 +28,10 @@ export default function LoginUser() {
 
       if (user) {
         login(user);
+        localStorage.setItem('user', JSON.stringify(formData));
         navigate('/reservas');
       } else if (admin) {
+        localStorage.setItem('admin', JSON.stringify(formData));
         login(admin);
         navigate('/dashboard');
       } else {
