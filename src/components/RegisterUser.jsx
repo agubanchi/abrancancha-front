@@ -4,14 +4,10 @@ import { FaUser, FaLock, FaEnvelope } from "react-icons/fa";
 import Swal from "sweetalert2";
 import Error from "./Error";
 import { useState } from "react";
-
+import { useAuth } from '../context/AuthContext';
 export default function RegisterUser() {
+  const { login } = useAuth(); // Importar login desde el contexto
 
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: ''
-  });
 
   const { register, handleSubmit, formState: { errors }, getValues } = useForm(); 
   const navigate = useNavigate();
@@ -30,6 +26,8 @@ export default function RegisterUser() {
   .then(response => {
     if (!response.ok) {
       throw new Error('Error al enviar los datos al servidor');
+      
+
     }
     Swal.fire({
       title: "Usuario registrado!",
@@ -39,8 +37,10 @@ export default function RegisterUser() {
       iconColor:"#77da7e",
       confirmButtonColor:"#77da7e"
     });
-     // Almacenar datos del usuario en localStorage
-     localStorage.setItem("user", JSON.stringify(formData));
+
+     login(formData); // Almacenar datos del usuario en el contexto
+          // Almacenar datos del usuario en localStorage
+          localStorage.setItem("user", JSON.stringify(formData));
     // Cambiar a la vista de inicio de sesión
     navigate('/login');
   })

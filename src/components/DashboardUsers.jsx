@@ -4,8 +4,9 @@ import { MdDelete } from "react-icons/md";
 import Modal from './Modal';
 import useStore from "../userStore";
 import Swal from "sweetalert2";
-
+import { useAuth } from "../context/AuthContext";
 const DashboardUsers = ({ user }) => {
+  const { formData } = useAuth(); // Correctamente usando formData
   const [showModal, setShowModal] = useState(false);
   const deleteUser = useStore((state) => state.deleteUser);
   const getUserById = useStore((state) => state.getUserById);
@@ -44,8 +45,8 @@ const DashboardUsers = ({ user }) => {
   return (
     <>
       <tr className='text-center text-white font-medium'>
-        <td  className="content-start">{user.name}</td>
-        <td  className="content-start">{user.email}</td>
+        <td  className="content-start">{formData.name}</td>
+        <td  className="content-start">{formData.email}</td>
         <td className="content-start">{user.telefono}</td>
         <td className="content-start">{user.cancha}</td>
         <td className="content-start">{user.tipo}</td>

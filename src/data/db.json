@@ -51,20 +51,40 @@
     {
       "id": "13",
       "url": "./gallery/img13.jpg"
+    },
+    {
+      "id": "14",
+      "url": "./gallery/img14.jpg"
+    },
+    {
+      "id": "15",
+      "url": "./gallery/img15.jpg"
+    },
+    {
+      "id": "16",
+      "url": "./gallery/img16.jpg"
+    },
+    {
+      "id": "17",
+      "url": "./gallery/img17.jpg"
+    },
+    {
+      "id": "18",
+      "url": "./gallery/img18.jpg"
     }
   ],
   "users": [
     {
-      "id": "0199",
+      "id": "1",
       "name": "Agustin",
       "email": "correo@correo.com",
       "password": "Milanga"
     },
     {
-      "id": "ab17",
-      "name": "Carlos",
-      "email": "carlosc@gmail.com",
-      "password": "Carlos123"
+      "id": "cc33",
+      "name": "Juan",
+      "email": "Juan@correo.com",
+      "password": "Juan123"
     }
   ],
   "admin": [
@@ -81,4 +101,5 @@
       "id": "8aca"
     }
   ]
+  
 }

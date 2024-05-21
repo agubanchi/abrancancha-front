@@ -6,7 +6,7 @@ import Error from "./Error";
 import { useAuth } from "../context/AuthContext";
 
 export default function LoginUser() {
-  const { login } = useAuth();
+  const { login, setFormData } = useAuth(); // Agrega setFormData para almacenar el nombre y el correo electrónico
   const [errorMessage, setErrorMessage] = useState("");
   const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
@@ -27,6 +27,8 @@ export default function LoginUser() {
       const admin = admins.find(admin => admin.email === formData.email && admin.password === formData.password);
 
       if (user) {
+        // Almacena el nombre y el correo electrónico del usuario en el contexto de autenticación
+        setFormData({ name: user.name, email: user.email });
         login(user);
         localStorage.setItem('user', JSON.stringify(formData));
         navigate('/reservas');
