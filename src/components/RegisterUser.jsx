@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { FaUser, FaLock, FaEnvelope } from "react-icons/fa";
+import { FaUser, FaLock, FaEnvelope, FaPhoneAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 import Error from "./Error";
 import { useState } from "react";
@@ -69,10 +69,14 @@ export default function RegisterUser() {
                   id="name"
                   className="w-full p-3  rounded-md border-acentColor border-2"
                   type="text"
-                  placeholder="Nombre de usuario"
+                  placeholder="Nombre completo"
                   onChange={(event) => setFormData({...formData, name:event.target.value})}
                   {...register('name', {
                     required: 'El Nombre de usuario es Obligatorio',
+                    pattern:{
+                      value:/^[a-zA-Z]{2,40}( [a-zA-Z]{2,40})+$/,
+                      message: 'El Nombre de usuario no es correcto'
+                    },
                     minLength: {
                       value: 4,
                       message: 'Mínimo 4 caracteres'
@@ -86,6 +90,27 @@ export default function RegisterUser() {
               </div>
               {errors.name && <Error>{errors.name.message}</Error>}
             </>
+
+            <div className="mb-5 font-Onest font-normal flex items-center gap-2">
+            <FaPhoneAlt className="w-4 text-textColor" />
+          <input
+            id="telefono"
+            className="w-full p-3 rounded-md border-acentColor border-2"
+            type="tel"
+            placeholder="Teléfono"
+            {...register("telefono", {
+              required: "El Número de teléfono es Obligatorio",
+              pattern: {
+                value: /^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$/,
+                message: 'Teléfono No Válido'
+              }
+            })}
+          />
+        </div>
+        {errors.telefono && (
+            <Error>{errors.telefono?.message.toString()}</Error>
+          )}
+
         
           <div className="mb-5 font-Onest font-normal flex items-center gap-2">
             <FaEnvelope className="w-4 text-textColor" />

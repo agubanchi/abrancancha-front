@@ -6,14 +6,25 @@ const useStore = create(
   persist(
     (set) => ({
       formData: [],
+      reservations: [],
       activeId: "",
       setFormData: (userData) =>
-        set((state) => ({
-          formData: [...state.formData, { ...userData, id: uuidv4() }],
-        })),
+        set((state) => {
+          const userId = uuidv4();
+          return {
+            formData: [...state.formData, { ...userData, id: userId }],
+            reservations: [
+              ...state.reservations,
+              { userId, reservationData: null },
+            ], // Agrega una reserva vacía con el mismo ID
+          };
+        }),
       deleteUser: (id) =>
         set((state) => ({
           formData: state.formData.filter((user) => user.id !== id),
+          reservations: state.reservations.filter(
+            (reservation) => reservation.userId !== id
+          ),
         })),
       getUserById: (id) => {
         set({ activeId: id }); // Actualiza activeId con el ID del usuario
@@ -26,6 +37,14 @@ const useStore = create(
           activeId: null, // Establecer activeId en null después de la edición
         }));
       },
+      setReservationData: (userId, reservationData) =>
+        set((state) => ({
+          reservations: state.reservations.map((reservation) =>
+            reservation.userId === userId
+              ? { ...reservation, reservationData }
+              : reservation
+          ),
+        })),
     }),
     {
       name: "userStore", // Nombre para identificar el store en localStorage

@@ -11,7 +11,7 @@ export default function Reservas() {
       <span className='text-acentColor'>Click de distancia</span>
     </h1>
 
-    <div className='mt-12 md:flex'>
+    <div className='mt-12 md:flex gap-4'>
 
     <div className='md:w-1/2 lg:w-2/5 mx-5 '>
     <h2 className="font-black text-3xl text-center text-acentColor">Tu Reserva </h2>

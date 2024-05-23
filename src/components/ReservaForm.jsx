@@ -3,6 +3,7 @@ import userStore from "../userStore";
 import { v4 as uuidv4 } from 'uuid';
 import Error from "./Error";
 import { useEffect } from "react";
+import { useAuth } from '../context/AuthContext';
 
 export default function ReservaForm() {
   const { register, handleSubmit, setValue, formState: { errors }, reset } = useForm();
@@ -10,6 +11,8 @@ export default function ReservaForm() {
   const activeId = userStore((state) => state.activeId);
   const users = userStore((state) => state.formData);
   const updateUsers = userStore((state) => state.updateUsers);
+  const { userId } = useAuth(); // Obtén el ID del usuario actual del contexto de autenticación
+
 
   const today = new Date();
 const maxDate = new Date(today);
@@ -20,7 +23,7 @@ maxDate.setDate(today.getDate() + 7);
   useEffect(()=>{
 if (activeId){
   const activeUser = users.filter(users => users.id === activeId)[0]
-setValue('telefono', activeUser.telefono)
+
 setValue('cancha', activeUser.cancha)
 setValue('tipo', activeUser.tipo)
 setValue('date', activeUser.date)
@@ -29,16 +32,30 @@ setValue('hour', activeUser.hour)
   },[activeId])
 
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const id = uuidv4(); // Genera un nuevo ID
     // Almacena los datos en el store global junto con el ID generado
-    if(activeId){
-      updateUsers(data)
-    }
-    else{
+    if (activeId) {
+      updateUsers(data);
+    } else {
       setFormData({ ...data, id });
     }
-    reset(); // Reinicia el formulario después de enviar
+    try {
+      // Realiza la solicitud POST para almacenar la reserva en la base de datos
+      const response = await fetch('http://localhost:3000/reservations', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ ...data, id, userId: userId })
+      });
+      if (!response.ok) {
+        throw new Error('Error al almacenar la reserva');
+      }
+      reset(); // Reinicia el formulario después de enviar
+    } catch (error) {
+      console.error("Error al guardar la reserva:", error);
+    }
   };
 
   return (
@@ -49,27 +66,7 @@ setValue('hour', activeUser.hour)
         className="bg-white shadow-md rounded-lg py-10 px-5 mb-10"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="mb-5">
-          <label htmlFor="telefono" className="text-sm uppercase font-bold">
-            Teléfono
-          </label>
-          <input
-            id="telefono"
-            className="w-full p-3  rounded-md border-acentColor border-2"
-            type="tel"
-            placeholder="Teléfono"
-            {...register("telefono", {
-              required: "El Número de teléfono es Obligatorio",
-              pattern: {
-                value: /^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$/,
-                message: 'Teléfono No Válido'
-              }
-            })}
-          />
-          {errors.telefono && (
-            <Error>{errors.telefono?.message.toString()}</Error>
-          )}
-        </div>
+ 
 
      <div className="mb-5">
   <label htmlFor="cancha" className="text-sm uppercase font-bold">

@@ -75,16 +75,51 @@
   ],
   "users": [
     {
-      "id": "1",
-      "name": "Agustin",
+      "id": "dfe7",
+      "name": "Agustin Banchi",
+      "telefono": "2244445077",
       "email": "correo@correo.com",
       "password": "Milanga"
     },
     {
-      "id": "cc33",
-      "name": "Juan",
-      "email": "Juan@correo.com",
-      "password": "Juan123"
+      "id": "f317",
+      "name": "Juan Manuel",
+      "telefono": "2244449988",
+      "email": "juan@correo.com",
+      "password": "juan123"
+    }
+  ],
+  "reservations": [
+    {
+      "id": "5a311cdc-c6e0-4608-b1f0-dd50a9fad504",
+      "cancha": "Cancha 3",
+      "tipo": "Futbol 9",
+      "date": "2024-05-25",
+      "hour": "13:30",
+      "userId": "dfe7"
+    },
+    {
+      "id": "7786179b-667c-4ae5-ba41-862bbdbf3621",
+      "cancha": "Cancha 3",
+      "tipo": "Futbol 9",
+      "date": "2024-05-26",
+      "hour": "12:00",
+      "userId": "dfe7"
+    },
+    {
+      "id": "f6c645fc-cafa-46aa-8ca1-86f682ec9d25",
+      "cancha": "Cancha 2",
+      "tipo": "Futbol 9",
+      "date": "2024-05-26",
+      "hour": "11:30",
+      "userId": "f317"
+    },
+    {
+      "id": "da797d98-bf03-43b5-b1b1-35a28b732812",
+      "cancha": "Cancha 2",
+      "tipo": "Futbol 7",
+      "date": "2024-05-25",
+      "hour": "10:30"
     }
   ],
   "admin": [
@@ -101,5 +136,4 @@
       "id": "8aca"
     }
   ]
-  
 }

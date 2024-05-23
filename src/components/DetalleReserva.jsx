@@ -65,7 +65,7 @@ export default function DetalleReserva({ user }) {
               </p>
               
               <p className='text-sm uppercase font-bold mb-3 text-textColor items-center flex gap-2'> Teléfono: {''}
-                <span className='text-sm uppercase font-light text-textColor font-Onest'>{user.telefono}</span>
+                <span className='text-sm uppercase font-light text-textColor font-Onest'>{formData.telefono}</span>
               </p>
               <p className='text-sm uppercase font-bold mb-3 text-textColor items-center flex gap-2'> Cancha: {''}
                 <span className='text-sm uppercase font-light text-textColor font-Onest'>{user.cancha}</span>
@@ -93,7 +93,7 @@ export default function DetalleReserva({ user }) {
           </div>
         </div>
       ) : (
-        <button type="button" className="w-full text-center py-3 mb-3 px-6 bg-acentColor text-white hover:bg-white hover:text-textColor font-bold uppercase rounded-lg text-sm" onClick={() => setShowReservation(true)}>Ver mis Reserva del {user.fecha}</button>
+        <button type="button" className="w-full text-center py-3 mb-3 px-6 bg-acentColor text-white hover:bg-white hover:text-textColor font-bold uppercase rounded-lg text-sm" onClick={() => setShowReservation(true)}>Ver mis Reserva del {user.date}, {user.hour}</button>
       )}
     </>
   );
