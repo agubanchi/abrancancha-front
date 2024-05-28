@@ -104,8 +104,8 @@ import { useState } from "react";
 import Swal from 'sweetalert2';
 import useStore from "../userStore";
 import { useAuth } from '../context/AuthContext';
-export default function DetalleReserva({ reserva, handleDeleteReservation }) {
-
+export default function DetalleReserva({ reserva }) {
+  const deleteReservation = useStore((state) => state.deleteReservation); 
   const getReservationById = useStore((state) => state.getReservationById); 
   const [showReservation, setShowReservation] = useState(true);
   const { user } = useAuth();
@@ -121,7 +121,7 @@ export default function DetalleReserva({ reserva, handleDeleteReservation }) {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
-        handleDeleteReservation(reserva.id);
+        deleteReservation(reserva.id);
         Swal.fire(
           'Eliminado!',
           'La reserva ha sido eliminada.',
@@ -149,7 +149,7 @@ export default function DetalleReserva({ reserva, handleDeleteReservation }) {
     <div className=''>
 
         <p className='text-sm uppercase font-bold mb-3 text-textColor items-center flex gap-2'> Email: {''}
-        <span className='text-sm lowercase font-light text-textColor font-Onest'>{user.email}</span>
+        <span className='text-sm low font-light text-textColor font-Onest'>{user.email}</span>
         </p>
         <p className='text-sm uppercase font-bold mb-3 text-textColor items-center flex gap-2'> Teléfno: {''}
         <span className='text-sm uppercase font-light text-textColor font-Onest'>{user.telefono}</span>

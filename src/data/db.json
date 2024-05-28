@@ -252,6 +252,14 @@
       "date": "2024-05-31",
       "hour": "11:30",
       "userId": "6aa0"
+    },
+    {
+      "id": "5c9bcf35-5270-4f9d-a9f3-ed630791a8f6",
+      "cancha": "Cancha 2",
+      "tipo": "Futbol 9",
+      "date": "2024-05-31",
+      "hour": "10:00",
+      "userId": "3ce7"
     }
   ],
   "admin": [
