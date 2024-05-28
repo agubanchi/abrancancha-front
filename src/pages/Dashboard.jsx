@@ -2,8 +2,8 @@ import React from 'react';
 import useStore from "../userStore";
 import DashboardUsers from '../components/DashboardUsers';
 
-export default function Dashboard({ user, props }) {
-  const usersList = useStore((state) => state.formData);
+export default function Dashboard({ reserva }) {
+  const reservationsList = useStore((state) => state.reservations);
 
   return (
     <>
@@ -24,8 +24,8 @@ export default function Dashboard({ user, props }) {
           </tr>
         </thead>
         <tbody>
-          {usersList.map((user) => (
-            <DashboardUsers key={user.id} user={user} />
+          {reservationsList.map((reserva) => (
+            <DashboardUsers key={reserva.id} reserva={reserva} />
           ))}
         </tbody>
       </table>

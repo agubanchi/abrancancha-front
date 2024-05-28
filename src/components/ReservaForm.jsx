@@ -7,10 +7,10 @@ import { useAuth } from "../context/AuthContext"; // Ajusta la ruta de importaci
 
 export default function ReservaForm() {
   const { register, handleSubmit, setValue, formState: { errors }, reset } = useForm();
-  const setFormData = userStore((state) => state.setFormData);
-  const activeId = userStore((state) => state.activeId);
-  const users = userStore((state) => state.formData);
-  const updateUsers = userStore((state) => state.updateUsers);
+  const addReservation = userStore((state) => state.addReservation);
+  const activeReservationId = userStore((state) => state.activeReservationId);
+  const reservations = userStore((state) => state.reservations);
+  const updateReservation = userStore((state) => state.updateReservation);
   const { user: authUser } = useAuth(); // Obtener el usuario autenticado desde el contexto
 
   const today = new Date();
@@ -18,25 +18,25 @@ export default function ReservaForm() {
   maxDate.setDate(today.getDate() + 7);
 
   useEffect(() => {
-    if (activeId) {
-      const activeUser = users.find(user => user.id === activeId);
-      if (activeUser) {
-        setValue('telefono', activeUser.telefono);
-        setValue('cancha', activeUser.cancha);
-        setValue('tipo', activeUser.tipo);
-        setValue('date', activeUser.date);
-        setValue('hour', activeUser.hour);
+    if (activeReservationId) {
+      const activeReservation = reservations.find(reservation => reservation.id === activeReservationId);
+      if (activeReservation) {
+        
+        setValue('cancha', activeReservation.cancha);
+        setValue('tipo', activeReservation.tipo);
+        setValue('date', activeReservation.date);
+        setValue('hour', activeReservation.hour);
       }
     }
-  }, [activeId, setValue, users]);
+  }, [activeReservationId, setValue, reservations]);
 
   const onSubmit = async (data) => {
     const id = uuidv4(); // Genera un nuevo ID
     // Almacena los datos en el store global junto con el ID generado
-    if (activeId) {
-      updateUsers(data);
+    if (activeReservationId) {
+      updateReservation(data);
     } else {
-      setFormData({ ...data, id });
+      addReservation({ ...data, id });
     }
 
     try {
@@ -63,27 +63,7 @@ export default function ReservaForm() {
         className="bg-white shadow-md rounded-lg py-10 px-5 mb-10"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="mb-5">
-          <label htmlFor="telefono" className="text-sm uppercase font-bold">
-            Teléfono
-          </label>
-          <input
-            id="telefono"
-            className="w-full p-3 rounded-md border-acentColor border-2"
-            type="tel"
-            placeholder="Teléfono"
-            {...register("telefono", {
-              required: "El Número de teléfono es Obligatorio",
-              pattern: {
-                value: /^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$/,
-                message: 'Teléfono No Válido'
-              }
-            })}
-          />
-          {errors.telefono && (
-            <Error>{errors.telefono?.message.toString()}</Error>
-          )}
-        </div>
+      
 
         <div className="mb-5">
           <label htmlFor="cancha" className="text-sm uppercase font-bold">
