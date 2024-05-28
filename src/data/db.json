@@ -55,22 +55,21 @@
   ],
   "users": [
     {
-      "id": "fab3",
-      "name": "Agustin",
+      "id": "e345",
+      "name": "Agustin ",
       "email": "correo@correo.com",
       "password": "Milanga"
-    },
+    }
+  ],
+  "reservations": [
     {
-      "id": "0b69",
-      "name": "Agustin",
-      "email": "correo@correo.com",
-      "password": "Milanga"
-    },
-    {
-      "id": "43b4",
-      "name": "Carlos",
-      "email": "carlos@correo.com",
-      "password": "Carlos123"
+      "id": "7bc9f075-c49b-40f8-94fc-29d5d48458cb",
+      "telefono": "2244445077",
+      "cancha": "Cancha 2",
+      "tipo": "Futbol 7",
+      "date": "2024-06-02",
+      "hour": "09:00",
+      "userId": "e345"
     }
   ],
   "admin": [
