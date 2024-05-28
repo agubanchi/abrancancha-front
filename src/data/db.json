@@ -70,6 +70,15 @@
       "date": "2024-06-02",
       "hour": "09:00",
       "userId": "e345"
+    },
+    {
+      "id": "6614ba6a-1068-45eb-8ae6-939422e7ffd0",
+      "telefono": "2244445077",
+      "cancha": "Cancha 2",
+      "tipo": "Futbol 7",
+      "date": "2024-06-04",
+      "hour": "11:00",
+      "userId": "e345"
     }
   ],
   "admin": [

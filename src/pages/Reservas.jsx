@@ -1,6 +1,6 @@
 import React from 'react'
 import ReservaForm from '../components/ReservaForm'
-import ListadoUsuarios from '../components/ListadoUsuarios'
+import ListadoReservas from '../components/ListadoReservas'
 
 export default function Reservas(props) {
   return (
@@ -22,7 +22,7 @@ export default function Reservas(props) {
 </p>
     <ReservaForm/>
     </div>
-    <ListadoUsuarios/>
+    <ListadoReservas/>
 
     </div>
 

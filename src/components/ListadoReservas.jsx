@@ -3,7 +3,7 @@ import React from "react";
 import useStore from "../userStore";
 import DetalleReserva from "./DetalleReserva";
 
-export default function ListadoUsuarios() {
+export default function ListadoReservas() {
   const usersList = useStore((state) => state.formData);
 
   return (
