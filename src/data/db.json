@@ -60,6 +60,20 @@
       "telefono": "2244445077",
       "email": "correo@correo.com",
       "password": "Milanga"
+    },
+    {
+      "id": "3ce7",
+      "name": "Juan Nu",
+      "telefono": "2244448899",
+      "email": "juan@correo.com",
+      "password": "juan123"
+    },
+    {
+      "id": "6aa0",
+      "name": "Carlos Ge",
+      "telefono": "2244448899",
+      "email": "carlos@correo.com",
+      "password": "carlos123"
     }
   ],
   "reservations": [
@@ -150,6 +164,54 @@
       "date": "2024-06-01",
       "hour": "14:00",
       "userId": "8aca"
+    },
+    {
+      "id": "71b66fb3-e7d5-43e6-b1ac-b6b442bb58ad",
+      "cancha": "Cancha 2",
+      "tipo": "Futbol 11",
+      "date": "2024-06-04",
+      "hour": "11:30",
+      "userId": "3ce7"
+    },
+    {
+      "id": "bb9325af-31f1-49d2-843f-09c14c2da9e9",
+      "cancha": "Cancha 2",
+      "tipo": "Futbol 9",
+      "date": "2024-05-30",
+      "hour": "8:00",
+      "userId": "3ce7"
+    },
+    {
+      "id": "34734fff-3617-4827-aef5-c1c8e8a2b11e",
+      "cancha": "Cancha 2",
+      "tipo": "Futbol 5",
+      "date": "2024-06-01",
+      "hour": "12:30",
+      "userId": "e5dd"
+    },
+    {
+      "id": "ef41cc64-cde1-4f3d-98eb-6e4858979b8e",
+      "cancha": "Cancha 1",
+      "tipo": "Futbol 5",
+      "date": "2024-05-31",
+      "hour": "8:00",
+      "userId": "e5dd"
+    },
+    {
+      "id": "afbe8370-61ad-4fb0-a7e8-becfea4a1e97",
+      "cancha": "Cancha 1",
+      "tipo": "Futbol 5",
+      "date": "2024-05-31",
+      "hour": "8:00",
+      "userId": "6aa0"
+    },
+    {
+      "id": "bd99225d-673f-488d-a9c4-b228a705a176",
+      "cancha": "Cancha 1",
+      "tipo": "Futbol 5",
+      "date": "2024-06-02",
+      "hour": "8:00",
+      "userId": "6aa0"
     }
   ],
   "admin": [

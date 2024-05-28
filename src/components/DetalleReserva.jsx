@@ -3,12 +3,14 @@ import { MdDelete } from "react-icons/md";
 import { useState } from "react";
 import Swal from 'sweetalert2';
 import useStore from "../userStore";
+import { useAuth } from "../context/AuthContext";
+
 
 export default function DetalleReserva({ reserva }) {
   const deleteReservation = useStore((state)=>state.deleteReservation)
   const getReservationById = useStore((state) => state.getReservationById); 
   const [showReservation, setShowReservation] = useState(true);
-
+  const { user } = useAuth();
   const handleEliminar = () => {
     Swal.fire({
       title: '¿Estás seguro?',
@@ -51,10 +53,10 @@ export default function DetalleReserva({ reserva }) {
     <div className=''>
         
     <p className='text-sm uppercase font-bold mb-3 text-textColor items-center flex gap-2'> Email: {''}
-        <span className='text-sm  font-light text-textColor font-Onest'>{reserva.email}</span>
+        <span className='text-sm  font-light text-textColor font-Onest'>{user.email}</span>
         </p>
         <p className='text-sm uppercase font-bold mb-3 text-textColor items-center flex gap-2'> Teléfono: {''}
-        <span className='text-sm uppercase font-light text-textColor font-Onest'>{reserva.telefono}</span>
+        <span className='text-sm uppercase font-light text-textColor font-Onest'>{user.telefono}</span>
         </p>
         <p className='text-sm uppercase font-bold mb-3 text-textColor items-center flex gap-2'> Cancha: {''}
         <span className='text-sm uppercase font-light text-textColor font-Onest'>{reserva.cancha}</span>
