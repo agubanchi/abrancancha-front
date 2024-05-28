@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import Modal from './Modal';
@@ -9,22 +9,9 @@ const DashboardUsers = ({ reserva }) => {
   const [showModal, setShowModal] = useState(false);
   const deleteReservation = useStore((state) => state.deleteReservation);
   const getReservationById = useStore((state) => state.getReservationById);
-  const getUserById = useStore((state) => state.getUserById);
-  const [user, setUser] = useState(null);
+  
 
-  useEffect(() => {
-    getReservationById(reserva.id);
-  }, [getReservationById, reserva.id]);
-
-  useEffect(() => {
-    if (reserva.userId) {
-      getUserById(reserva.userId);
-    }
-  }, [getUserById, reserva.userId]);
-
-
-
-
+  
   const handleOpenModal = () => {
     setShowModal(true);
     getReservationById(reserva.id); // Obtener los detalles de la reserva seleccionada
@@ -61,9 +48,9 @@ const DashboardUsers = ({ reserva }) => {
   return (
     <>
       <tr className='text-center text-white font-medium'>
-      <td className="content-start">{user ? user.name : ""}</td>
-        <td className="content-start">{user ? user.email : ""}</td>
-        <td className="content-start">{user ? user.telefono : ""}</td>
+        <td  className="content-start">{reserva.name}</td>
+        <td  className="content-start">{reserva.email}</td>
+        <td className="content-start">{reserva.telefono}</td>
         <td className="content-start">{reserva.cancha}</td>
         <td className="content-start">{reserva.tipo}</td>
         <td className="content-start">{reserva.date}</td>
