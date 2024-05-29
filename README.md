@@ -7,6 +7,6 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-npm i - para instalar dependencias
-npm run dev - para correr proyecto
+npm i - para instalar dependencias <br>
+npm run dev - para correr proyecto <br>
 npm run db - para correr la db generada mediante json-server
