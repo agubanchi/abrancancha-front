@@ -2,7 +2,7 @@ import React from 'react';
 import useStore from "../userStore";
 import DashboardUsers from '../components/DashboardUsers';
 
-export default function Dashboard({ reserva }) {
+export default function Dashboard() {
   const reservationsList = useStore((state) => state.reservations);
 
   return (
