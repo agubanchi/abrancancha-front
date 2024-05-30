@@ -47,7 +47,7 @@ const DashboardUsers = ({ reserva }) => {
 
   return (
     <>
-      <tr className='text-center text-white font-medium'>
+      <tr className='text-center text-white flex justify-between gap-2 w-full px-4'>
         <td  className="content-start">{reserva.name}</td>
         <td  className="content-start">{reserva.email}</td>
         <td className="content-start">{reserva.telefono}</td>
@@ -55,7 +55,7 @@ const DashboardUsers = ({ reserva }) => {
         <td className="content-start">{reserva.tipo}</td>
         <td className="content-start">{reserva.date}</td>
         <td className="content-start">{reserva.hour}</td>
-        <td className='flex justify-around py-2 gap-2  items-center'>
+        <td className='flex justify-around py-2 gap-5  items-center'>
           {/* Modifica el manejo de eventos para abrir el modal y obtener los detalles de la reserva */}
           <FaEdit className="cursor-pointer" onClick={handleOpenModal} />
           <MdDelete className="cursor-pointer" onClick={() => handleEliminar(reserva.id)} />

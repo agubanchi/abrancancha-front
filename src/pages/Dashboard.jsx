@@ -12,7 +12,7 @@ export default function Dashboard({ reserva }) {
       </h1>
       <table className="w-full h-screen">
         <thead>
-          <tr className='bg-acentColor py-2 gap-2 px-6'>
+          <tr className='text-center text-white flex justify-between gap-2 w-full bg-acentColor px-4'>
             <th>Nombre y Apellido</th>
             <th>Email</th>
             <th>Teléfono</th>

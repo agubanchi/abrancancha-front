@@ -109,6 +109,8 @@ export default function DetalleReserva({ reserva }) {
   const getReservationById = useStore((state) => state.getReservationById); 
   const [showReservation, setShowReservation] = useState(true);
   const { user } = useAuth();
+
+
   const handleEliminar = () => {
     Swal.fire({
       title: '¿Estás seguro?',
@@ -121,16 +123,32 @@ export default function DetalleReserva({ reserva }) {
       cancelButtonColor: '#1d1d1d',
       confirmButtonText: 'Sí, eliminar',
       cancelButtonText: 'Cancelar'
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        deleteReservation(reserva.id);
-        Swal.fire(
-          'Eliminado!',
-          'La reserva ha sido eliminada.',
-          'success'
-        );
+        try {
+          const response = await fetch(`http://localhost:3000/reservations/${reserva.id}`, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+          if (!response.ok) {
+            throw new Error('Error al eliminar la reserva');
+          }
+          deleteReservation(reserva.id);
+          Swal.fire('Eliminado!', 'La reserva ha sido eliminada.', 'success');
+        } catch (error) {
+          console.error("Error al eliminar la reserva:", error);
+          Swal.fire('Error', 'Hubo un problema al eliminar la reserva.', 'error');
+        }
       }
     });
+  };
+
+
+  const handleEditar = () => {
+    getReservationById(reserva.id);
+    
   };
 
   const confirmarReserva = () => {
@@ -182,8 +200,8 @@ export default function DetalleReserva({ reserva }) {
 
   
 <div class=" flex justify-between py-2 gap-3  mt-4">
-<button type="button" className=" flex gap-2 items-center py-2 px-6 bg-indigo-500 hover:bg-indigo-800 text-white font-bold uppercase rounded-lg text-sm" onClick={()=>getReservationById(reserva.id)}><FaEdit/> Editar Reserva</button>
-<button type="button" className=" flex gap-2 items-center py-2 px-6 bg-red-500 hover:bg-red-800 text-white font-bold uppercase rounded-lg text-sm" onClick={()=>handleEliminar(reserva.id)}><MdDelete /> Eliminar Reserva</button>
+<button type="button" className=" flex gap-2 items-center py-2 px-6 bg-indigo-500 hover:bg-indigo-800 text-white font-bold uppercase rounded-lg text-sm" onClick={handleEditar}><FaEdit/> Editar Reserva</button>
+<button type="button" className=" flex gap-2 items-center py-2 px-6 bg-red-500 hover:bg-red-800 text-white font-bold uppercase rounded-lg text-sm" onClick={handleEliminar}><MdDelete /> Eliminar Reserva</button>
 </div>
 
 <div className="w-full text-center py-6">

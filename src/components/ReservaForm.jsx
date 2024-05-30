@@ -5,7 +5,7 @@ import Error from "./Error";
 import { useEffect } from "react";
 import { useAuth } from "../context/AuthContext"; // Ajusta la ruta de importación según tu proyecto
 
-export default function ReservaForm({onClose}) {
+export default function ReservaForm({ onClose }) {
   const { register, handleSubmit, setValue, formState: { errors }, reset } = useForm();
   const addReservation = userStore((state) => state.addReservation);
   const activeReservationId = userStore((state) => state.activeReservationId);
@@ -21,7 +21,6 @@ export default function ReservaForm({onClose}) {
     if (activeReservationId) {
       const activeReservation = reservations.find(reservation => reservation.id === activeReservationId);
       if (activeReservation) {
-        
         setValue('cancha', activeReservation.cancha);
         setValue('tipo', activeReservation.tipo);
         setValue('date', activeReservation.date);
@@ -31,18 +30,19 @@ export default function ReservaForm({onClose}) {
   }, [activeReservationId, setValue, reservations]);
 
   const onSubmit = async (data) => {
-    const id = uuidv4(); // Genera un nuevo ID
-    // Almacena los datos en el store global junto con el ID generado
+    const id = activeReservationId ? activeReservationId : uuidv4(); // Usa el ID activo o genera uno nuevo
     if (activeReservationId) {
-      updateReservation(data);
+      updateReservation({ ...data, id });
     } else {
       addReservation({ ...data, id });
     }
 
     try {
-      // Realiza la solicitud POST para almacenar la reserva en la base de datos
-      const response = await fetch('http://localhost:3000/reservations', {
-        method: 'POST',
+      const method = activeReservationId ? 'PUT' : 'POST';
+      const endpoint = activeReservationId ? `http://localhost:3000/reservations/${id}` : 'http://localhost:3000/reservations';
+
+      const response = await fetch(endpoint, {
+        method,
         headers: {
           'Content-Type': 'application/json'
         },
@@ -64,8 +64,6 @@ export default function ReservaForm({onClose}) {
         className="bg-white shadow-md rounded-lg py-10 px-5 mb-10"
         onSubmit={handleSubmit(onSubmit)}
       >
-      
-
         <div className="mb-5">
           <label htmlFor="cancha" className="text-sm uppercase font-bold">
             Cancha
