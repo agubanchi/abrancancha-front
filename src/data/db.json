@@ -87,11 +87,11 @@
       "userId": "8aca"
     },
     {
-      "id": "5a67faf8-0f0f-4567-b814-cec4407fd169",
       "cancha": "Cancha 2",
-      "tipo": "Futbol 9",
+      "tipo": "Futbol 11",
       "date": "2024-05-31",
       "hour": "10:00",
+      "id": "5a67faf8-0f0f-4567-b814-cec4407fd169",
       "userId": "1383"
     },
     {
@@ -157,14 +157,6 @@
       "hour": "13:00",
       "id": "329c3278-c870-4baf-a23c-0c7c396156d2",
       "userId": "8aca"
-    },
-    {
-      "id": "ccbaba8d-b850-4598-811e-a528de516e1c",
-      "cancha": "Cancha 2",
-      "tipo": "Futbol 9",
-      "date": "2024-05-31",
-      "hour": "12:00",
-      "userId": "1383"
     },
     {
       "id": "e504b054-4fae-4c64-b2bd-f4d5711bf73d",
