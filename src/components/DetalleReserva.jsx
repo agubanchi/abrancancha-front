@@ -115,8 +115,10 @@ export default function DetalleReserva({ reserva }) {
       text: 'Esta acción eliminará la reserva',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#d33',
-      cancelButtonColor: '#3085d6',
+      color: "#1d1d1d",
+      iconColor: "#1d1d1d",
+      confirmButtonColor: "#77da7e",
+      cancelButtonColor: '#1d1d1d',
       confirmButtonText: 'Sí, eliminar',
       cancelButtonText: 'Cancelar'
     }).then((result) => {
@@ -135,7 +137,12 @@ export default function DetalleReserva({ reserva }) {
     Swal.fire({
       title: "Reserva confirmada!",
       text: "Su Reserva ha sido confirmada con éxito",
-      icon: "success"
+      icon: "success",
+      confirmButtonColor: '#d33',
+      color: "#1d1d1d",
+      iconColor: "#1d1d1d",
+      confirmButtonColor: "#77da7e",
+      
     });
     
     setShowReservation(false);

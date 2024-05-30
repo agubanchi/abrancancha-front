@@ -5,7 +5,7 @@ import Error from "./Error";
 import { useEffect } from "react";
 import { useAuth } from "../context/AuthContext"; // Ajusta la ruta de importación según tu proyecto
 
-export default function ReservaForm() {
+export default function ReservaForm({onClose}) {
   const { register, handleSubmit, setValue, formState: { errors }, reset } = useForm();
   const addReservation = userStore((state) => state.addReservation);
   const activeReservationId = userStore((state) => state.activeReservationId);
@@ -52,6 +52,7 @@ export default function ReservaForm() {
         throw new Error('Error al almacenar la reserva');
       }
       reset(); // Reinicia el formulario después de enviar
+      onClose();
     } catch (error) {
       console.error("Error al guardar la reserva:", error);
     }

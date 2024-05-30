@@ -18,7 +18,7 @@ const Modal = ({ visible, onClose }) => {
         <div className='flex justify-end mr-6 mt-2 pt-6'>
           <IoIosCloseCircle className='cursor-pointer text-acentColor text-2xl' onClick={onClose} />
         </div>
-        <ReservaForm/>
+        <ReservaForm onClose={onClose}/>
       </div>
     </div>
   );
