@@ -55,18 +55,21 @@
   ],
   "users": [
     {
-      "id": "1383",
+      "id": "a320",
       "name": "Agustin Banchi",
       "telefono": "2244445077",
       "email": "correo@correo.com",
       "password": "Milanga"
     },
     {
-      "id": "130e",
+      "id": "ce5f",
       "name": "Juan Nu",
-      "telefono": "2244448899",
-      "email": "correo@correo.com",
+      "telefono": "2244447788",
+      "email": "juan@correo.com",
       "password": "juan123"
+    },
+    {
+      "id": "2f3f"
     }
   ],
   "reservations": [
