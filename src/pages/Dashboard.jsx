@@ -1,9 +1,19 @@
-import React from 'react';
-import useStore from "../userStore";
+import { useEffect } from 'react';
 import DashboardUsers from '../components/DashboardUsers';
+import { useAuth } from '../context/AuthContext';
 
 export default function Dashboard() {
-  const reservationsList = useStore((state) => state.reservations);
+  const {reservations, setReservations } = useAuth();
+
+
+// traio listado de todas las reservas almacenadas en mi db
+  useEffect(() => {
+    fetch('http://localhost:3000/reservations/')
+      .then(res => res.json())
+      .then(json => setReservations(json))
+      .catch(err => console.error('Error fetching reservations:', err));
+  }, [setReservations]);
+
 
   return (
     <>
@@ -24,8 +34,8 @@ export default function Dashboard() {
           </tr>
         </thead>
         <tbody>
-          {reservationsList.map((reserva) => (
-            <DashboardUsers key={reserva.id} reserva={reserva} />
+          {reservations.map((reserva) => (
+            <DashboardUsers key={reserva.id} reserva={reserva}  />
           ))}
         </tbody>
       </table>

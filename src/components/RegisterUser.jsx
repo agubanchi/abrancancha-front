@@ -8,20 +8,20 @@ import { useAuth } from '../context/AuthContext';
 
 export default function RegisterUser() {
   const { users, setUsers, login } = useAuth(); // importo los states que voy a necesitar desde el contexto
-  const { register, handleSubmit, formState: { errors }, getValues } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
 
   const onSubmit = (userData) => {
     setUsers([...users, userData]); // Establecer los datos del contacto en el state
   
-    const formData = getValues();
+    
   
     fetch('http://localhost:3000/users', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(formData)
+      body: JSON.stringify(userData)
     })
     .then(response => {
       if (!response.ok) {
@@ -37,9 +37,9 @@ export default function RegisterUser() {
         confirmButtonColor:"#77da7e"
       });
   
-       login(formData); // Almacenar datos del usuario en el contexto
+       login(userData); // Almacenar datos del usuario en el contexto
             // Almacenar datos del usuario en localStorage
-            localStorage.setItem("user", JSON.stringify(formData));
+            localStorage.setItem("user", JSON.stringify(userData));
       // Cambiar a la vista de inicio de sesión
       navigate('/login');
       

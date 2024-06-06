@@ -1,58 +1,35 @@
 import { useForm } from "react-hook-form";
-import userStore from "../userStore";
-import { v4 as uuidv4 } from 'uuid';
 import Error from "./Error";
 import { useEffect } from "react";
-import { useAuth } from "../context/AuthContext"; // Ajusta la ruta de importación según tu proyecto
+import { useAuth } from "../context/AuthContext"; 
 
-export default function ReservaForm({ onClose }) {
-  const { register, handleSubmit, setValue, formState: { errors }, reset } = useForm();
-  const addReservation = userStore((state) => state.addReservation);
-  const activeReservationId = userStore((state) => state.activeReservationId);
-  const reservations = userStore((state) => state.reservations);
-  const updateReservation = userStore((state) => state.updateReservation);
-  const { user: authUser } = useAuth(); // Obtener el usuario autenticado desde el contexto
+export default function ReservaForm() {
+  const { register, handleSubmit,  formState: { errors }, reset } = useForm();
+  const { currentUser, reservations, setReservations } = useAuth(); // llamada los states necesarios del contexto
 
   const today = new Date();
   const maxDate = new Date(today);
   maxDate.setDate(today.getDate() + 7);
 
-  useEffect(() => {
-    if (activeReservationId) {
-      const activeReservation = reservations.find(reservation => reservation.id === activeReservationId);
-      if (activeReservation) {
-        setValue('cancha', activeReservation.cancha);
-        setValue('tipo', activeReservation.tipo);
-        setValue('date', activeReservation.date);
-        setValue('hour', activeReservation.hour);
-      }
-    }
-  }, [activeReservationId, setValue, reservations]);
-
   const onSubmit = async (data) => {
-    const id = activeReservationId ? activeReservationId : uuidv4(); // Usa el ID activo o genera uno nuevo
-    if (activeReservationId) {
-      updateReservation({ ...data, id });
-    } else {
-      addReservation({ ...data, id });
-    }
-
     try {
-      const method = activeReservationId ? 'PUT' : 'POST';
-      const endpoint = activeReservationId ? `http://localhost:3000/reservations/${id}` : 'http://localhost:3000/reservations';
-
-      const response = await fetch(endpoint, {
-        method,
+      const newReservation = { ...data, userId: currentUser.id };
+      const response = await fetch('http://localhost:3000/reservations', {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ ...data, id, userId: authUser.id })
+        body: JSON.stringify(newReservation)
       });
+
       if (!response.ok) {
         throw new Error('Error al almacenar la reserva');
       }
+
+      setReservations([...reservations, newReservation]);
+
       reset(); // Reinicia el formulario después de enviar
-      onClose();
+      
     } catch (error) {
       console.error("Error al guardar la reserva:", error);
     }

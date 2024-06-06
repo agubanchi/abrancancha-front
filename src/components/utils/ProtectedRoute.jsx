@@ -1,17 +1,15 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import Reservas from "../../pages/Reservas";
-import Dashboard from "../../pages/Dashboard";
 
 const ProtectedRouter = () => {
-  const { user } = useAuth();
+  const { currentUser } = useAuth();
 
-  if (!user) {
+  if (!currentUser) {
     return <Navigate to="/login" />;
   }
 
-  return <Outlet/>
+  return <Outlet />;
 };
 
 export default ProtectedRouter;

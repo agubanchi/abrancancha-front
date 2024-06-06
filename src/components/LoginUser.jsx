@@ -41,19 +41,17 @@ export default function LoginUser() {
     }
   };
 
-  const mensaje =  'Ingresa los datos de acceso';
-
   return (
     <div className="flex items-center justify-center h-screen px-5">
       <div className="bg-white shadow-md rounded-lg py-10 px-5 mb-10 md:w-1/2 w-full">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <h1 className='font-black text-2xl py-4 text-center text-textColor'>{mensaje}</h1>
+          <h1 className='font-black text-2xl py-4 text-center text-textColor'>Ingresa los datos de acceso</h1>
           <div className="mb-5 font-Onest font-normal flex items-center gap-2">
             <FaEnvelope className="w-4 text-textColor" />
             <input
               name="email"
               id="email"
-              className="w-full p-3  rounded-md border-acentColor border-2"
+              className="w-full p-3 rounded-md border-acentColor border-2"
               type="email"
               placeholder="Email"
               {...register("email", {
@@ -71,7 +69,7 @@ export default function LoginUser() {
             <input
               name="password"
               id="password"
-              className="w-full p-3  rounded-md border-acentColor border-2"
+              className="w-full p-3 rounded-md border-acentColor border-2"
               type="password"
               placeholder="Contraseña"
               {...register("password", {

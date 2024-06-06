@@ -55,143 +55,28 @@
   ],
   "users": [
     {
-      "id": "a320",
+      "id": "4300",
       "name": "Agustin Banchi",
       "telefono": "2244445077",
       "email": "correo@correo.com",
       "password": "Milanga"
     },
     {
-      "id": "ce5f",
-      "name": "Juan Nu",
-      "telefono": "2244447788",
+      "id": "4a07",
+      "name": "Juan Carlos",
+      "telefono": "2244448899",
       "email": "juan@correo.com",
       "password": "juan123"
-    },
-    {
-      "id": "2f3f"
     }
   ],
   "reservations": [
     {
-      "id": "685c0423-4285-446c-a896-42db16bd8ead",
+      "id": "c6cc",
       "cancha": "Cancha 2",
       "tipo": "Futbol 9",
-      "date": "2024-05-31",
-      "hour": "09:00",
-      "userId": "8aca"
-    },
-    {
-      "id": "55d3b098-5add-4dd1-983f-e5b8fd58dbcf",
-      "cancha": "Cancha 2",
-      "tipo": "Futbol 9",
-      "date": "2024-05-31",
-      "hour": "09:00",
-      "userId": "8aca"
-    },
-    {
-      "cancha": "Cancha 2",
-      "tipo": "Futbol 11",
-      "date": "2024-05-31",
-      "hour": "10:00",
-      "id": "5a67faf8-0f0f-4567-b814-cec4407fd169",
-      "userId": "1383"
-    },
-    {
-      "id": "f7a07f43-e165-43ed-bff6-fb3c3dc07715",
-      "cancha": "Cancha 2",
-      "tipo": "Futbol 7",
-      "date": "2024-05-31",
-      "hour": "10:00",
-      "userId": "8aca"
-    },
-    {
-      "id": "da399baf-49d0-4b67-90ee-8bcab4ee155c",
-      "cancha": "Cancha 2",
-      "tipo": "Futbol 7",
-      "date": "2024-05-31",
-      "hour": "8:00",
-      "userId": "8aca"
-    },
-    {
-      "id": "64b59432-00ad-4781-af6e-5c8f39bae215",
-      "cancha": "Cancha 2",
-      "tipo": "Futbol 11",
-      "date": "2024-05-30",
-      "hour": "11:00",
-      "userId": "8aca"
-    },
-    {
-      "id": "dcf5e38b-bbad-4455-abe4-faf0dc4841a5",
-      "cancha": "Cancha 2",
-      "tipo": "Futbol 11",
-      "date": "2024-05-30",
-      "hour": "13:00",
-      "userId": "8aca"
-    },
-    {
-      "id": "c647e506-1750-4b59-9a4b-328d2a638a1a",
-      "cancha": "Cancha 1",
-      "tipo": "Futbol 7",
-      "date": "2024-05-30",
-      "hour": "8:30",
-      "userId": "8aca"
-    },
-    {
-      "id": "1213dcb6-5de8-4fc3-aa38-8460e5ecc6c9",
-      "cancha": "Cancha 1",
-      "tipo": "Futbol 9",
-      "date": "2024-05-31",
-      "hour": "8:30",
-      "userId": "8aca"
-    },
-    {
-      "id": "9c0b1bcb-d502-4b3a-90ef-6d9c3cc9f8bc",
-      "cancha": "Cancha 1",
-      "tipo": "Futbol 9",
-      "date": "2024-05-31",
-      "hour": "13:00",
-      "userId": "8aca"
-    },
-    {
-      "cancha": "Cancha 2",
-      "tipo": "Futbol 7",
-      "date": "2024-05-31",
-      "hour": "13:00",
-      "id": "329c3278-c870-4baf-a23c-0c7c396156d2",
-      "userId": "8aca"
-    },
-    {
-      "id": "e504b054-4fae-4c64-b2bd-f4d5711bf73d",
-      "cancha": "Cancha 3",
-      "tipo": "Futbol 11",
-      "date": "2024-05-31",
-      "hour": "12:00",
-      "userId": "8aca"
-    },
-    {
-      "id": "abd75174-3370-40fd-add4-781fe0ba29b5",
-      "cancha": "Cancha 3",
-      "tipo": "Futbol 11",
-      "date": "2024-05-31",
-      "hour": "12:00",
-      "userId": "8aca"
-    },
-    {
-      "id": "7dfcfd30-707b-4c27-a70b-6b9d82e45895",
-      "cancha": "Cancha 3",
-      "tipo": "Futbol 11",
-      "date": "2024-05-31",
-      "hour": "12:00",
-      "userId": "8aca"
-    },
-    {
-      "id": "1f248ffc-9958-4d2c-8305-e14b9e52f6d8",
-      "cancha": "Cancha 3",
-      "tipo": "Futbol 11",
-      "date": "2024-05-31",
-      "hour": "12:00",
-      "userId": "8aca"
+      "date": "2024-06-09",
+      "hour": "10:30",
+      "userId": "4a07"
     }
   ],
   "admin": [
