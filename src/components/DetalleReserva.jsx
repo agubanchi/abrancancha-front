@@ -6,7 +6,7 @@ import { useState } from "react";
 import Swal from 'sweetalert2';
 import useStore from "../userStore";
 import { useAuth } from '../context/AuthContext';
-export default function DetalleReserva({ reserva, removeReservation }) {
+export default function DetalleReserva({ reserva, removeReservation, handleEditar }) {
   const { currentUser, reservations } = useAuth();
   const [showReservation, setShowReservation] = useState(true);
 
@@ -14,10 +14,7 @@ export default function DetalleReserva({ reserva, removeReservation }) {
 
 
 
-  const handleEditar = () => {
-    getReservationById(reserva.id);
-    
-  };
+  
 
   const confirmarReserva = () => {
     Swal.fire({
@@ -68,7 +65,7 @@ export default function DetalleReserva({ reserva, removeReservation }) {
 
   
 <div class=" flex justify-between py-2 gap-3  mt-4">
-<button type="button" className=" flex gap-2 items-center py-2 px-6 bg-indigo-500 hover:bg-indigo-800 text-white font-bold uppercase rounded-lg text-sm" onClick={handleEditar}><FaEdit/> Editar Reserva</button>
+<button type="button" className="flex gap-2 items-center py-2 px-6 bg-indigo-500 hover:bg-indigo-800 text-white font-bold uppercase rounded-lg text-sm" onClick={() => handleEditar(reserva.id)}><FaEdit/> Editar Reserva</button>
 <button type="button" className=" flex gap-2 items-center py-2 px-6 bg-red-500 hover:bg-red-800 text-white font-bold uppercase rounded-lg text-sm"  onClick={()=>removeReservation(reserva.id)}><MdDelete /> Eliminar Reserva</button>
 </div>
 

@@ -3,33 +3,54 @@ import Error from "./Error";
 import { useEffect } from "react";
 import { useAuth } from "../context/AuthContext"; 
 
-export default function ReservaForm() {
-  const { register, handleSubmit,  formState: { errors }, reset } = useForm();
-  const { currentUser, reservations, setReservations } = useAuth(); // llamada los states necesarios del contexto
-
+export default function ReservaForm({ editingReservation, setEditingReservation }) {
+  const { register, handleSubmit, setValue, formState: { errors }, reset } = useForm();
+  const { currentUser, reservations, setReservations } = useAuth();
   const today = new Date();
   const maxDate = new Date(today);
   maxDate.setDate(today.getDate() + 7);
 
+  useEffect(() => {
+    if (editingReservation) {
+      setValue('cancha', editingReservation.cancha);
+      setValue('tipo', editingReservation.tipo);
+      setValue('date', editingReservation.date);
+      setValue('hour', editingReservation.hour);
+    }
+  }, [editingReservation, setValue]);
+
   const onSubmit = async (data) => {
+    const newReservation = { ...data, userId: currentUser.id };
+
     try {
-      const newReservation = { ...data, userId: currentUser.id };
-      const response = await fetch('http://localhost:3000/reservations', {
-        method: 'POST',
+      const method = editingReservation ? 'PATCH' : 'POST';
+      const endpoint = editingReservation 
+        ? `http://localhost:3000/reservations/${editingReservation.id}`
+        : 'http://localhost:3000/reservations/';
+  
+      const response = await fetch(endpoint, {
+        method,
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(newReservation)
       });
-
       if (!response.ok) {
         throw new Error('Error al almacenar la reserva');
       }
 
-      setReservations([...reservations, newReservation]);
+      const updatedReservation = await response.json();
 
-      reset(); // Reinicia el formulario después de enviar
-      
+      setReservations(prevReservations => {
+        if (editingReservation) {
+          return prevReservations.map(reserva => reserva.id === editingReservation.id ? updatedReservation : reserva);
+        } else {
+          return [...prevReservations, updatedReservation];
+        }
+      });
+
+      reset();
+      setEditingReservation(null); // Reinicia el estado de edición
     } catch (error) {
       console.error("Error al guardar la reserva:", error);
     }
@@ -37,7 +58,7 @@ export default function ReservaForm() {
 
   return (
     <div className="md:w-full mx-5">
-      <form
+        <form
         className="bg-white shadow-md rounded-lg py-10 px-5 mb-10"
         onSubmit={handleSubmit(onSubmit)}
       >

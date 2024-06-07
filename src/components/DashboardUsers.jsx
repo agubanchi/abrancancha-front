@@ -10,13 +10,10 @@ const DashboardUsers = ({ reserva, removeReservation }) => {
   const { users } = useAuth();
   const [showModal, setShowModal] = useState(false);
   
-  const getReservationById = useStore((state) => state.getReservationById);
   
   
-  useEffect(() => {
-    getReservationById(reserva.id); // Obtener los detalles de la reserva seleccionada por Id
-  }, [reserva.id, getReservationById]);
-
+  
+ 
   const user = users.find(user => user.id === reserva.userId);
 
   const handleOpenModal = () => {

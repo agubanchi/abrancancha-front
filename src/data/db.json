@@ -69,7 +69,16 @@
       "password": "juan123"
     }
   ],
-  "reservations": [],
+  "reservations": [
+    {
+      "id": "8190",
+      "cancha": "Cancha 2",
+      "tipo": "Futbol 9",
+      "date": "2024-06-08",
+      "hour": "13:00",
+      "userId": "4300"
+    }
+  ],
   "admin": [
     {
       "role": "admin",

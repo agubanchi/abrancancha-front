@@ -2,23 +2,21 @@ import React, { useEffect } from "react";
 import Swal from "sweetalert2";
 import DetalleReserva from "./DetalleReserva";
 import { useAuth } from "../context/AuthContext";
-export default function ListadoReservas() {
+
+export default function ListadoReservas({ onEdit }) {
   const { currentUser, reservations, setReservations } = useAuth();
   
-
   useEffect(() => {
     if (currentUser && currentUser.id) {
       fetch(`http://localhost:3000/reservations?userId=${currentUser.id}`)
         .then((response) => response.json())
-        .then((data) => setReservations(data))  // Actualiza las reservas en el store
+        .then((data) => setReservations(data))
         .catch((error) => console.error('Error fetching reservations:', error));
     }
-  }, [currentUser]);
+  }, [currentUser, setReservations]);
 
-
-  //funcion para eliminar Reserva por ID, que luego paso como prop al componente ListdoReservas.
-  function removeReservation(id) {
-    Swal.fire({
+  const removeReservation = async (id) => {
+    const result = await Swal.fire({
       title: '¿Estás seguro?',
       text: 'Esta acción eliminará la reserva',
       icon: 'warning',
@@ -29,27 +27,32 @@ export default function ListadoReservas() {
       cancelButtonColor: '#1d1d1d',
       confirmButtonText: 'Sí, eliminar',
       cancelButtonText: 'Cancelar'
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        try {
-          const response = await fetch(`http://localhost:3000/reservations/${id}`, {
-            method: 'DELETE',
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          });
-          if (!response.ok) {
-            throw new Error('Error al eliminar la reserva');
-          }
-          setReservations(prevReservations => prevReservations.filter(reserva => reserva.id !== id));
-          Swal.fire('Eliminado!', 'La reserva ha sido eliminada.', 'success');
-        } catch (error) {
-          console.error("Error al eliminar la reserva:", error);
-          Swal.fire('Error', 'Hubo un problema al eliminar la reserva.', 'error');
-        }
-      }
     });
-  }
+
+    if (result.isConfirmed) {
+      try {
+        const response = await fetch(`http://localhost:3000/reservations/${id}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        if (!response.ok) {
+          throw new Error('Error al eliminar la reserva');
+        }
+        setReservations(prevReservations => prevReservations.filter(reserva => reserva.id !== id));
+        Swal.fire('Eliminado!', 'La reserva ha sido eliminada.', 'success');
+      } catch (error) {
+        console.error("Error al eliminar la reserva:", error);
+        Swal.fire('Error', 'Hubo un problema al eliminar la reserva.', 'error');
+      }
+    }
+  };
+
+  const handleEditar = (id) => {
+    const reservaEdit = reservations.find(reserva => reserva.id === id);
+    onEdit(reservaEdit); // Pasar la reserva a editar al formulario
+  };
 
   return (
     <div className="md:w-1/2 lg:3/5 md:h-screen overflow-y-scroll scrollbar scrollbar-thumb-acentColor scrollbar-thumb-radius">
@@ -60,7 +63,7 @@ export default function ListadoReservas() {
           <span className="text-acentColor font-bold">Reservas</span>
           </p>
           {reservations.map((reserva) => (
-            <DetalleReserva key={reserva.id} reserva={reserva} removeReservation={removeReservation} />
+            <DetalleReserva key={reserva.id} reserva={reserva} removeReservation={removeReservation} handleEditar={handleEditar}  />
           ))}
         </>
       ) : (
