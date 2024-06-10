@@ -71,11 +71,11 @@
   ],
   "reservations": [
     {
-      "id": "8190",
+      "id": "8704",
       "cancha": "Cancha 2",
       "tipo": "Futbol 9",
-      "date": "2024-06-08",
-      "hour": "13:00",
+      "date": "2024-06-15",
+      "hour": "09:30",
       "userId": "4300"
     }
   ],

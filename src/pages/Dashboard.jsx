@@ -61,13 +61,13 @@ function removeReservation(id) {
       <table className="w-full h-screen">
         <thead>
           <tr className='text-center text-white flex justify-between gap-2 w-full bg-acentColor px-4'>
-            <th>Nombre y Apellido</th>
-            <th>Email</th>
-            <th>Teléfono</th>
-            <th>Cancha</th>
-            <th>Tipo de Cancha</th>
-            <th>Fecha</th>
-            <th>Hora</th>
+            <th className='w-40'>Nombre y Apellido</th>
+            <th className='w-40'>Email</th>
+            <th className='w-40'>Teléfono</th>
+            <th className='w-40'>Cancha</th>
+            <th className='w-40'>Tipo de Cancha</th>
+            <th className='w-40'>Fecha</th>
+            <th className='w-40'>Hora</th>
             <th>Acciones</th>
           </tr>
         </thead>
