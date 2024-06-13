@@ -12,29 +12,32 @@ export default function RegisterUser() {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
 
-  const onSubmit = async (userData) => {
-    // Verificar si el email ya está registrado
-    const emailExists = users.some(user => user.email === userData.email);
+  const onSubmit = (userData) => {
+    setUsers([...users, userData]); // Establecer los datos del contacto en el state
+      // Verificar si el email ya está registrado
+      const emailExists = users.some(user => user.email === userData.email);
 
-    if (emailExists) {
-      Swal.fire({
-        title: "Error",
-        text: "El correo electrónico ya está registrado",
-        icon: "error",
-        iconColor: "#1d1d1d",
-        confirmButtonColor: "#77da7e"
-      });
-      return;
-    }
-
-    try {
-      const response = await fetchCreate({
-        endPoint: Endpoint.register,
-        data: userData
-      });
-
-      const data = await response.json();
-
+      if (emailExists) {
+        Swal.fire({
+          title: "Error",
+          text: "El correo electrónico ya está registrado",
+          icon: "error",
+          color:"#1d1d1d",
+          iconColor:"#1d1d1d",
+          confirmButtonColor:"#77da7e"
+        });
+        return;
+      }
+    
+  
+    fetch('http://localhost:3000/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(userData)
+    })
+    .then(response => {
       if (!response.ok) {
         throw new Error(data.message || 'Error al registrar usuario');
       }
