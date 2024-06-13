@@ -53,8 +53,25 @@
       "url": "./gallery/img13.jpg"
     }
   ],
-  "users": [],
-  "reservations": [],
+  "users": [
+    {
+      "id": "eb56",
+      "name": "Agustin Banchi",
+      "telefono": "2244445077",
+      "email": "correo@correo.com",
+      "password": "Milanga"
+    }
+  ],
+  "reservations": [
+    {
+      "id": "9240",
+      "cancha": "Cancha 1",
+      "tipo": "Futbol 11",
+      "date": "2024-06-18",
+      "hour": "10:00",
+      "userId": "eb56"
+    }
+  ],
   "admin": [
     {
       "id": "8aca",

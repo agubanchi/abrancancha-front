@@ -57,18 +57,8 @@ export default function Dashboard() {
           if (!response.ok) {
             throw new Error('Error al eliminar la reserva');
           }
-          setReservations((prevReservations) =>
-            prevReservations.filter((reserva) => reserva.id !== id)
-          );
-          Swal.fire({
-            title: 'Eliminado!',
-            text: 'La reserva ha sido eliminada.',
-            icon: 'success',
-            color: '#1d1d1d',
-            iconColor: '#1d1d1d',
-            confirmButtonColor: '#77da7e',
-            cancelButtonColor: '#1d1d1d',
-          });
+          setReservations(prevReservations => prevReservations.filter(reserva => reserva.id !== id));
+          Swal.fire('Eliminado!', 'La reserva ha sido eliminada.', 'success');
         } catch (error) {
           console.error('Error al eliminar la reserva:', error);
           Swal.fire(
