@@ -55,28 +55,21 @@
   ],
   "users": [
     {
-      "id": "4300",
+      "id": "eb56",
       "name": "Agustin Banchi",
       "telefono": "2244445077",
       "email": "correo@correo.com",
       "password": "Milanga"
-    },
-    {
-      "id": "4a07",
-      "name": "Juan Carlos",
-      "telefono": "2244448899",
-      "email": "juan@correo.com",
-      "password": "juan123"
     }
   ],
   "reservations": [
     {
-      "id": "8704",
-      "cancha": "Cancha 2",
-      "tipo": "Futbol 9",
-      "date": "2024-06-15",
-      "hour": "09:30",
-      "userId": "4300"
+      "id": "9240",
+      "cancha": "Cancha 1",
+      "tipo": "Futbol 11",
+      "date": "2024-06-18",
+      "hour": "10:00",
+      "userId": "eb56"
     }
   ],
   "admin": [

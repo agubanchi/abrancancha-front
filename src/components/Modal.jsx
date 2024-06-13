@@ -1,10 +1,8 @@
 import React from 'react';
-
 import { IoIosCloseCircle } from "react-icons/io";
-
 import ReservaForm from './ReservaForm';
 
-const Modal = ({ visible, onClose }) => {
+const Modal = ({ visible, onClose, editingReservation }) => {
 
   const handleOnClose = (e) => {
     if (e.target.id === 'container-modal') onClose();
@@ -18,7 +16,7 @@ const Modal = ({ visible, onClose }) => {
         <div className='flex justify-end mr-6 mt-2 pt-6'>
           <IoIosCloseCircle className='cursor-pointer text-acentColor text-2xl' onClick={onClose} />
         </div>
-        <ReservaForm onClose={onClose}/>
+        <ReservaForm onClose={onClose} editingReservation={editingReservation} />
       </div>
     </div>
   );
