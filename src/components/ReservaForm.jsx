@@ -3,7 +3,7 @@ import Error from "./Error";
 import { useEffect } from "react";
 import { useAuth } from "../context/AuthContext"; 
 
-export default function ReservaForm({ editingReservation, setEditingReservation }) {
+export default function ReservaForm({ editingReservation,  onClose }) {
   const { register, handleSubmit, setValue, formState: { errors }, reset } = useForm();
   const { currentUser, reservations, setReservations } = useAuth();
   const today = new Date();
@@ -19,21 +19,30 @@ export default function ReservaForm({ editingReservation, setEditingReservation 
     }
   }, [editingReservation, setValue]);
 
+  
   const onSubmit = async (data) => {
-    const newReservation = { ...data, userId: currentUser.id };
-
+   
+  
     try {
       const method = editingReservation ? 'PATCH' : 'POST';
       const endpoint = editingReservation 
         ? `http://localhost:3000/reservations/${editingReservation.id}`
         : 'http://localhost:3000/reservations/';
+
+        const reservationData = {
+          cancha: data.cancha,
+          tipo: data.tipo,
+          date: data.date,
+          hour: data.hour,
+          userId: editingReservation ? editingReservation.userId : currentUser.id
+        };
   
       const response = await fetch(endpoint, {
         method,
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(newReservation)
+        body: JSON.stringify(reservationData)
       });
       if (!response.ok) {
         throw new Error('Error al almacenar la reserva');
@@ -48,9 +57,10 @@ export default function ReservaForm({ editingReservation, setEditingReservation 
           return [...prevReservations, updatedReservation];
         }
       });
-
+      
       reset();
-      setEditingReservation(null); // Reinicia el estado de edición
+      onClose();
+
     } catch (error) {
       console.error("Error al guardar la reserva:", error);
     }
