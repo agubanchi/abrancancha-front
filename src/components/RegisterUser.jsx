@@ -13,7 +13,20 @@ export default function RegisterUser() {
 
   const onSubmit = (userData) => {
     setUsers([...users, userData]); // Establecer los datos del contacto en el state
-  
+      // Verificar si el email ya está registrado
+      const emailExists = users.some(user => user.email === userData.email);
+
+      if (emailExists) {
+        Swal.fire({
+          title: "Error",
+          text: "El correo electrónico ya está registrado",
+          icon: "error",
+          color:"#1d1d1d",
+          iconColor:"#1d1d1d",
+          confirmButtonColor:"#77da7e"
+        });
+        return;
+      }
     
   
     fetch('http://localhost:3000/users', {
