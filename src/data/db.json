@@ -55,51 +55,21 @@
   ],
   "users": [
     {
-      "id": "f41f",
-      "fullname": "Juan Carlos",
-      "phone": "2244445599",
+      "id": "eb56",
+      "name": "Agustin Banchi",
+      "telefono": "2244445077",
       "email": "correo@correo.com",
       "password": "Milanga"
     }
   ],
   "reservations": [
     {
-      "id": "c122",
-      "cancha": "Cancha 2",
-      "tipo": "Futbol 5",
-      "date": "2024-07-04",
-      "hour": "10:00",
-      "userId": "f41f",
-      "price": 20000,
-      "observations": "Cancha cubierta"
-    },
-    {
-      "id": "2c7b",
+      "id": "9240",
       "cancha": "Cancha 1",
-      "tipo": "Futbol 9",
-      "date": "2024-07-06",
-      "hour": "10:30",
-      "userId": "f41f",
-      "price": 40000,
-      "observations": "Cancha al Aire Libre, Hierba"
-    },
-    {
-      "id": "5644",
-      "cancha": "Cancha 4",
-      "tipo": "Futbol 5",
-      "date": "2024-07-06",
-      "hour": "14:00",
-      "userId": "f41f",
-      "price": 20000,
-      "observations": "Cancha Iluminación Nocturna"
-    },
-    {
-      "id": "3405",
-      "cancha": "Cancha 3",
-      "tipo": "Futbol 9",
-      "date": "2024-06-15",
-      "hour": "09:30",
-      "userId": "4300"
+      "tipo": "Futbol 11",
+      "date": "2024-06-18",
+      "hour": "10:00",
+      "userId": "eb56"
     }
   ],
   "admin": [
