@@ -65,16 +65,7 @@ export default function ReservaForm({ editingReservation,  onClose }) {
     }
   }, [editingReservation, setValue]);
 
-  const tipoSeleccionado = watch('tipo');
   
-  useEffect(() => {
-    if (tipoSeleccionado) {
-      const nuevoPrecio = precios[tipoSeleccionado] || 0;
-      setPrecio(nuevoPrecio);
-      setAnticipo(nuevoPrecio * porcentajeAnticipo);
-    }
-  }, [tipoSeleccionado]);
-
   const onSubmit = async (data) => {
    
   
@@ -84,16 +75,14 @@ export default function ReservaForm({ editingReservation,  onClose }) {
         ? `http://localhost:3000/reservations/${editingReservation.id}`
         : 'http://localhost:3000/reservations/';
 
-      const reservationData = {
-        cancha: data.cancha,
-        tipo: data.tipo,
-        date: data.date,
-        hour: data.hour,
-        userId: editingReservation ? editingReservation.userId : currentUser.id,
-        precio,
-        anticipo
-      };
-
+        const reservationData = {
+          cancha: data.cancha,
+          tipo: data.tipo,
+          date: data.date,
+          hour: data.hour,
+          userId: editingReservation ? editingReservation.userId : currentUser.id
+        };
+  
       const response = await fetch(endpoint, {
         method,
         headers: {
