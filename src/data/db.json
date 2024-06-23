@@ -67,8 +67,16 @@
       "id": "10f5",
       "cancha": "Cancha 1",
       "tipo": "Futbol 7",
-      "date": "2024-06-19",
-      "hour": "09:00",
+      "date": "2024-06-22",
+      "hour": "8:00",
+      "userId": "eb56"
+    },
+    {
+      "id": "d7d1",
+      "cancha": "Cancha 2",
+      "tipo": "Futbol 9",
+      "date": "2024-06-21",
+      "hour": "09:30",
       "userId": "eb56"
     }
   ],

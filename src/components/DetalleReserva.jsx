@@ -13,6 +13,8 @@ export default function DetalleReserva({ reserva, handleEditar }) {
       title: "Reserva confirmada!",
       text: "Su Reserva ha sido confirmada con éxito",
       icon: "success",
+      color: "#1d1d1d",
+      iconColor: "#1d1d1d",
       confirmButtonColor: "#77da7e",
     }).then(() => {
       confirmReservation(reserva.id); // Llama al método del contexto para confirmar esta reserva

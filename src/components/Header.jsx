@@ -41,12 +41,11 @@ const Header = () => {
               <a href="#contacto" className="hover:text-acentColor"> Contacto </a>
               <a href="#frecuentes" className="hover:text-acentColor"> Preguntas Frecuentes </a>
             </div>
-            <div className='gap-2 flex items-center'>
-              {/* <button onClick={handleLogout} className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor">Cerrar Sesión</button> */}
+            <div>
               {currentUser ? (
-                <ButtonCerrarSesion/>
+                <button onClick={handleLogout} className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor">Logout</button>
               ) : (
-                <NavLink to="/login" className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor">Iniciar Sesión</NavLink>
+                <NavLink to="/login" className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor">Login</NavLink>
               )}
             </div>
           </nav>
@@ -78,9 +77,9 @@ const Header = () => {
               <div className='py-6'>
                 {/* <button onClick={handleLogout} className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor">Cerrar Sesión</button> */}
                 {currentUser ? (
-                  <ButtonCerrarSesion/>
+                  <button onClick={handleLogout} className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor">Logout</button>
                 ) : (
-                  <NavLink to="/login" className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor">Iniciar Sesión</NavLink>
+                  <NavLink to="/login" className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor">Login</NavLink>
                 )}
               </div>
             </nav>
