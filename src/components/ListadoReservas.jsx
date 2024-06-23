@@ -55,7 +55,7 @@ export default function ListadoReservas({ onEdit }) {
   };
 
   return (
-    <div className="md:w-1/2 lg:3/5 md:h-screen overflow-y-scroll scrollbar scrollbar-thumb-acentColor scrollbar-thumb-radius">
+    <div className="md:w-1/2 lg:3/5 md:h-screen overflow-y-scroll ">
       {reservations.length ? (
         <>
           <h2 className="font-black text-3xl text-center text-acentColor">Listado de Reservas</h2>
