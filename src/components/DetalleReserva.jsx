@@ -21,7 +21,6 @@ export default function DetalleReserva({ reserva, removeReservation, handleEdita
       title: "Reserva confirmada!",
       text: "Su Reserva ha sido confirmada con éxito",
       icon: "success",
-      confirmButtonColor: '#d33',
       color: "#1d1d1d",
       iconColor: "#1d1d1d",
       confirmButtonColor: "#77da7e",

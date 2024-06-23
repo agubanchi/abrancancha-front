@@ -4,12 +4,16 @@ import { NavLink } from 'react-router-dom';
 import Modal from "./Modal";
 import { IoClose } from "react-icons/io5";
 import { RiFootballFill } from "react-icons/ri";
+import { useAuth } from "../context/AuthContext";
 
 const Header = () => {
+  const { currentUser, logout } = useAuth();
   const [sticky, setSticky] = useState(false);
   const [open, setOpen] = useState(false);
-
   
+  const handleLogout = () => {
+    logout(); // Llama a la función de logout
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,10 +25,8 @@ const Header = () => {
     };
   }, []);
 
-
-
   return (
-    <header className="bg-textColor shadow-md fixed lef-0 top-0 mb-10 w-full z-[9999]">
+    <header className="bg-textColor shadow-md relative lef-0 top-0  w-full z-[9999]">
       <div className="mx-auto container px-5 py-0">
         <div className="flex justify-between items-center">
           <div className="z-[999]">
@@ -39,49 +41,49 @@ const Header = () => {
               <a href="#frecuentes" className="hover:text-acentColor"> Preguntas Frecuentes </a>
             </div>
             <div>
-              <NavLink to="/login" className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor"> Login </NavLink>
+              {currentUser ? (
+                <button onClick={handleLogout} className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor">Logout</button>
+              ) : (
+                <NavLink to="/login" className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor">Login</NavLink>
+              )}
             </div>
           </nav>
 
           <div
-          onClick={() => setOpen(!open)}
-          className={`z-[2]  ${
-            open ? "text-acentColor" : "text-acentColor"
-          } ${sticky?  " text-white" :""}  text-3xl md:hidden m-5`}
-        >{ open?
-          <IoClose className="cursor-pointer z-[9999]"/>
-        
-         :
-         <RiFootballFill className={`cursor-pointer animate-bounce ${sticky ? "text-white" :""}`}/>
-         }
-        </div>
+            onClick={() => setOpen(!open)}
+            className={`z-[2]  ${open ? "text-acentColor" : "text-acentColor"} ${sticky ? " text-white" : ""}  text-3xl md:hidden m-5`}
+          >
+            {open ? (
+              <IoClose className="cursor-pointer z-[9999]" />
+            ) : (
+              <RiFootballFill className={`cursor-pointer animate-bounce ${sticky ? "text-white" : ""}`} />
+            )}
+          </div>
 
-        <div
-          className={`md:hidden text-gray-900 absolute w-full h-screen
-      px-7 py-2 font-medium bg-textColor top-0 duration-300 ${
-        open ? "right-0" : "right-[-100%]"
-      }`}
-        >
-                     <nav className='flex flex-col justify-center h-full text-white font-Bebas text-2xl '  onClick={() => setOpen(false)}
-               >
-                  <div className='pt-40  flex flex-col justify-center gap-6  '>
-                  <NavLink to="/reservas" className="hover:text-acentColor border-b-2 border-acentColor"> Reservar Cancha </NavLink>
-                    <a href="#inicio"  className="hover:text-acentColor"> Inicio </a>
-                    <a href="#galeria"  className="hover:text-acentColor"> Galería </a>
-                    <a href="#contacto"  className="hover:text-acentColor"> Contacto </a>
-                    <a href="#frecuentes"  className="hover:text-acentColor"> Preguntas Frecuentes </a>
-                    </div>
-                    <div className='py-6'>
-                    <NavLink to="/login" className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor" > Login </NavLink>
-                    </div>
- 
- </nav>
-        </div>
- 
-           
+          <div
+            className={`md:hidden text-gray-900 absolute w-full h-screen px-7 py-2 font-medium bg-textColor top-0 duration-300 ${
+              open ? "right-0" : "right-[-100%]"
+            }`}
+          >
+            <nav className='flex flex-col justify-center h-full text-white font-Bebas text-2xl' onClick={() => setOpen(false)}>
+              <div className='pt-40 flex flex-col justify-center gap-6'>
+                <NavLink to="/reservas" className="hover:text-acentColor border-b-2 border-acentColor"> Reservar Cancha </NavLink>
+                <a href="#inicio" className="hover:text-acentColor"> Inicio </a>
+                <a href="#galeria" className="hover:text-acentColor"> Galería </a>
+                <a href="#contacto" className="hover:text-acentColor"> Contacto </a>
+                <a href="#frecuentes" className="hover:text-acentColor"> Preguntas Frecuentes </a>
+              </div>
+              <div className='py-6'>
+                {currentUser ? (
+                  <button onClick={handleLogout} className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor">Logout</button>
+                ) : (
+                  <NavLink to="/login" className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor">Login</NavLink>
+                )}
+              </div>
+            </nav>
+          </div>
         </div>
       </div>
-     
     </header>
   );
 };

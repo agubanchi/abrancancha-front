@@ -13,6 +13,18 @@ html {
     background: #1d1d1d;
   }
 
+  /* width */
+::-webkit-scrollbar {
+  background-color: #334151;
+  width: 8px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #77da7e;
+  border-radius: 5px;
+}
+
 
   
   
