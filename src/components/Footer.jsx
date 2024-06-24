@@ -7,7 +7,7 @@ export default function Footer() {
     <>
     <div className='py-4 bg-acentColor w-full'>
 
-<div className=' container mx-auto px-8 md:flex  justify-between items-center'>
+<div className=' container mx-auto px-8 md:flex grid justify-center  md:justify-between items-center justify-items-center'>
 
     <div>
     <img className="w-32" src="/logo_black.svg" alt="Abrancancha" />
