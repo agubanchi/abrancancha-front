@@ -69,10 +69,31 @@ export default function DetalleReserva({ reserva, handleEditar }) {
               </p>
             </div>
 
-            <div>
-              <img className="w-full" src="/logo_black.svg" alt="Abrancancha" />
-            </div>
-          </div>
+        <p className='text-sm uppercase font-bold mb-3 text-textColor items-center flex gap-2'> Email: {''}
+        <span className='text-sm low font-light text-textColor font-Onest'>{currentUser.email}</span>
+        </p>
+        <p className='text-sm uppercase font-bold mb-3 text-textColor items-center flex gap-2'> Teléfno: {''}
+        <span className='text-sm uppercase font-light text-textColor font-Onest'>{currentUser.telefono}</span>
+        </p>
+        <p className='text-sm uppercase font-bold mb-3 text-textColor items-center flex gap-2'> Cancha: {''}
+        <span className='text-sm uppercase font-light text-textColor font-Onest'>{reserva.cancha}</span>
+        </p>
+        <p className='text-sm uppercase font-bold mb-3 text-textColor items-center flex gap-2'> Tipo de Cancha: {''}
+        <span className='text-sm uppercase font-light text-textColor font-Onest'>{reserva.tipo}</span>
+        </p>
+        <p className='text-sm uppercase font-bold mb-3 text-textColor items-center flex gap-2'> Fecha: {''}
+        <span className='text-sm uppercase font-light text-textColor font-Onest'>{reserva.date}</span>
+        </p>   
+        <p className='text-sm uppercase font-bold mb-3 text-textColor items-center flex gap-2'> Hora: {''}
+        <span className='text-sm uppercase font-light text-textColor font-Onest'>{reserva.hour}</span>
+        </p>
+        <p className='text-sm uppercase font-bold mb-3 text-textColor items-center flex gap-2'> Precio: {''}
+        <span className='text-sm uppercase font-light text-textColor font-Onest'>$ {reserva.precio}</span>
+        </p>
+        <p className='text-sm uppercase font-bold mb-3 text-textColor items-center flex gap-2'> Seña/anticipo: {''}
+        <span className='text-sm uppercase font-light text-textColor font-Onest'>$ {reserva.anticipo}</span>
+        </p>
+    </div>
 
           <div className="flex justify-between py-2 gap-3 mt-4">
             <button type="button" className="flex gap-2 items-center py-3 px-6 bg-acentColor hover:bg-green-800 text-white font-bold uppercase rounded-lg text-sm" onClick={confirmarReserva}><FaCheckSquare /> Confirmar Reserva</button>
