@@ -3,15 +3,15 @@ import Error from "./Error";
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext"; 
 
-export default function ReservaForm({ editingReservation,  onClose }) {
-  const { register, handleSubmit, setValue, formState: { errors }, reset } = useForm();
+export default function ReservaForm({ editingReservation,setEditingReservation, onClose }) {
+  const { register, handleSubmit, setValue, formState: { errors }, reset, watch } = useForm();
   const { currentUser, reservations, setReservations } = useAuth();
   const today = new Date();
   const maxDate = new Date(today);
   maxDate.setDate(today.getDate() + 7);
 
-  const [price, setPrice] = useState(0);
-
+  const [precio, setPrecio] = useState(0);
+  const [anticipo, setAnticipo] = useState(0);
 
   const precios = {
     'Futbol 5': 20000,
@@ -33,24 +33,33 @@ export default function ReservaForm({ editingReservation,  onClose }) {
     }
   }, [editingReservation, setValue]);
 
+  const tipoSeleccionado = watch('tipo');
   
+  useEffect(() => {
+    if (tipoSeleccionado) {
+      const nuevoPrecio = precios[tipoSeleccionado] || 0;
+      setPrecio(nuevoPrecio);
+      setAnticipo(nuevoPrecio * porcentajeAnticipo);
+    }
+  }, [tipoSeleccionado]);
+
   const onSubmit = async (data) => {
-   
-  
     try {
       const method = editingReservation ? 'PATCH' : 'POST';
       const endpoint = editingReservation 
         ? `http://localhost:3000/reservations/${editingReservation.id}`
         : 'http://localhost:3000/reservations/';
 
-        const reservationData = {
-          cancha: data.cancha,
-          tipo: data.tipo,
-          date: data.date,
-          hour: data.hour,
-          userId: editingReservation ? editingReservation.userId : currentUser.id
-        };
-  
+      const reservationData = {
+        cancha: data.cancha,
+        tipo: data.tipo,
+        date: data.date,
+        hour: data.hour,
+        userId: editingReservation ? editingReservation.userId : currentUser.id,
+        precio,
+        anticipo
+      };
+
       const response = await fetch(endpoint, {
         method,
         headers: {
@@ -74,6 +83,7 @@ export default function ReservaForm({ editingReservation,  onClose }) {
       });
       
       reset();
+      setEditingReservation(null);
       onClose();
 
     } catch (error) {
