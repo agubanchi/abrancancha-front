@@ -32,19 +32,19 @@ const Header = () => {
           <div className="z-[999]">
             <NavLink to="/"><img className="w-full max-w-40" src="/logo_white.svg" alt="Abrancancha" /></NavLink>
           </div>
-          <nav className='w-full md:flex hidden items-center gap-6 justify-around text-white font-Bebas text-2xl'>
-            <div className='w-full items-center gap-6 text-center flex justify-center'>
+          <nav className='w-full md:flex hidden items-center gap-4 justify-around text-white font-Bebas text-2xl'>
+            <div className='w-3/4 items-center gap-6 text-center flex justify-center'>
               <NavLink to="/reservas" className="hover:text-acentColor border-b-2 border-acentColor"> Reservar Cancha </NavLink>
               <a href="#inicio" className="hover:text-acentColor"> Inicio </a>
               <a href="#galeria" className="hover:text-acentColor"> Galería </a>
               <a href="#contacto" className="hover:text-acentColor"> Contacto </a>
               <a href="#frecuentes" className="hover:text-acentColor"> Preguntas Frecuentes </a>
             </div>
-            <div>
+            <div className='gap-2 flex items-center'>
               {currentUser ? (
-                <button onClick={handleLogout} className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor">Logout</button>
+                <button onClick={handleLogout} className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor">Cerrar Sesión</button>
               ) : (
-                <NavLink to="/login" className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor">Login</NavLink>
+                <NavLink to="/login" className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor">Iniciar Sesión</NavLink>
               )}
             </div>
           </nav>
@@ -75,9 +75,9 @@ const Header = () => {
               </div>
               <div className='py-6'>
                 {currentUser ? (
-                  <button onClick={handleLogout} className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor">Logout</button>
+                  <button onClick={handleLogout} className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor">Cerrar Sesión</button>
                 ) : (
-                  <NavLink to="/login" className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor">Login</NavLink>
+                  <NavLink to="/login" className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor">Iniciar Sesión</NavLink>
                 )}
               </div>
             </nav>
