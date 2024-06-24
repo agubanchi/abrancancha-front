@@ -55,6 +55,12 @@ export default function DetalleReserva({ reserva, removeReservation, handleEdita
         <p className='text-sm uppercase font-bold mb-3 text-textColor items-center flex gap-2'> Hora: {''}
         <span className='text-sm uppercase font-light text-textColor font-Onest'>{reserva.hour}</span>
         </p>
+        <p className='text-sm uppercase font-bold mb-3 text-textColor items-center flex gap-2'> Precio: {''}
+        <span className='text-sm uppercase font-light text-textColor font-Onest'>$ {reserva.precio}</span>
+        </p>
+        <p className='text-sm uppercase font-bold mb-3 text-textColor items-center flex gap-2'> Seña/anticipo: {''}
+        <span className='text-sm uppercase font-light text-textColor font-Onest'>$ {reserva.anticipo}</span>
+        </p>
     </div>
 
 <div>

@@ -64,20 +64,34 @@
   ],
   "reservations": [
     {
-      "id": "10f5",
-      "cancha": "Cancha 1",
-      "tipo": "Futbol 7",
-      "date": "2024-06-24",
-      "hour": "8:00",
-      "userId": "eb56"
+      "id": "2b09",
+      "cancha": "Cancha 2",
+      "tipo": "Futbol 11",
+      "date": "2024-06-30",
+      "hour": "11:30",
+      "userId": "eb56",
+      "precio": 48000,
+      "anticipo": 14400
     },
     {
-      "id": "d7d1",
+      "id": "1346",
+      "cancha": "Cancha 1",
+      "tipo": "Futbol 5",
+      "date": "2024-06-29",
+      "hour": "11:00",
+      "userId": "eb56",
+      "precio": 20000,
+      "anticipo": 6000
+    },
+    {
+      "id": "bd37",
       "cancha": "Cancha 2",
-      "tipo": "Futbol 9",
-      "date": "2024-06-21",
-      "hour": "09:30",
-      "userId": "eb56"
+      "tipo": "Futbol 5",
+      "date": "2024-06-29",
+      "hour": "8:00",
+      "userId": "eb56",
+      "precio": 20000,
+      "anticipo": 6000
     }
   ],
   "admin": [

@@ -1,14 +1,26 @@
 import { useForm } from "react-hook-form";
 import Error from "./Error";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext"; 
 
-export default function ReservaForm({ editingReservation,  onClose }) {
-  const { register, handleSubmit, setValue, formState: { errors }, reset } = useForm();
+export default function ReservaForm({ editingReservation,setEditingReservation, onClose }) {
+  const { register, handleSubmit, setValue, formState: { errors }, reset, watch } = useForm();
   const { currentUser, reservations, setReservations } = useAuth();
   const today = new Date();
   const maxDate = new Date(today);
   maxDate.setDate(today.getDate() + 7);
+
+  const [precio, setPrecio] = useState(0);
+  const [anticipo, setAnticipo] = useState(0);
+
+  const precios = {
+    'Futbol 5': 20000,
+    'Futbol 7': 32000,
+    'Futbol 9': 40000,
+    'Futbol 11': 48000
+  };
+
+  const porcentajeAnticipo = 0.3;
 
   useEffect(() => {
     if (editingReservation) {
@@ -16,27 +28,38 @@ export default function ReservaForm({ editingReservation,  onClose }) {
       setValue('tipo', editingReservation.tipo);
       setValue('date', editingReservation.date);
       setValue('hour', editingReservation.hour);
+      setPrecio(precios[editingReservation.tipo] || 0);
+      setAnticipo((precios[editingReservation.tipo] || 0) * porcentajeAnticipo);
     }
   }, [editingReservation, setValue]);
 
+  const tipoSeleccionado = watch('tipo');
   
+  useEffect(() => {
+    if (tipoSeleccionado) {
+      const nuevoPrecio = precios[tipoSeleccionado] || 0;
+      setPrecio(nuevoPrecio);
+      setAnticipo(nuevoPrecio * porcentajeAnticipo);
+    }
+  }, [tipoSeleccionado]);
+
   const onSubmit = async (data) => {
-   
-  
     try {
       const method = editingReservation ? 'PATCH' : 'POST';
       const endpoint = editingReservation 
         ? `http://localhost:3000/reservations/${editingReservation.id}`
         : 'http://localhost:3000/reservations/';
 
-        const reservationData = {
-          cancha: data.cancha,
-          tipo: data.tipo,
-          date: data.date,
-          hour: data.hour,
-          userId: editingReservation ? editingReservation.userId : currentUser.id
-        };
-  
+      const reservationData = {
+        cancha: data.cancha,
+        tipo: data.tipo,
+        date: data.date,
+        hour: data.hour,
+        userId: editingReservation ? editingReservation.userId : currentUser.id,
+        precio,
+        anticipo
+      };
+
       const response = await fetch(endpoint, {
         method,
         headers: {
@@ -59,6 +82,7 @@ export default function ReservaForm({ editingReservation,  onClose }) {
       });
       
       reset();
+      setEditingReservation(null);
       onClose();
 
     } catch (error) {
@@ -68,7 +92,7 @@ export default function ReservaForm({ editingReservation,  onClose }) {
 
   return (
     <div className="md:w-full mx-5">
-        <form
+      <form
         className="bg-white shadow-md rounded-lg py-10 px-5 mb-10"
         onSubmit={handleSubmit(onSubmit)}
       >
@@ -157,6 +181,18 @@ export default function ReservaForm({ editingReservation,  onClose }) {
           {errors.hour && (
             <Error>{errors.hour?.message.toString()}</Error>
           )}
+        </div>
+
+        <div className="mb-5">
+          <label className="text-sm uppercase font-bold">
+            Precio: ${precio}
+          </label>
+        </div>
+
+        <div className="mb-5">
+          <label className="text-sm uppercase font-bold">
+            Seña/Anticipo: ${anticipo}
+          </label>
         </div>
 
         <input
