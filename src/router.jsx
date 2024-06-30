@@ -35,7 +35,7 @@ const AppRouter = () => {
     <Route path='/admins' element={<Admins/>} roles={["admin"]}/>
     </Route>
     </Route>
-    
+    {/* <Route path='*' element={<Missing/>} /> */}
    </Routes>
       </BrowserRouter>
     </AuthProvider>
