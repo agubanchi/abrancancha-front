@@ -2,19 +2,26 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { FaEnvelope, FaLock } from "react-icons/fa";
-import Error from "./Error";
+import ErrorComp from "./Error";
 import { useAuth } from "../context/AuthContext";
-import { ENDPOINTS, fetchCreate, fetchGet } from "../../services/useFetch";
+import { Endpoint } from "../services/fetchs";
+import loginService from "../services/login";
 
 export default function LoginUser() {
-  const { login } = useAuth();
+  const { login, fetchCreate } = useAuth();
   const [errorMessage, setErrorMessage] = useState("");
-  const { register, handleSubmit, formState: { errors } } = useForm();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const navigate = useNavigate();
 
   const onSubmit = async (formData) => {
+    // formData.preventDefault()
     try {
-      // const loguedUser = await fetchCreate(ENDPOINTS.auth, {
+      // const loguedUser = await useCreate(Endpoint.auth, {
       //   email: formData.email,
       //   password: formData.password,
       // }); //-----esto devuelve el token
@@ -25,33 +32,58 @@ export default function LoginUser() {
       // } else {
       //   throw new Error("Credenciales incorrectas");
       // }
-
-      // const responseUsers = await fetchGet(ENDPOINTS.users);
-      // const responseAdmins = await fetchGet(ENDPOINTS.administrators);
-      const responseUsers = await fetch('http://localhost:3000/users');
-      const responseAdmins = await fetch('http://localhost:3000/admin');
-
-      if (!responseUsers.ok || !responseAdmins.ok) {
-        throw new Error('Error al obtener los usuarios o los administradores');
+      //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      // loginService.login({email,password});
+      const response = await fetchCreate({
+        endPoint: Endpoint.login,
+        // data: { email: "marioepatronelli@gmail.com", password: "Ab*12345" },
+        data: { email: formData.email, password: formData.password },
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        const newRsp2= new Response({...response,ok:response.ok,status:response.status, statusText: data.message});
+        // const newRsp = {...response, statusText: data.message}
+        // throw (response.error);
+        throw new Error(data.message);
+        // throw new Error("Credenciales incorrectas");
       }
+      //
+      login(data.user,data.token);
+      const profile = { "user": "/reservas", "admin": "/dashboard" };
+      const role = data.user.role;
+      navigate(profile[role]);
+      //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-      const users = await responseUsers.json();
-      const admins = await responseAdmins.json();
+      // const responseUsers = await fetch("http://localhost:3000/users");
+      // const responseAdmins = await fetch("http://localhost:3000/admin");
 
-      const user = users.find(user => user.email === formData.email && user.password === formData.password);
-      const admin = admins.find(admin => admin.email === formData.email && admin.password === formData.password);
+      // if (!responseUsers.ok || !responseAdmins.ok) {
+      //   throw new Error("Error al obtener los usuarios o los administradores");
+      // }
 
-      if (user) {
-        login(user);
-        navigate('/reservas');
-      } else if (admin) {
-        login(admin);
-        navigate('/dashboard');
-      } else {
-        throw new Error('Credenciales incorrectas');
-      }
+      // const users = await responseUsers.json();
+      // const admins = await responseAdmins.json();
+
+      // const user = users.find(
+      //   (user) =>
+      //     user.email === formData.email && user.password === formData.password
+      // );
+      // const admin = admins.find(
+      //   (admin) =>
+      //     admin.email === formData.email && admin.password === formData.password
+      // );
+
+      // if (user) {
+      //   login(user);
+      //   navigate("/reservas");
+      // } else if (admin) {
+      //   login(admin);
+      //   navigate("/dashboard");
+      // } else {
+      //   throw new Error("Credenciales incorrectas");
+      // }
     } catch (error) {
-      console.error('Error al iniciar sesión:', error);
+      console.error("Error al iniciar sesión:", error);
       setErrorMessage(error.message);
     }
   };
@@ -75,12 +107,12 @@ export default function LoginUser() {
                 required: "El Email es Obligatorio",
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: 'Email no válido'
-                }
+                  message: "Email no válido",
+                },
               })}
             />
           </div>
-          {errors.email && <Error>{errors.email.message}</Error>}
+          {errors.email && <ErrorComp>{errors.email.message}</ErrorComp>}
           <div className="mb-5 font-Onest font-normal flex items-center gap-2">
             <FaLock className="w-4 text-textColor" />
             <input
@@ -90,20 +122,30 @@ export default function LoginUser() {
               type="password"
               placeholder="Contraseña"
               {...register("password", {
-                required: "La contraseña es Obligatoria"
+                required: "La contraseña es Obligatoria",
               })}
             />
           </div>
-          {errors.password && <Error>{errors.password.message}</Error>}
-          {errorMessage && <Error>{errorMessage}</Error>}
+          {errors.password && <ErrorComp>{errors.password.message}</ErrorComp>}
+          {errorMessage && <ErrorComp>{errorMessage}</ErrorComp>}
           <div className="items-center justify-around text-center flex py-4 gap-2">
-            <button className="bg-textColor rounded-md text-acentColor px-6 py-3 md:text-[.9rem] font-Onest uppercase hover:bg-acentColor hover:text-textColor">Iniciar Sesión</button>
+            <button className="bg-textColor rounded-md text-acentColor px-6 py-3 md:text-[.9rem] font-Onest uppercase hover:bg-acentColor hover:text-textColor">
+              Iniciar Sesión
+            </button>
           </div>
           <div className="text-center py-2">
-            <a className="text-ms border-b-2 border-acentColor" href="#">¿Olvidaste tu Contraseña?</a>
+            <a className="text-ms border-b-2 border-acentColor" href="#">
+              ¿Olvidaste tu Contraseña?
+            </a>
           </div>
           <div className="text-center py-2">
-            ¿No estás registrado? <a className="text-ms border-b-2 border-acentColor" href="/registrar">Registrate</a>
+            ¿No estás registrado?{" "}
+            <a
+              className="text-ms border-b-2 border-acentColor"
+              href="/registrar"
+            >
+              Registrate
+            </a>
           </div>
         </form>
       </div>
