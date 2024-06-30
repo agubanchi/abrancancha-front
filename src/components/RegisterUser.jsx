@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { FaUser, FaLock, FaEnvelope, FaPhoneAlt } from "react-icons/fa";
@@ -63,13 +63,15 @@ export default function RegisterUser() {
     }
   };
 
-  const mensaje = 'Crear Usuario';
+  const mensaje = "Crear Usuario";
 
   return (
     <div className="flex items-center justify-center h-screen px-5">
       <div className="bg-white shadow-md rounded-lg py-10 px-5 mb-10 md:w-1/2 w-full">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <h1 className='font-black text-2xl py-4 text-center text-textColor '>{mensaje}</h1>
+          <h1 className="font-black text-2xl py-4 text-center text-textColor ">
+            {mensaje}
+          </h1>
 
           <div className="mb-5 font-Onest font-normal flex items-center gap-2">
             <FaUser className="w-4 text-textColor" />
@@ -83,16 +85,16 @@ export default function RegisterUser() {
                 required: 'El Nombre de usuario es Obligatorio',
                 pattern: {
                   value: /^[a-zA-Z]{2,40}( [a-zA-Z]{2,40})+$/,
-                  message: 'El Nombre de usuario no es correcto'
+                  message: "El Nombre de usuario no es correcto",
                 },
                 minLength: {
                   value: 4,
-                  message: 'Mínimo 4 caracteres'
+                  message: "Mínimo 4 caracteres",
                 },
                 maxLength: {
                   value: 45,
-                  message: 'Máximo 45 caracteres'
-                }
+                  message: "Máximo 45 caracteres",
+                },
               })}
             />
           </div>
@@ -109,13 +111,14 @@ export default function RegisterUser() {
               {...register("phone", {
                 required: "El Número de teléfono es Obligatorio",
                 pattern: {
-                  value: /^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$/,
-                  message: 'Teléfono No Válido'
-                }
+                  value:
+                    /^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$/,
+                  message: "Teléfono No Válido",
+                },
               })}
             />
           </div>
-          {errors.phone && <Error>{errors.phone?.message.toString()}</Error>}
+          {errors.phone && <ErrorComp>{errors.phone?.message.toString()}</ErrorComp>}
 
           <div className="mb-5 font-Onest font-normal flex items-center gap-2">
             <FaEnvelope className="w-4 text-textColor" />
@@ -129,8 +132,8 @@ export default function RegisterUser() {
                 required: "El Email es Obligatorio",
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: 'Email no válido'
-                }
+                  message: "Email no válido",
+                },
               })}
             />
           </div>
@@ -145,7 +148,7 @@ export default function RegisterUser() {
               type="password"
               placeholder="Contraseña"
               {...register("password", {
-                required: "La contraseña es Obligatoria"
+                required: "La contraseña es Obligatoria",
               })}
             />
           </div>
@@ -161,7 +164,10 @@ export default function RegisterUser() {
           </div>
 
           <div className="text-center py-4">
-            ¿Ya tienes una cuenta? <a className="text-ms border-b-2 border-acentColor" href="/login">Iniciar Sesión</a>
+            ¿Ya tienes una cuenta?{" "}
+            <a className="text-ms border-b-2 border-acentColor" href="/login">
+              Iniciar Sesión
+            </a>
           </div>
         </form>
       </div>

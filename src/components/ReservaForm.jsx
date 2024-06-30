@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import Error from "./Error";
+import ErrorComp from "./Error";
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { Endpoint, HttpMethod, fetchAll } from "../services/fetchs"; // Asegúrate de que las rutas sean correctas
@@ -23,7 +23,8 @@ function dateFormatToYMD(fechaString) {
 
 export default function ReservaForm({ editingReservation, setEditingReservation, onClose }) {
   const { register, handleSubmit, setValue, formState: { errors }, reset, watch } = useForm();
-  const { currentUser, reservations, setReservations } = useAuth();
+
+  const { currentUser, reservations, setReservations,fetchCreate,fetchUpdate } = useAuth();
   const today = new Date();
   const maxDate = new Date(today);
   maxDate.setDate(today.getDate() + 7);
@@ -104,23 +105,23 @@ export default function ReservaForm({ editingReservation, setEditingReservation,
       });
 
       if (!response.ok) {
-        throw new Error('Error al almacenar la reserva');
+        throw new ErrorComp("Error al almacenar la reserva");
       }
 
       const updatedReservation = await response.json();
-
-      setReservations(prevReservations => {
+      setReservations((prevReservations) => {
         if (editingReservation) {
-          return prevReservations.map(reserva => reserva.id === editingReservation.id ? updatedReservation : reserva);
+          return prevReservations.map((reserva) =>
+            reserva.id === editingReservation.id ? updatedReservation : reserva
+          );
         } else {
           return [...prevReservations, updatedReservation];
         }
       });
-      
+
       reset();
       setEditingReservation(null);
       onClose();
-
     } catch (error) {
       console.error("Error al guardar la reserva:", error);
     }
@@ -173,9 +174,7 @@ export default function ReservaForm({ editingReservation, setEditingReservation,
             <option value="Cancha 4">Cancha 4</option>
             <option value="Cancha 5">Cancha 5</option>
           </select>
-          {errors.cancha && (
-            <Error>{errors.cancha?.message.toString()}</Error>
-          )}
+          {errors.cancha && <ErrorComp>{errors.cancha?.message.toString()}</ErrorComp>}
         </div>
 
         <div className="mb-5">
@@ -193,9 +192,7 @@ export default function ReservaForm({ editingReservation, setEditingReservation,
             <option value="Futbol 9">Futbol 9</option>
             <option value="Futbol 11">Futbol 11</option>
           </select>
-          {errors.tipo && (
-            <Error>{errors.tipo?.message.toString()}</Error>
-          )}
+          {errors.tipo && <ErrorComp>{errors.tipo?.message.toString()}</ErrorComp>}
         </div>
 
         <div className="mb-5">
@@ -206,15 +203,13 @@ export default function ReservaForm({ editingReservation, setEditingReservation,
             id="date"
             className="w-full p-3 rounded-md border-acentColor border-2"
             type="date"
-            min={new Date().toISOString().split('T')[0]}
-            max={maxDate.toISOString().split('T')[0]}
-            {...register('date', {
-              required: 'La fecha es Obligatoria'
+            min={new Date().toISOString().split("T")[0]}
+            max={maxDate.toISOString().split("T")[0]}
+            {...register("date", {
+              required: "La fecha es Obligatoria",
             })}
           />
-          {errors.date && (
-            <Error>{errors.date?.message.toString()}</Error>
-          )}
+          {errors.date && <ErrorComp>{errors.date?.message.toString()}</ErrorComp>}
         </div>
 
         <div className="mb-5">
@@ -242,7 +237,7 @@ export default function ReservaForm({ editingReservation, setEditingReservation,
             <option value="14:00">14:00hs</option>
           </select>
           {errors.hour && (
-            <Error>{errors.hour?.message.toString()}</Error>
+            <ErrorComp>{errors.hour?.message.toString()}</ErrorComp>
           )}
         </div>
 
@@ -267,7 +262,7 @@ export default function ReservaForm({ editingReservation, setEditingReservation,
         <input
           type="submit"
           className="bg-acentColor w-full p-3 text-textColor uppercase font-bold hover:bg-textColor hover:text-acentColor cursor-pointer transition-colors"
-          value='Guardar Reserva'
+          value="Guardar Reserva"
         />
       </form>
       {editingReservation && (

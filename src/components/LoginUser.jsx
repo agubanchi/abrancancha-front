@@ -9,10 +9,16 @@ import { Endpoint } from "../services/fetchs";
 export default function LoginUser() {
   const { login, fetchCreate } = useAuth();
   const [errorMessage, setErrorMessage] = useState("");
-  const { register, handleSubmit, formState: { errors } } = useForm();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const navigate = useNavigate();
 
   const onSubmit = async (formData) => {
+    // formData.preventDefault()
     try {
   
       const response = await fetchCreate({
@@ -62,12 +68,12 @@ export default function LoginUser() {
                 required: "El Email es Obligatorio",
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: 'Email no válido'
-                }
+                  message: "Email no válido",
+                },
               })}
             />
           </div>
-          {errors.email && <Error>{errors.email.message}</Error>}
+          {errors.email && <ErrorComp>{errors.email.message}</ErrorComp>}
           <div className="mb-5 font-Onest font-normal flex items-center gap-2">
             <FaLock className="w-4 text-textColor" />
             <input
@@ -77,20 +83,30 @@ export default function LoginUser() {
               type="password"
               placeholder="Contraseña"
               {...register("password", {
-                required: "La contraseña es Obligatoria"
+                required: "La contraseña es Obligatoria",
               })}
             />
           </div>
-          {errors.password && <Error>{errors.password.message}</Error>}
-          {errorMessage && <Error>{errorMessage}</Error>}
+          {errors.password && <ErrorComp>{errors.password.message}</ErrorComp>}
+          {errorMessage && <ErrorComp>{errorMessage}</ErrorComp>}
           <div className="items-center justify-around text-center flex py-4 gap-2">
-            <button className="bg-textColor rounded-md text-acentColor px-6 py-3 md:text-[.9rem] font-Onest uppercase hover:bg-acentColor hover:text-textColor">Iniciar Sesión</button>
+            <button className="bg-textColor rounded-md text-acentColor px-6 py-3 md:text-[.9rem] font-Onest uppercase hover:bg-acentColor hover:text-textColor">
+              Iniciar Sesión
+            </button>
           </div>
           <div className="text-center py-2">
-            <a className="text-ms border-b-2 border-acentColor" href="#">¿Olvidaste tu Contraseña?</a>
+            <a className="text-ms border-b-2 border-acentColor" href="#">
+              ¿Olvidaste tu Contraseña?
+            </a>
           </div>
           <div className="text-center py-2">
-            ¿No estás registrado? <a className="text-ms border-b-2 border-acentColor" href="/registrar">Registrate</a>
+            ¿No estás registrado?{" "}
+            <a
+              className="text-ms border-b-2 border-acentColor"
+              href="/registrar"
+            >
+              Registrate
+            </a>
           </div>
         </form>
       </div>

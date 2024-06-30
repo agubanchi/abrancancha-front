@@ -3,15 +3,20 @@ import { Endpoint, fetchAll, HttpMethod } from "../services/fetchs";
 const AuthContext = createContext();
 
 export const useAuth = () => useContext(AuthContext);
+// export const useAuth = () => {
+//   const { auth } = useContext(AuthContext);
+//   // useDebugValue(auth, (auth) => (auth?.user ? "Logged In" : "Logged Out"));
+//   return useContext(AuthContext);
+// };
 
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(() => {
-    const user = localStorage.getItem('user');
+    const user = localStorage.getItem("user");
     return user ? JSON.parse(user) : null;
   });
 
   const [users, setUsers] = useState(() => {
-    const storedUsers = localStorage.getItem('users');
+    const storedUsers = localStorage.getItem("users");
     return storedUsers ? JSON.parse(storedUsers) : [];
   });
 
@@ -21,9 +26,19 @@ export const AuthProvider = ({ children }) => {
   });
 
   const [reservations, setReservations] = useState(() => {
-    const storedReservations = localStorage.getItem('reservations');
+    const storedReservations = localStorage.getItem("reservations");
     return storedReservations ? JSON.parse(storedReservations) : [];
   });
+  const [token, setToken] = useState(() => {
+    const storedToken = localStorage.getItem("token");
+    return storedToken ? JSON.parse(storedToken) : [];
+  });
+  // const [dbHandler, setDbHandler] = useState(() => {
+  //   const storedToken = localStorage.getItem('token');
+  //   return storedToken ? JSON.parse(storedToken) : [];
+  // });
+    // const [loginUser, fetchLogin] = useState(""); //<-esta la puse yo: mario
+  // const {fetchCreate} = useFetch(Endpoint.login); //<-esta la puse yo: mario
 
   useEffect(() => {
     localStorage.setItem('reservations', JSON.stringify(reservations));
