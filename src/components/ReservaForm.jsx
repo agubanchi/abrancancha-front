@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import ErrorComp from "./Error";
+import ErrorComp from "./Error";
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { Endpoint, HttpMethod, fetchAll } from "../services/fetchs"; // Asegúrate de que las rutas sean correctas

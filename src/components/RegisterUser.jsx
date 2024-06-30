@@ -86,13 +86,17 @@ export default function RegisterUser() {
                 pattern: {
                   value: /^[a-zA-Z]{2,40}( [a-zA-Z]{2,40})+$/,
                   message: "El Nombre de usuario no es correcto",
+                  message: "El Nombre de usuario no es correcto",
                 },
                 minLength: {
                   value: 4,
                   message: "Mínimo 4 caracteres",
+                  message: "Mínimo 4 caracteres",
                 },
                 maxLength: {
                   value: 45,
+                  message: "Máximo 45 caracteres",
+                },
                   message: "Máximo 45 caracteres",
                 },
               })}
