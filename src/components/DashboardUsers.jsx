@@ -6,7 +6,7 @@ import { useAuth } from "../context/AuthContext";
 
 const DashboardUsers = ({ reserva, removeReservation, handleEdit }) => {
   const { users } = useAuth();
-  const user = users.find(user => user.id === reserva.userId);
+  const user = users.find(user => user.id === reserva.idUser);
 
   const handleOpenModal = () => {
     handleEdit(reserva);

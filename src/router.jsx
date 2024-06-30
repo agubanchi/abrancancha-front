@@ -24,6 +24,7 @@ const AppRouter = () => {
     <Route path='/dashboard' element={<Dashboard/>} roles={["admin"]}/>
     </Route>
     </Route>
+    {/* <Route path='*' element={<Missing/>} /> */}
    </Routes>
       </BrowserRouter>
     </AuthProvider>

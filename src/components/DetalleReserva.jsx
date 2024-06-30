@@ -69,7 +69,7 @@ export default function DetalleReserva({ reserva, removeReservation, handleEdita
 </div>
 
   
-<div class=" flex justify-between py-2 gap-3  mt-4">
+<div className=" flex justify-between py-2 gap-3  mt-4">
 <button type="button" className="flex gap-2 items-center py-2 px-6 bg-indigo-500 hover:bg-indigo-800 text-white font-bold uppercase rounded-lg text-sm" onClick={() => handleEditar(reserva.id)}><FaEdit/> Editar Reserva</button>
 <button type="button" className=" flex gap-2 items-center py-2 px-6 bg-red-500 hover:bg-red-800 text-white font-bold uppercase rounded-lg text-sm"  onClick={()=>removeReservation(reserva.id)}><MdDelete /> Eliminar Reserva</button>
 </div>
