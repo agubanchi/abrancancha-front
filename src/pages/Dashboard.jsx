@@ -3,18 +3,31 @@ import DashboardUsers from '../components/DashboardUsers';
 import { useAuth } from '../context/AuthContext';
 import Swal from 'sweetalert2';
 import Modal from '../components/Modal';
+import { Endpoint } from "../services/fetchs";
 
 export default function Dashboard() {
-  const { reservations, setReservations } = useAuth();
+  const { reservations, setReservations, token, fetchGet, fetchDelete } = useAuth();
   const [editingReservation, setEditingReservation] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
-  useEffect(() => {
-    fetch('http://localhost:3000/reservations/')
-      .then(res => res.json())
-      .then(json => setReservations(json))
-      .catch(err => console.error('Error fetching reservations:', err));
-  }, [setReservations]);
+  useEffect(
+    function () {
+      async function fetchData() {
+              // fetch('http://localhost:3000/reservations/')
+    fetchGet({endPoint: Endpoint.reservations})
+    .then(res => res.json())
+    .then(json => setReservations(json))
+    .catch(err => console.error('Error fetching reservations:', err));
+      }
+      fetchData();
+        
+    // () => {    
+    // // fetch('http://localhost:3000/reservations/')
+    // fetchGet({endPoint: Endpoint.reservations})
+    //   .then(res => res.json())
+    //   .then(json => setReservations(json))
+    //   .catch(err => console.error('Error fetching reservations:', err));
+  }, [setReservations,token]);
 
   const removeReservation = (id) => {
     Swal.fire({
@@ -31,12 +44,13 @@ export default function Dashboard() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const response = await fetch(`http://localhost:3000/reservations/${id}`, {
-            method: 'DELETE',
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          });
+          // const response = await fetch(`http://localhost:3000/reservations/${id}`, {
+          //   method: 'DELETE',
+          //   headers: {
+          //     'Content-Type': 'application/json'
+          //   }
+          // });
+          const response = await fetchDelete({endPoint: Endpoint.reservations, idData: id})
           if (!response.ok) {
             throw new Error('Error al eliminar la reserva');
           }
@@ -88,7 +102,7 @@ export default function Dashboard() {
           </tr>
         </thead>
         <tbody>
-          {reservations.map((reserva) => (
+          {reservations && reservations.map((reserva) => (
             <DashboardUsers key={reserva.id} reserva={reserva} removeReservation={removeReservation} handleEdit={handleEdit} />
           ))}
         </tbody>

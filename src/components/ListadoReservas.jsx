@@ -2,15 +2,15 @@ import React, { useEffect } from "react";
 import DetalleReserva from "./DetalleReserva";
 import useStore from "../userStore";
 import { useAuth } from "../context/AuthContext";
-import { ENDPOINTS, fetchGet } from "../../services/useFetch";
+import { Endpoint } from "../services/fetchs";
 
 export default function ListadoReservas() {
-  const { user: authUser } = useAuth();
+  const { user: authUser, fetchGet } = useAuth();
   const reservations = useStore((state) => state.reservations);
 
   useEffect(() => {
     if (authUser && authUser.id) {
-      // fetchGet(`${ENDPOINTS.reservations}/${authUser.id}`)
+      // fetchGet({endPoint:`${Endpoint.reservations}?userId=${authUser.id}`})
       fetch(`http://localhost:3000/reservations?userId=${authUser.id}`)
         .then((response) => response.json())
         .then((data) => useStore.setState({ reservations: data })) // Actualiza las reservas en el store
