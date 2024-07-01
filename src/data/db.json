@@ -78,8 +78,15 @@
       "tipo": "Futbol 9",
       "date": "2024-07-05",
       "hour": "09:30",
-      "userId": "f41f",
-      "price": 40000
+      "userId": "4300"
+    },
+    {
+      "id": "de76",
+      "cancha": "Cancha 1",
+      "tipo": "Futbol 5",
+      "date": "2024-07-08",
+      "hour": "8:30",
+      "userId": "8aca"
     }
   ],
   "admin": [
