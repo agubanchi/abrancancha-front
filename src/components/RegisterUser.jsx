@@ -98,7 +98,7 @@ export default function RegisterUser() {
               })}
             />
           </div>
-          {errors.fullname && <Error>{errors.fullname.message}</Error>}
+          {errors.fullname && <ErrorComp>{errors.fullname.message}</ErrorComp>}
 
           <div className="mb-5 font-Onest font-normal flex items-center gap-2">
             <FaPhoneAlt className="w-4 text-textColor" />
@@ -137,7 +137,7 @@ export default function RegisterUser() {
               })}
             />
           </div>
-          {errors.email && <Error>{errors.email.message}</Error>}
+          {errors.email && <ErrorComp>{errors.email.message}</ErrorComp>}
 
           <div className="mb-5 font-Onest font-normal flex items-center gap-2">
             <FaLock className="w-4 text-textColor" />
@@ -152,7 +152,7 @@ export default function RegisterUser() {
               })}
             />
           </div>
-          {errors.password && <Error>{errors.password.message}</Error>}
+          {errors.password && <ErrorComp>{errors.password.message}</ErrorComp>}
 
           <div className="items-center justify-around text-center flex py-4 gap-2">
             <button

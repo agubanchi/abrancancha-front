@@ -1,12 +1,12 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { FaUser, FaLock, FaEnvelope } from "react-icons/fa";
-import Error from "./Error";
+import ErrorComp from "./Error";
 import { useState } from "react";
-import { fetchGet } from "../../services/useFetch";
+import { Endpoint } from "../services/fetchs";
 
 export default function LoginAdmin() {
-
+  const { fetchGet } = useAuth();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -20,11 +20,11 @@ export default function LoginAdmin() {
   const onSubmit = async (data) => {
     
     const formData = getValues();
-    fetch('http://localhost:3000/admin')
-    // fetchGet(ENDPOINTS.administrators)
+    // fetch('http://localhost:3000/admin')
+    fetchGet(Endpoint.administrators)
       .then(response => {
         if (!response.ok) {
-          throw new Error('Error al obtener los usuarios');
+          throw new ErrorComp('Error al obtener los usuarios');
         }
         return response.json(); // Asegúrate de obtener los datos correctamente
       })
@@ -80,7 +80,7 @@ export default function LoginAdmin() {
               })}
             />
           </div>
-          {errors.email && <Error>{errors.email.message}</Error>}
+          {errors.email && <ErrorComp>{errors.email.message}</ErrorComp>}
           <div className="mb-5 font-Onest font-normal flex items-center gap-2">
             <FaLock className="w-4 text-textColor" />
             <input
@@ -95,7 +95,7 @@ export default function LoginAdmin() {
               })}
             />
           </div>
-          {errors.password && <Error>{errors.password.message}</Error>}
+          {errors.password && <ErrorComp>{errors.password.message}</ErrorComp>}
           <div className="items-center justify-around text-center flex py-4 gap-2">
           <button className=
               "bg-textColor  rounded-md text-acentColor px-6 py-3   md:text-[.9rem] font-Onest uppercase hover:bg-acentColor hover:text-textColor" 
