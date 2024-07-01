@@ -55,7 +55,7 @@
   ],
   "users": [
     {
-      "id": "eb56",
+      "id": "48e7",
       "name": "Agustin Banchi",
       "telefono": "2244445077",
       "email": "correo@correo.com",
@@ -64,34 +64,44 @@
   ],
   "reservations": [
     {
-      "id": "2b09",
-      "cancha": "Cancha 2",
-      "tipo": "Futbol 11",
-      "date": "2024-06-30",
-      "hour": "11:30",
-      "userId": "eb56",
-      "precio": 48000,
-      "anticipo": 14400
+      "id": "a5be",
+      "cancha": "Cancha 1",
+      "tipo": "Futbol 7",
+      "date": "2024-07-06",
+      "hour": "10:30",
+      "userId": "48e7",
+      "precio": 32000,
+      "anticipo": 9600
     },
     {
-      "id": "1346",
+      "id": "3423",
+      "cancha": "Cancha 1",
+      "tipo": "Futbol 7",
+      "date": "2024-07-06",
+      "hour": "09:00",
+      "userId": "48e7",
+      "precio": 32000,
+      "anticipo": 9600
+    },
+    {
+      "id": "16ce",
       "cancha": "Cancha 1",
       "tipo": "Futbol 5",
-      "date": "2024-06-29",
-      "hour": "11:00",
-      "userId": "eb56",
+      "date": "2024-07-06",
+      "hour": "8:30",
+      "userId": "48e7",
       "precio": 20000,
       "anticipo": 6000
     },
     {
-      "id": "bd37",
-      "cancha": "Cancha 2",
-      "tipo": "Futbol 5",
-      "date": "2024-06-29",
-      "hour": "8:00",
-      "userId": "eb56",
-      "precio": 20000,
-      "anticipo": 6000
+      "id": "bb6d",
+      "cancha": "Cancha 1",
+      "tipo": "Futbol 7",
+      "date": "2024-07-06",
+      "hour": "8:30",
+      "userId": "48e7",
+      "precio": 32000,
+      "anticipo": 9600
     }
   ],
   "admin": [

@@ -9,6 +9,7 @@ import ProtectedRoute from "./components/utils/ProtectedRoute"; // Importar Prot
 import Home from "./pages/Home";
 import Logueo from "./Layouts/Logueo";
 import PrivateRoute from "./components/utils/PrivateRoute";
+import Layout from "./Layouts/Layout";
 
 const AppRouter = () => {
   return (
@@ -19,11 +20,16 @@ const AppRouter = () => {
     <Route element={<Logueo/>}>
     <Route path='/login' element={<LoginUser />} />
     <Route path='/registrar' element={<RegisterUser />} />
+    </Route>
     <Route element={<PrivateRoute roles={["user", "admin"]}/>}>
+    <Route element={<Logueo/>}>
     <Route path='/reservas' element={<Reservas/>} roles={["user"]}/>
+    </Route>
+    <Route element={<Layout/>}>
     <Route path='/dashboard' element={<Dashboard/>} roles={["admin"]}/>
     </Route>
     </Route>
+    
    </Routes>
       </BrowserRouter>
     </AuthProvider>
