@@ -12,8 +12,8 @@ export default function Home(props) {
     <Header/>
     <Hero/>
       <Galeria/>
-      <Faq/>
       <Contacto/>
+      <Faq/>
       <Backtop/>
       <Footer/>
     </>

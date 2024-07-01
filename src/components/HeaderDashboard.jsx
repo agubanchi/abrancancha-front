@@ -16,7 +16,7 @@ const HeaderDashboard = () => {
   };
 
   return (
-    <header className="bg-textColor shadow-md relative lef-0 top-0  w-full z-[9999]">
+    <header className="bg-textColor shadow-md fixed lef-0 top-0  w-full z-[9999]">
       <div className="mx-auto container px-5 py-4">
         <div className="flex justify-between items-center">
           <div className="z-[999] w-48">
@@ -26,10 +26,10 @@ const HeaderDashboard = () => {
             <div className='w-3/4 items-center gap-6 text-center flex justify-center'>
             <NavLink to="/canchas" className="hover:text-acentColor border px-2 py-2  border-acentColor rounded-md">Canchas</NavLink>
             <NavLink to="/reservations" className="hover:text-acentColor border px-2 py-2  border-acentColor rounded-md">Reservas</NavLink>
-            <NavLink to="/admins" className="hover:text-acentColor border px-2 py-2  border-acentColor rounded-md">Administradores</NavLink>
+            <NavLink to="/admin" className="hover:text-acentColor border px-2 py-2  border-acentColor rounded-md">Administradores</NavLink>
             <NavLink to="/users" className="hover:text-acentColor border px-2 py-2  border-acentColor rounded-md">Usuarios</NavLink>
             </div>
-            <div className='gap-2 flex items-center'>a
+            <div className='gap-2 flex items-center'>
               {currentUser ? (
                 <button onClick={handleLogout} className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor">Cerrar Sesión</button>
               ) : (
@@ -57,7 +57,7 @@ const HeaderDashboard = () => {
             <nav className='flex flex-col justify-center h-full text-white font-Bebas text-2xl' onClick={() => setOpen(false)}>
               <div className='pt-5 flex flex-col justify-center gap-6'>
                 <NavLink to="/canchas" className="hover:text-acentColor "> Canchas </NavLink>
-                <NavLink to="/reservations" className="hover:text-acentColor " > Reservas </NavLink>
+                <NavLink to="/reservations" className="hover:text-acentColor "> Reservas </NavLink>
                 <NavLink to="/admin" className="hover:text-acentColor">Administradores</NavLink>
             <NavLink to="/users" className="hover:text-acentColor">Usuarios</NavLink>
               </div>
