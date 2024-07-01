@@ -49,6 +49,22 @@ export default function ReservaForm({ editingReservation, setEditingReservation,
 
   // los precios vienen con la cancha
 
+  // crear un estado local? o traer las canchas del contexto?
+  // useEffect(() => {
+  //   fetchGet({endPoint: Endpoint.courts})
+  //     .then(res => res.json())
+  //     .then(json => setCourts(json))
+  //     .catch(err => console.error('Error fetching courts:', err));
+  // }, []);
+  // useEffect(() => {
+  //   fetchGet({endPoint: Endpoint.typesOfCourt})
+  //     .then(res => res.json())
+  //     .then(json => setCourts(json))
+  //     .catch(err => console.error('Error fetching typesOfCourt:', err));
+  // }, []);
+
+  // los precios vienen con la cancha
+
   const precios = {
     'Futbol 5': 20000,
     'Futbol 7': 32000,
