@@ -7,13 +7,29 @@ import { Endpoint } from "../services/fetchs";
 export default function ReservaForm({ editingReservation,setEditingReservation, onClose }) {
   const { register, handleSubmit, setValue, formState: { errors }, reset, watch } = useForm();
 
-  const { currentUser, reservations, setReservations,fetchCreate,fetchUpdate } = useAuth();
+  const { currentUser, reservations, setReservations, fetchCreate, fetchUpdate } = useAuth();
   const today = new Date();
   const maxDate = new Date(today);
   maxDate.setDate(today.getDate() + 7);
 
   const [precio, setPrecio] = useState(0);
   const [anticipo, setAnticipo] = useState(0);
+
+  // crear un estado local? o traer las canchas del contexto?
+  // useEffect(() => {
+  //   fetchGet({endPoint: Endpoint.courts})
+  //     .then(res => res.json())
+  //     .then(json => setCourts(json))
+  //     .catch(err => console.error('Error fetching courts:', err));
+  // }, []);
+  // useEffect(() => {
+  //   fetchGet({endPoint: Endpoint.typesOfCourt})
+  //     .then(res => res.json())
+  //     .then(json => setCourts(json))
+  //     .catch(err => console.error('Error fetching typesOfCourt:', err));
+  // }, []);
+
+  // los precios vienen con la cancha
 
   const precios = {
     'Futbol 5': 20000,

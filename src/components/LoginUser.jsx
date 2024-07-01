@@ -5,7 +5,7 @@ import { FaEnvelope, FaLock } from "react-icons/fa";
 import ErrorComp from "./Error";
 import { useAuth } from "../context/AuthContext";
 import { Endpoint } from "../services/fetchs";
-import loginService from "../services/login";
+// import loginService from "../services/login";
 
 export default function LoginUser() {
   const { login, fetchCreate } = useAuth();

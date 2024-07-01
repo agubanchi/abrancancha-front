@@ -10,8 +10,8 @@ export default function ListadoReservas() {
 
   useEffect(() => {
     if (authUser && authUser.id) {
-      // fetchGet({endPoint:`${Endpoint.reservations}?userId=${authUser.id}`})
-      fetch(`http://localhost:3000/reservations?userId=${authUser.id}`)
+      // fetch(`http://localhost:3000/reservations?userId=${authUser.id}`)
+      fetchGet({endPoint:`${Endpoint.reservations}?userId=${authUser.id}`})
         .then((response) => response.json())
         .then((data) => useStore.setState({ reservations: data })) // Actualiza las reservas en el store
         .catch((error) => console.error('Error fetching reservations:', error));

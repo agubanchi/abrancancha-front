@@ -3,9 +3,9 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { FaUser, FaLock, FaEnvelope, FaPhoneAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
-import Error from "./Error";
+import ErrorComp from "./Error";
 import { useAuth } from "../context/AuthContext";
-import { Endpoint } from "../../services/fetchs";
+import { Endpoint } from "../services/fetchs";
 
 export default function RegisterUser() {
   const { users, setUsers, login, fetchCreate } = useAuth(); // importo los states que voy a necesitar desde el contexto
@@ -43,7 +43,7 @@ export default function RegisterUser() {
     fetchCreate({ endPoint: Endpoint.register, data: userData })
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Error al enviar los datos al servidor");
+          throw new ErrorComp("Error al enviar los datos al servidor");
         }
         Swal.fire({
           title: "Usuario registrado!",
@@ -102,7 +102,7 @@ export default function RegisterUser() {
               })}
             />
           </div>
-          {errors.name && <Error>{errors.name.message}</Error>}
+          {errors.name && <ErrorComp>{errors.name.message}</ErrorComp>}
 
           <div className="mb-5 font-Onest font-normal flex items-center gap-2">
             <FaPhoneAlt className="w-4 text-textColor" />
@@ -122,7 +122,7 @@ export default function RegisterUser() {
             />
           </div>
           {errors.telefono && (
-            <Error>{errors.telefono?.message.toString()}</Error>
+            <ErrorComp>{errors.telefono?.message.toString()}</ErrorComp>
           )}
 
           <div className="mb-5 font-Onest font-normal flex items-center gap-2">
@@ -142,7 +142,7 @@ export default function RegisterUser() {
               })}
             />
           </div>
-          {errors.email && <Error>{errors.email.message}</Error>}
+          {errors.email && <ErrorComp>{errors.email.message}</ErrorComp>}
 
           <div className="mb-5 font-Onest font-normal flex items-center gap-2">
             <FaLock className="w-4 text-textColor" />
@@ -157,7 +157,7 @@ export default function RegisterUser() {
               })}
             />
           </div>
-          {errors.password && <Error>{errors.password.message}</Error>}
+          {errors.password && <ErrorComp>{errors.password.message}</ErrorComp>}
 
           <div className="items-center justify-around text-center flex py-4 gap-2">
             <button
