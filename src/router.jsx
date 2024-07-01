@@ -11,8 +11,6 @@ import Home from "./pages/Home";
 import Logueo from "./Layouts/Logueo";
 import PrivateRoute from "./components/utils/PrivateRoute";
 import Layout from "./Layouts/Layout";
-import Users from "./pages/Users";
-import Admins from "./pages/Admins";
 
 const AppRouter = () => {
   return (
