@@ -4,7 +4,6 @@ import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { useState } from "react";
 import Swal from 'sweetalert2';
-import useStore from "../userStore";
 import { useAuth } from '../context/AuthContext';
 export default function DetalleReserva({ reserva, removeReservation, handleEditar }) {
   const { currentUser, reservations } = useAuth();

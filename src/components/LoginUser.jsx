@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { FaEnvelope, FaLock } from "react-icons/fa";
+import Swal from "sweetalert2";
 import Error from "./Error";
 import { useAuth } from "../context/AuthContext";
 
@@ -34,9 +35,19 @@ export default function LoginUser() {
         navigate('/dashboard');
       } else {
         throw new Error('Credenciales incorrectas');
+        
       }
     } catch (error) {
-      console.error('Error al iniciar sesión:', error);
+        Swal.fire({
+           
+            text: 'Error al iniciar sesión, verifica tus datos de acceso',
+            icon:  'error',
+            color: '#1d1d1d',
+            iconColor: "#1d1d1d",
+            confirmButtonColor: '#77da7e',
+            cancelButtonColor: '#1d1d1d',
+              
+          })
       setErrorMessage(error.message);
     }
   };
