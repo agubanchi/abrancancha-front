@@ -32,7 +32,7 @@ export default function LoginUser() {
         navigate('/reservas');
       } else if (admin) {
         login(admin);
-        navigate('/dashboard');
+        navigate('/reservations');
       } else {
         throw new Error('Credenciales incorrectas');
         

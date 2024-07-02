@@ -75,12 +75,12 @@ export default function RegisterUser() {
           <div className="mb-5 font-Onest font-normal flex items-center gap-2">
             <FaUser className="w-4 text-textColor" />
             <input
-              name="name"
-              id="name"
+              name="fullname"
+              id="fullname"
               className="w-full p-3 rounded-md border-acentColor border-2"
               type="text"
               placeholder="Nombre completo"
-              {...register('name', {
+              {...register('fullname', {
                 required: 'El Nombre de usuario es Obligatorio',
                 pattern: {
                   value: /^[a-zA-Z]{2,40}( [a-zA-Z]{2,40})+$/,
@@ -97,16 +97,17 @@ export default function RegisterUser() {
               })}
             />
           </div>
-          {errors.name && <Error>{errors.name.message}</Error>}
+          {errors.fullname && <Error>{errors.fullname.message}</Error>}
 
           <div className="mb-5 font-Onest font-normal flex items-center gap-2">
             <FaPhoneAlt className="w-4 text-textColor" />
             <input
-              id="telefono"
+            name='phone'
+              id="phone"
               className="w-full p-3 rounded-md border-acentColor border-2"
               type="tel"
               placeholder="Teléfono"
-              {...register("telefono", {
+              {...register("phone", {
                 required: "El Número de teléfono es Obligatorio",
                 pattern: {
                   value: /^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$/,
@@ -115,7 +116,7 @@ export default function RegisterUser() {
               })}
             />
           </div>
-          {errors.telefono && <Error>{errors.telefono?.message.toString()}</Error>}
+          {errors.phone && <Error>{errors.phone?.message.toString()}</Error>}
 
           <div className="mb-5 font-Onest font-normal flex items-center gap-2">
             <FaEnvelope className="w-4 text-textColor" />

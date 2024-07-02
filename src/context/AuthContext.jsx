@@ -9,6 +9,7 @@ export const AuthProvider = ({ children }) => {
     const user = localStorage.getItem('user');
     return user ? JSON.parse(user) : null;
   });
+
   const [users, setUsers] = useState(() => {
     const storedUsers = localStorage.getItem('users');
     return storedUsers ? JSON.parse(storedUsers) : [];
@@ -20,9 +21,9 @@ export const AuthProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    localStorage.setItem('reservations', JSON.stringify(reservations));// Guardar Reservas en el almacenamiento local
-    localStorage.setItem('users', JSON.stringify(users)); // Guardar usuarios en el almacenamiento local
-  }, [reservations, users]); //guardar los usuarios y reservas cuando cambian
+    localStorage.setItem('reservations', JSON.stringify(reservations));
+    localStorage.setItem('users', JSON.stringify(users));
+  }, [reservations, users]);
 
   const login = (userData) => {
     localStorage.setItem('user', JSON.stringify(userData));
@@ -35,8 +36,24 @@ export const AuthProvider = ({ children }) => {
     setCurrentUser(null);
   };
 
+  const confirmReservation = (reservationId) => {
+    const updatedReservations = reservations.map(res => {
+      if (res.id === reservationId) {
+        return { ...res, status: 'confirmada' }; // Actualiza el estado de la reserva a 'confirmada'
+      }
+      return res;
+    });
+
+    setReservations(updatedReservations);
+  };
+
+  const removeReservation = (reservationId) => {
+    const updatedReservations = reservations.filter(res => res.id !== reservationId);
+    setReservations(updatedReservations);
+  };
+
   return (
-    <AuthContext.Provider value={{ currentUser, users, setUsers, reservations, setReservations, login, logout }}>
+    <AuthContext.Provider value={{ currentUser, users, setUsers, reservations, setReservations, login, logout, confirmReservation, removeReservation }}>
       {children}
     </AuthContext.Provider>
   );

@@ -10,8 +10,8 @@ export default function ReservaForm({ editingReservation,setEditingReservation, 
   const maxDate = new Date(today);
   maxDate.setDate(today.getDate() + 7);
 
-  const [precio, setPrecio] = useState(0);
-  const [anticipo, setAnticipo] = useState(0);
+  const [price, setPrice] = useState(0);
+
 
   const precios = {
     'Futbol 5': 20000,
@@ -28,8 +28,8 @@ export default function ReservaForm({ editingReservation,setEditingReservation, 
       setValue('tipo', editingReservation.tipo);
       setValue('date', editingReservation.date);
       setValue('hour', editingReservation.hour);
-      setPrecio(precios[editingReservation.tipo] || 0);
-      setAnticipo((precios[editingReservation.tipo] || 0) * porcentajeAnticipo);
+      setPrice(precios[editingReservation.tipo] || 0);
+      
     }
   }, [editingReservation, setValue]);
 
@@ -38,8 +38,8 @@ export default function ReservaForm({ editingReservation,setEditingReservation, 
   useEffect(() => {
     if (tipoSeleccionado) {
       const nuevoPrecio = precios[tipoSeleccionado] || 0;
-      setPrecio(nuevoPrecio);
-      setAnticipo(nuevoPrecio * porcentajeAnticipo);
+      setPrice(nuevoPrecio);
+
     }
   }, [tipoSeleccionado]);
 
@@ -56,8 +56,7 @@ export default function ReservaForm({ editingReservation,setEditingReservation, 
         date: data.date,
         hour: data.hour,
         userId: editingReservation ? editingReservation.userId : currentUser.id,
-        precio,
-        anticipo
+        price
       };
 
       const response = await fetch(endpoint, {
@@ -185,13 +184,13 @@ export default function ReservaForm({ editingReservation,setEditingReservation, 
 
         <div className="mb-5">
           <label className="text-sm uppercase font-bold">
-            Precio: ${precio}
+            Precio: ${price}
           </label>
         </div>
 
         <div className="mb-5">
           <label className="text-sm uppercase font-bold">
-            Seña/Anticipo: ${anticipo}
+            Seña/Anticipo: ${price * porcentajeAnticipo}
           </label>
         </div>
 
