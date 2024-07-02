@@ -72,8 +72,8 @@ export default function DetalleReserva({ reserva, handleEditar }) {
         <p className='text-sm uppercase font-bold mb-3 text-textColor items-center flex gap-2'> Email: {''}
         <span className='text-sm low font-light text-textColor font-Onest'>{currentUser.email}</span>
         </p>
-        <p className='text-sm uppercase font-bold mb-3 text-textColor items-center flex gap-2'> Teléfno: {''}
-        <span className='text-sm uppercase font-light text-textColor font-Onest'>{currentUser.telefono}</span>
+        <p className='text-sm uppercase font-bold mb-3 text-textColor items-center flex gap-2'> Teléfono: {''}
+        <span className='text-sm uppercase font-light text-textColor font-Onest'>{currentUser.phone}</span>
         </p>
         <p className='text-sm uppercase font-bold mb-3 text-textColor items-center flex gap-2'> Cancha: {''}
         <span className='text-sm uppercase font-light text-textColor font-Onest'>{reserva.cancha}</span>
@@ -88,10 +88,10 @@ export default function DetalleReserva({ reserva, handleEditar }) {
         <span className='text-sm uppercase font-light text-textColor font-Onest'>{reserva.hour}</span>
         </p>
         <p className='text-sm uppercase font-bold mb-3 text-textColor items-center flex gap-2'> Precio: {''}
-        <span className='text-sm uppercase font-light text-textColor font-Onest'>$ {reserva.precio}</span>
+        <span className='text-sm uppercase font-light text-textColor font-Onest'>$ {reserva.price}</span>
         </p>
         <p className='text-sm uppercase font-bold mb-3 text-textColor items-center flex gap-2'> Seña/anticipo: {''}
-        <span className='text-sm uppercase font-light text-textColor font-Onest'>$ {reserva.anticipo}</span>
+        <span className='text-sm uppercase font-light text-textColor font-Onest'>$ {reserva.price * 0.3}</span>
         </p>
     </div>
 
@@ -100,15 +100,20 @@ export default function DetalleReserva({ reserva, handleEditar }) {
             <button type="button" className="flex gap-2 items-center py-3 px-6 bg-red-500 hover:bg-red-800 text-white font-bold uppercase rounded-lg text-sm" onClick={cancelarReserva}><MdDelete /> Cancelar Reserva</button>
           </div>
 
-          <div className="w-full text-center py-6">
-            <button type="button" className="w-full text-center justify-center flex gap-2 items-center py-3 px-6 bg-indigo-500 hover:bg-indigo-800 text-white font-bold uppercase rounded-lg text-sm" onClick={() => handleEditar(reserva.id)}><FaEdit /> Editar Reserva</button>
-          </div>
-        </div>
-      ) : (
-        <button type="button" className="w-full text-center py-3 mb-3 px-6 bg-acentColor text-white hover:bg-white hover:text-textColor font-bold uppercase rounded-lg text-sm" onClick={() => setShowReservation(true)}>
-          Ver mi Reserva del {reserva.date}
-        </button>
-      )}
-    </>
+  
+<div class=" flex justify-between py-2 gap-3  mt-4">
+<button type="button" className="flex gap-2 items-center py-2 px-6 bg-indigo-500 hover:bg-indigo-800 text-white font-bold uppercase rounded-lg text-sm" onClick={() => handleEditar(reserva.id)}><FaEdit/> Editar Reserva</button>
+<button type="button" className=" flex gap-2 items-center py-2 px-6 bg-red-500 hover:bg-red-800 text-white font-bold uppercase rounded-lg text-sm"  onClick={()=>removeReservation(reserva.id)}><MdDelete /> Eliminar Reserva</button>
+</div>
+
+<div className="w-full text-center py-6">
+<button type="button" className=" w-full   text-center py-3 px-6 bg-acentColor text-textColor hover:bg-textColor hover:text-white font-bold uppercase rounded-lg text-sm" onClick={confirmarReserva}> Confirmar Reserva</button>
+</div>
+
+</div>
+  ) : <button type="button" className="w-full text-center py-3 mb-3 px-6 bg-acentColor text-white hover:bg-white hover:text-textColor font-bold uppercase rounded-lg text-sm" onClick={() => setShowReservation(true)}>Ver mis Reserva del {reserva.date}</button>
+}
+  </>
+   
   );
 }

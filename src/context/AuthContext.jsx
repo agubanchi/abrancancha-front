@@ -60,6 +60,22 @@ export const AuthProvider = ({ children }) => {
     setReservations(updatedReservations);
   };
 
+  const confirmReservation = (reservationId) => {
+    const updatedReservations = reservations.map(res => {
+      if (res.id === reservationId) {
+        return { ...res, status: 'confirmada' }; // Actualiza el estado de la reserva a 'confirmada'
+      }
+      return res;
+    });
+
+    setReservations(updatedReservations);
+  };
+
+  const removeReservation = (reservationId) => {
+    const updatedReservations = reservations.filter(res => res.id !== reservationId);
+    setReservations(updatedReservations);
+  };
+
   return (
     <AuthContext.Provider value={{ currentUser, users, setUsers, reservations, setReservations, login, logout, confirmReservation, removeReservation }}>
       {children}

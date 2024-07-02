@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import Modal from './Modal';
+import { useAuth } from "../context/AuthContext";
 
 const DashboardReservations = ({ reserva, removeReservation, handleEdit }) => {
+  const { users } = useAuth();
+  const user = users.find(user => user.id === reserva.userId);
+
   const handleOpenModal = () => {
     handleEdit(reserva);
   };
