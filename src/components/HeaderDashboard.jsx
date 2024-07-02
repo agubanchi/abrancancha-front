@@ -17,7 +17,7 @@ const HeaderDashboard = () => {
   };
 
   return (
-    <header className="bg-textColor shadow-md fixed lef-0 top-0  w-full z-[9999]">
+    <header className="bg-textColor shadow-md relative lef-0 top-0  w-full z-[9999]">
       <div className="mx-auto container px-5 py-4">
         <div className="flex justify-between items-center">
           {/* <div className="z-[999] w-48">
@@ -27,7 +27,7 @@ const HeaderDashboard = () => {
             <div className='w-3/4 items-center gap-6 text-center flex justify-center'>
             <NavLink to="/canchas" className="hover:text-acentColor border px-2 py-2  border-acentColor rounded-md">Canchas</NavLink>
             <NavLink to="/reservations" className="hover:text-acentColor border px-2 py-2  border-acentColor rounded-md">Reservas</NavLink>
-            <NavLink to="/ListadoAdmins" className="hover:text-acentColor border px-2 py-2  border-acentColor rounded-md">Administradores</NavLink>
+            <NavLink to="/admins" className="hover:text-acentColor border px-2 py-2  border-acentColor rounded-md">Administradores</NavLink>
             <NavLink to="/users" className="hover:text-acentColor border px-2 py-2  border-acentColor rounded-md">Usuarios</NavLink>
             <NavLink to="/tiposCanchas" className="hover:text-acentColor border px-2 py-2  border-acentColor rounded-md">Tipos de cancha</NavLink>
             <NavLink to="/estadosCanchas" className="hover:text-acentColor border px-2 py-2  border-acentColor rounded-md">Estados de cancha</NavLink>

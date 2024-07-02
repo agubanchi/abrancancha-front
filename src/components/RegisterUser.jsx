@@ -107,7 +107,7 @@ export default function RegisterUser() {
           <div className="mb-5 font-Onest font-normal flex items-center gap-2">
             <FaPhoneAlt className="w-4 text-textColor" />
             <input
-              name='phone'
+            name='phone'
               id="phone"
               className="w-full p-3 rounded-md border-acentColor border-2"
               type="tel"
