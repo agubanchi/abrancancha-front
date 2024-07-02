@@ -10,6 +10,7 @@ import Home from "./pages/Home";
 import Logueo from "./Layouts/Logueo";
 import PrivateRoute from "./components/utils/PrivateRoute";
 import Layout from "./Layouts/Layout";
+import ListadoAdmins from "./pages/ListadoAdmins";
 
 const AppRouter = () => {
   return (
@@ -27,6 +28,7 @@ const AppRouter = () => {
     </Route>
     <Route element={<Layout/>}>
     <Route path='/dashboard' element={<Dashboard/>} roles={["admin"]}/>
+    <Route path='/ListadoAdmins' element={<ListadoAdmins />} roles={["admin"]}/>
     </Route>
     </Route>
     
