@@ -16,8 +16,63 @@ export default function RegisterUser() {
   } = useForm();
   const navigate = useNavigate();
 
-  const onSubmit = (userData) => {
+  const onSubmit = async (userData) => {
+    // // ################################################################
+    // const dataNueva ={ fullname: userData.name,
+    //   email: userData.email,
+    //   password: userData.password,
+    //   phone: userData.telefono,
+    //   // avatar: "algo"      
+    // }
+    // try {
+    //   // fetchCreate({ endPoint: Endpoint.register, data: userData })
+    //   const response = await fetchCreate({ endPoint: Endpoint.register, data: dataNueva })
+    //   const data = await response.json();
+    //   if (!response.ok) {
+    //     throw new Error(data.message);
+    //   }       
+ 
     setUsers([...users, userData]); // Establecer los datos del contacto en el state
+    //       //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    //       // loginService.login({email,password});
+    //       // falta obtener el token, habria q ver  de sacarlo  de response
+    //       fetchCreate({
+    //         endPoint: Endpoint.login,
+    //         data: { email: userData.email, password: userData.password },
+    //       }).then((response) => {
+    //         if (!response.ok) {
+    //           throw new Error(data.message);
+    //         }
+    //         const dataLogin =  response.json();
+    //         login(userData,dataLogin.token);
+    //       });
+    //       //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    //       //        login(userData); // Almacenar datos del usuario en el contexto
+    //       // Almacenar datos del usuario en localStorage
+    //       localStorage.setItem("user", JSON.stringify(userData));
+    //       // Cambiar a la vista de inicio de sesión
+    //       Swal.fire({
+    //         title: "Usuario registrado!",
+    //         text: "Usuario registrado exitosamente",
+    //         icon: "success",
+    //         color: "#1d1d1d",
+    //         iconColor: "#77da7e",
+    //         confirmButtonColor: "#77da7e",
+    //       });
+    //       navigate("/reservas");
+    //       // navigate("/login");
+    //   } catch (error) {        
+    //     Swal.fire({
+    //       title: "Error",
+    //       text: error,
+    //       icon: "error",
+    //       color: "#1d1d1d",
+    //       iconColor: "#1d1d1d",
+    //       confirmButtonColor: "#77da7e",
+    //     });
+    //     return;
+    // }
+    // ################################################################
     // Verificar si el email ya está registrado
     const emailExists = users.some((user) => user.email === userData.email);
 
@@ -65,6 +120,7 @@ export default function RegisterUser() {
       .catch((error) => {
         console.error("Error al registrar usuario:", error);
       });
+      // ################################################################
   };
 
   const mensaje = "Crear Usuario";

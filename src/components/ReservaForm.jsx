@@ -3,8 +3,9 @@ import ErrorComp from "./Error";
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { Endpoint } from "../services/fetchs";
+import SelectGenerico from "./SelectGenerico";
 
-export default function ReservaForm({ editingReservation,setEditingReservation, onClose }) {
+export default function ReservaForm({ editingReservation, setEditingReservation, onClose }) {
   const { register, handleSubmit, setValue, formState: { errors }, reset, watch } = useForm();
 
   const { currentUser, reservations, setReservations, fetchCreate, fetchUpdate } = useAuth();
@@ -63,20 +64,35 @@ export default function ReservaForm({ editingReservation,setEditingReservation, 
 
   const onSubmit = async (data) => {
     try {
-      const response = editingReservation
-      ? await fetchCreate({
-          endPoint: Endpoint.reservations,
-          data: data,
-        })
-      : await fetchUpdate({
-          endPoint: Endpoint.reservations,
-          data: data,
-          idData: editingReservation.id,
-        });
-      // const method = editingReservation ? "PATCH" : "POST";
-      // const endpoint = editingReservation
-      //   ? `http://localhost:3000/reservations/${editingReservation.id}`
-      //   : "http://localhost:3000/reservations/";
+      // ################################################################
+            //  anular estas lineas para el sistema viejo
+      // const reservationData = {
+      //   // timedate: new Date(`${data.date} ${data.hour}`),
+      //   // price: data.court.tariff.price /* 5000 */,
+      //   // idCourt: data.court.id,
+      //   // idUser: currentUser.id,
+      //   // idStatus: 1,
+      //   cancha: data.cancha,
+      //   tipo: data.tipo,
+      //   date: data.date,
+      //   hour: data.hour,
+      //   price,
+      //   ...(editingReservation && {id: editingReservation})
+      // };
+            // const response = editingReservation
+      // ? await fetchCreate({
+      //     endPoint: Endpoint.reservations,
+      //     data: data,
+      //   })
+      // : await fetchUpdate({
+      //     endPoint: Endpoint.reservations,
+      //     data: data,
+      //     idData: editingReservation.id,
+      //   });
+      const method = editingReservation ? "PATCH" : "POST";
+      const endpoint = editingReservation
+        ? `http://localhost:3000/reservations/${editingReservation.id}`
+        : "http://localhost:3000/reservations/";
 
       const reservationData = {
         cancha: data.cancha,
@@ -87,13 +103,14 @@ export default function ReservaForm({ editingReservation,setEditingReservation, 
         price
       };
 
-      // const response = await fetch(endpoint, {
-      //   method,
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify(reservationData),
-      // });
+      const response = await fetch(endpoint, {
+        method,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(reservationData),
+      });
+      // ################################################################
       if (!response.ok) {
         throw new ErrorComp("Error al almacenar la reserva");
       }
@@ -127,6 +144,15 @@ export default function ReservaForm({ editingReservation,setEditingReservation, 
           <label htmlFor="cancha" className="text-sm uppercase font-bold">
             Cancha
           </label>
+                    
+                {/* <select id='cancha' className="w-full p-3 rounded-md border-acentColor border-2" defaultValue="Elige Deporte" */}
+                  {/* // onChange={(event) => updateFiltroTipoCancha(Number(event.target.value))} */}
+                  {/* // {...register("cancha", { required: "Selecciona una Cancha" })}> */}
+                  {/* <option disabled value=" ">              {" "}              -- selecciona una opción --{" "}            </option> */}
+                  {/* <option value={0} > Elige Deporte </option> */}
+                  {/* <SelectGenerico endPoint={Endpoint.typesOfCourt} /> */}
+                {/* </select>           */}
+         
           <select
             id="cancha"
             className="w-full p-3 rounded-md border-acentColor border-2"
@@ -147,6 +173,13 @@ export default function ReservaForm({ editingReservation,setEditingReservation, 
           <label htmlFor="tipo" className="text-sm uppercase font-bold">
             Tipo
           </label>
+          {/* <select id='tipo' className="w-full p-3 rounded-md border-acentColor border-2" defaultValue=" "
+                  // onChange={(event) => updateFiltroTipoCancha(Number(event.target.value))}
+                  {...register("cancha", { required: "Selecciona un Tipo de Cancha" })}>
+                  <option disabled value=" ">              {" "}              -- selecciona una opción --{" "}            </option>
+                  {/* <option value={0} > Elige Deporte </option> */}
+                  {/* <SelectGenerico endPoint={Endpoint.typesOfCourt} />
+                </select>    */} 
           <select
             id="tipo"
             className="w-full p-3 rounded-md border-acentColor border-2"

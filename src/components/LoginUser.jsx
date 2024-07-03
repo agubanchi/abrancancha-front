@@ -41,7 +41,7 @@ export default function LoginUser() {
       });
       const data = await response.json();
       if (!response.ok) {
-        const newRsp2= new Response({...response,ok:response.ok,status:response.status, statusText: data.message});
+        // const newRsp2= new Response({...response,ok:response.ok,status:response.status, statusText: data.message});
         // const newRsp = {...response, statusText: data.message}
         // throw (response.error);
         throw new Error(data.message);
