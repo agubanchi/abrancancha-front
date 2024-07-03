@@ -32,56 +32,55 @@ export default function LoginUser() {
       // } else {
       //   throw new Error("Credenciales incorrectas");
       // }
-      //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-      // loginService.login({email,password});
-      const response = await fetchCreate({
-        endPoint: Endpoint.login,
-        // data: { email: "marioepatronelli@gmail.com", password: "Ab*12345" },
-        data: { email: formData.email, password: formData.password },
-      });
-      const data = await response.json();
-      if (!response.ok) {
-        // const newRsp2= new Response({...response,ok:response.ok,status:response.status, statusText: data.message});
-        // const newRsp = {...response, statusText: data.message}
-        // throw (response.error);
-        throw new Error(data.message);
-        // throw new Error("Credenciales incorrectas");
+      // ################################################################
+      // // loginService.login({email,password});
+      // const response = await fetchCreate({
+      //   endPoint: Endpoint.login,
+      //   // data: { email: "marioepatronelli@gmail.com", password: "Ab*12345" },
+      //   data: { email: formData.email, password: formData.password },
+      // });
+      // const data = await response.json();
+      // if (!response.ok) {
+      //   // const newRsp2= new Response({...response,ok:response.ok,status:response.status, statusText: data.message});
+      //   // const newRsp = {...response, statusText: data.message}
+      //   // throw (response.error);
+      //   throw new Error(data.message);
+      //   // throw new Error("Credenciales incorrectas");
+      // }
+      // //
+      // login(data.user,data.token);
+      // const profile = { "user": "/reservas", "admin": "/dashboard" };
+      // const role = data.user.role;
+      // navigate(profile[role]);
+      // ################################################################
+      const responseUsers = await fetch("http://localhost:3000/users");
+      const responseAdmins = await fetch("http://localhost:3000/admin");
+
+      if (!responseUsers.ok || !responseAdmins.ok) {
+        throw new Error("Error al obtener los usuarios o los administradores");
       }
-      //
-      login(data.user,data.token);
-      const profile = { "user": "/reservas", "admin": "/dashboard" };
-      const role = data.user.role;
-      navigate(profile[role]);
-      //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-      // const responseUsers = await fetch("http://localhost:3000/users");
-      // const responseAdmins = await fetch("http://localhost:3000/admin");
+      const users = await responseUsers.json();
+      const admins = await responseAdmins.json();
 
-      // if (!responseUsers.ok || !responseAdmins.ok) {
-      //   throw new Error("Error al obtener los usuarios o los administradores");
-      // }
+      const user = users.find(
+        (user) =>
+          user.email === formData.email && user.password === formData.password
+      );
+      const admin = admins.find(
+        (admin) =>
+          admin.email === formData.email && admin.password === formData.password
+      );
 
-      // const users = await responseUsers.json();
-      // const admins = await responseAdmins.json();
-
-      // const user = users.find(
-      //   (user) =>
-      //     user.email === formData.email && user.password === formData.password
-      // );
-      // const admin = admins.find(
-      //   (admin) =>
-      //     admin.email === formData.email && admin.password === formData.password
-      // );
-
-      // if (user) {
-      //   login(user);
-      //   navigate("/reservas");
-      // } else if (admin) {
-      //   login(admin);
-      //   navigate("/dashboard");
-      // } else {
-      //   throw new Error("Credenciales incorrectas");
-      // }
+      if (user) {
+        login(user);
+        navigate("/reservas");
+      } else if (admin) {
+        login(admin);
+        navigate("/dashboard");
+      } else {
+        throw new Error("Credenciales incorrectas");
+      }
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
       setErrorMessage(error.message);

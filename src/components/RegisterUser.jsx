@@ -22,7 +22,7 @@ export default function RegisterUser() {
     //   email: userData.email,
     //   password: userData.password,
     //   phone: userData.telefono,
-    //   // avatar: "algo"      
+    //   // avatar: "algo"
     // }
     // try {
     //   // fetchCreate({ endPoint: Endpoint.register, data: userData })
@@ -30,10 +30,11 @@ export default function RegisterUser() {
     //   const data = await response.json();
     //   if (!response.ok) {
     //     throw new Error(data.message);
-    //   }       
- 
+    //   }
+    // // ################################################################
+
     setUsers([...users, userData]); // Establecer los datos del contacto en el state
-    //       //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    //       // ################################################################
     //       // loginService.login({email,password});
     //       // falta obtener el token, habria q ver  de sacarlo  de response
     //       fetchCreate({
@@ -61,7 +62,7 @@ export default function RegisterUser() {
     //       });
     //       navigate("/reservas");
     //       // navigate("/login");
-    //   } catch (error) {        
+    //   } catch (error) {
     //     Swal.fire({
     //       title: "Error",
     //       text: error,
@@ -88,14 +89,16 @@ export default function RegisterUser() {
       return;
     }
 
-    // fetch("http://localhost:3000/users", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(userData),
-    // })
-    fetchCreate({ endPoint: Endpoint.register, data: userData })
+    fetch("http://localhost:3000/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    })
+      // ################################################################
+      // fetchCreate({ endPoint: Endpoint.register, data: userData })
+      // ################################################################
       .then((response) => {
         if (!response.ok) {
           throw new ErrorComp("Error al enviar los datos al servidor");
@@ -120,7 +123,7 @@ export default function RegisterUser() {
       .catch((error) => {
         console.error("Error al registrar usuario:", error);
       });
-      // ################################################################
+    // ################################################################
   };
 
   const mensaje = "Crear Usuario";
@@ -141,8 +144,8 @@ export default function RegisterUser() {
               className="w-full p-3 rounded-md border-acentColor border-2"
               type="text"
               placeholder="Nombre completo"
-              {...register('fullname', {
-                required: 'El Nombre de usuario es Obligatorio',
+              {...register("fullname", {
+                required: "El Nombre de usuario es Obligatorio",
                 pattern: {
                   value: /^[a-zA-Z]{2,40}( [a-zA-Z]{2,40})+$/,
                   message: "El Nombre de usuario no es correcto",
@@ -163,7 +166,7 @@ export default function RegisterUser() {
           <div className="mb-5 font-Onest font-normal flex items-center gap-2">
             <FaPhoneAlt className="w-4 text-textColor" />
             <input
-            name='phone'
+              name="phone"
               id="phone"
               className="w-full p-3 rounded-md border-acentColor border-2"
               type="tel"
@@ -178,7 +181,9 @@ export default function RegisterUser() {
               })}
             />
           </div>
-          {errors.phone && <ErrorComp>{errors.phone?.message.toString()}</ErrorComp>}
+          {errors.phone && (
+            <ErrorComp>{errors.phone?.message.toString()}</ErrorComp>
+          )}
 
           <div className="mb-5 font-Onest font-normal flex items-center gap-2">
             <FaEnvelope className="w-4 text-textColor" />

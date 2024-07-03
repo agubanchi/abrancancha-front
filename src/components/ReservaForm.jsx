@@ -64,23 +64,23 @@ export default function ReservaForm({ editingReservation, setEditingReservation,
 
   const onSubmit = async (data) => {
     try {
+      const reservationData = {
+          // timedate: new Date(`${data.date} ${data.hour}`),
+          // price: data.court.tariff.price /* 5000 */,
+          // idCourt: data.court.id,
+          // idUser: currentUser.id,
+          // idStatus: 1,
+          //   ...(editingReservation && {id: editingReservation}),
+        cancha: data.cancha,
+        tipo: data.tipo,
+        date: data.date,
+        hour: data.hour,
+        userId: editingReservation ? editingReservation.userId : currentUser.id,
+        price
+      };
       // ################################################################
-      //  anular estas lineas para el sistema viejo
-      // const reservationData = {
-      //   // timedate: new Date(`${data.date} ${data.hour}`),
-      //   // price: data.court.tariff.price /* 5000 */,
-      //   // idCourt: data.court.id,
-      //   // idUser: currentUser.id,
-      //   // idStatus: 1,
-      //   cancha: data.cancha,
-      //   tipo: data.tipo,
-      //   date: data.date,
-      //   hour: data.hour,
-      //   precio,
-      //   anticipo,
-      //   ...(editingReservation && {id: editingReservation})
-      // };
-      // const response = editingReservation
+      //  anular estas lineas para el sistema viejo  
+       // const response = editingReservation
       // ? await fetchCreate({
       //     endPoint: Endpoint.reservations,
       //     data: data,
@@ -90,20 +90,11 @@ export default function ReservaForm({ editingReservation, setEditingReservation,
       //     data: data,
       //     idData: editingReservation,
       //   });
-        // ################################################################
+      // ################################################################      
       const method = editingReservation ? "PATCH" : "POST";
       const endpoint = editingReservation
         ? `http://localhost:3000/reservations/${editingReservation.id}`
         : "http://localhost:3000/reservations/";
-
-      const reservationData = {
-        cancha: data.cancha,
-        tipo: data.tipo,
-        date: data.date,
-        hour: data.hour,
-        userId: editingReservation ? editingReservation.userId : currentUser.id,
-        price
-      };
 
       const response = await fetch(endpoint, {
         method,
@@ -115,14 +106,12 @@ export default function ReservaForm({ editingReservation, setEditingReservation,
         body: JSON.stringify(reservationData),
       });
       // ################################################################
-      // ################################################################
       if (!response.ok) {
-        throw new ErrorComp("Error al almacenar la reserva");
         throw new ErrorComp("Error al almacenar la reserva");
       }
 
       const updatedReservation = await response.json();
-      setReservations((prevReservations) => {
+      // setReservations((prevReservations) => {
       setReservations((prevReservations) => {
         if (editingReservation) {
           return prevReservations.map((reserva) =>
@@ -182,15 +171,10 @@ export default function ReservaForm({ editingReservation, setEditingReservation,
               {" "}
               -- selecciona una opción --{" "}
             </option>
-            <option disabled value=" ">
-              {" "}
-              -- selecciona una opción --{" "}
-            </option>
             <option value="Cancha 1">Cancha 1</option>
             <option value="Cancha 2">Cancha 2</option>
             <option value="Cancha 3">Cancha 3</option>
           </select>
-          {errors.cancha && <ErrorComp>{errors.cancha?.message.toString()}</ErrorComp>}
           {errors.cancha && <ErrorComp>{errors.cancha?.message.toString()}</ErrorComp>}
         </div>
 
@@ -269,18 +253,6 @@ export default function ReservaForm({ editingReservation, setEditingReservation,
           {errors.hour && (
             <ErrorComp>{errors.hour?.message.toString()}</ErrorComp>
           )}
-        </div>
-
-        <div className="mb-5">
-          <label className="text-sm uppercase font-bold">
-            Precio: ${price}
-          </label>
-        </div>
-
-        <div className="mb-5">
-          <label className="text-sm uppercase font-bold">
-            Seña/Anticipo: ${price * porcentajeAnticipo}
-          </label>
         </div>
 
         <div className="mb-5">

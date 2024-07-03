@@ -4,10 +4,11 @@ import { useAuth } from '../context/AuthContext';
 import Swal from 'sweetalert2';
 
 export default function Admins() {
-  const { users, setUsers } = useAuth();
+  const { users, setUsers, fetchGet, fetchDelete,fetchUpdate } = useAuth();
   const [editingUser, setEditingUser] = useState(null);
 
   useEffect(() => {
+    // fetchGet({endPoint: Endpoint.users})
     fetch('http://localhost:3000/users/')
       .then(res => res.json())
       .then(json => setUsers(json))
@@ -29,6 +30,7 @@ export default function Admins() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
+          // const response = await fetchDelete({endPoint: Endpoint.users, idData: id})
           const response = await fetch(`http://localhost:3000/users/${id}`, {
             method: 'DELETE',
             headers: {
@@ -58,6 +60,7 @@ export default function Admins() {
 
   const updateUser = async (user) => {
     try {
+      // const response = await fetchUpdate({endPoint: Endpoint.users, idData: user.id, data: user});
       const response = await fetch(`http://localhost:3000/users/${user.id}`, {
         method: 'PUT',
         headers: {

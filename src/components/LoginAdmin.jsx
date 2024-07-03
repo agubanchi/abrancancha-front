@@ -20,8 +20,8 @@ export default function LoginAdmin() {
   const onSubmit = async (data) => {
     
     const formData = getValues();
-    // fetch('http://localhost:3000/admin')
-    fetchGet(Endpoint.administrators)
+    fetch('http://localhost:3000/admin')
+    // fetchGet(Endpoint.administrators)
       .then(response => {
         if (!response.ok) {
           throw new ErrorComp('Error al obtener los usuarios');

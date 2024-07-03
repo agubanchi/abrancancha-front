@@ -5,11 +5,12 @@ import Swal from 'sweetalert2';
 import Modal from '../components/Modal';
 
 export default function Dashboard() {
-  const { reservations, setReservations } = useAuth();
+  const { reservations, setReservations, fetchGet, fetchDelete } = useAuth();
   const [editingReservation, setEditingReservation] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
+    // fetchGet({endPoint: Endpoint.reservations})
     fetch('http://localhost:3000/reservations/')
       .then(res => res.json())
       .then(json => setReservations(json))
@@ -31,6 +32,7 @@ export default function Dashboard() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
+          // const response = await fetchDelete({endPoint: Endpoint.reservations, idData: id});
           const response = await fetch(`http://localhost:3000/reservations/${id}`, {
             method: 'DELETE',
             headers: {
