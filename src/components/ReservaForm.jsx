@@ -289,7 +289,7 @@ export default function ReservaForm({ editingReservation, setEditingReservation,
             <ErrorComp>{errors.hour?.message.toString()}</ErrorComp>
           )}
         </div>
-
+        
         <div className="mb-5">
           <label className="text-sm uppercase font-bold">
             Precio: ${price}

@@ -13,11 +13,11 @@ export default function Dashboard() {
   useEffect(
     function () {
       async function fetchData() {
-              // fetch('http://localhost:3000/reservations/')
-    fetchGet({endPoint: Endpoint.reservations})
-    .then(res => res.json())
-    .then(json => setReservations(json))
-    .catch(err => console.error('Error fetching reservations:', err));
+        fetch('http://localhost:3000/reservations/')
+        // fetchGet({endPoint: Endpoint.reservations})
+        .then(res => res.json())
+        .then(json => setReservations(json))
+        .catch(err => console.error('Error fetching reservations:', err));
       }
       fetchData();
         
@@ -44,13 +44,13 @@ export default function Dashboard() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          // const response = await fetch(`http://localhost:3000/reservations/${id}`, {
-          //   method: 'DELETE',
-          //   headers: {
-          //     'Content-Type': 'application/json'
-          //   }
-          // });
-          const response = await fetchDelete({endPoint: Endpoint.reservations, idData: id})
+          const response = await fetch(`http://localhost:3000/reservations/${id}`, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+          // const response = await fetchDelete({endPoint: Endpoint.reservations, idData: id})
           if (!response.ok) {
             throw new Error('Error al eliminar la reserva');
           }

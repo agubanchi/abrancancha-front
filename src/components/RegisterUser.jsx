@@ -81,8 +81,8 @@ export default function RegisterUser() {
               className="w-full p-3 rounded-md border-acentColor border-2"
               type="text"
               placeholder="Nombre completo"
-              {...register('fullname', {
-                required: 'El Nombre de usuario es Obligatorio',
+              {...register("fullname", {
+                required: "El Nombre de usuario es Obligatorio",
                 pattern: {
                   value: /^[a-zA-Z]{2,40}( [a-zA-Z]{2,40})+$/,
                   message: "El Nombre de usuario no es correcto",
@@ -122,7 +122,9 @@ export default function RegisterUser() {
               })}
             />
           </div>
-          {errors.phone && <ErrorComp>{errors.phone?.message.toString()}</ErrorComp>}
+          {errors.phone && (
+            <ErrorComp>{errors.phone?.message.toString()}</ErrorComp>
+          )}
 
           <div className="mb-5 font-Onest font-normal flex items-center gap-2">
             <FaEnvelope className="w-4 text-textColor" />
