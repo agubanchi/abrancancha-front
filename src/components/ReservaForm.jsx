@@ -65,7 +65,7 @@ export default function ReservaForm({ editingReservation, setEditingReservation,
   const onSubmit = async (data) => {
     try {
       // ################################################################
-            //  anular estas lineas para el sistema viejo
+      //  anular estas lineas para el sistema viejo
       // const reservationData = {
       //   // timedate: new Date(`${data.date} ${data.hour}`),
       //   // price: data.court.tariff.price /* 5000 */,
@@ -76,10 +76,11 @@ export default function ReservaForm({ editingReservation, setEditingReservation,
       //   tipo: data.tipo,
       //   date: data.date,
       //   hour: data.hour,
-      //   price,
+      //   precio,
+      //   anticipo,
       //   ...(editingReservation && {id: editingReservation})
       // };
-            // const response = editingReservation
+      // const response = editingReservation
       // ? await fetchCreate({
       //     endPoint: Endpoint.reservations,
       //     data: data,
@@ -87,8 +88,9 @@ export default function ReservaForm({ editingReservation, setEditingReservation,
       // : await fetchUpdate({
       //     endPoint: Endpoint.reservations,
       //     data: data,
-      //     idData: editingReservation.id,
+      //     idData: editingReservation,
       //   });
+        // ################################################################
       const method = editingReservation ? "PATCH" : "POST";
       const endpoint = editingReservation
         ? `http://localhost:3000/reservations/${editingReservation.id}`
@@ -107,17 +109,25 @@ export default function ReservaForm({ editingReservation, setEditingReservation,
         method,
         headers: {
           "Content-Type": "application/json",
+          "Content-Type": "application/json",
         },
+        body: JSON.stringify(reservationData),
         body: JSON.stringify(reservationData),
       });
       // ################################################################
+      // ################################################################
       if (!response.ok) {
+        throw new ErrorComp("Error al almacenar la reserva");
         throw new ErrorComp("Error al almacenar la reserva");
       }
 
       const updatedReservation = await response.json();
       setReservations((prevReservations) => {
+      setReservations((prevReservations) => {
         if (editingReservation) {
+          return prevReservations.map((reserva) =>
+            reserva.id === editingReservation.id ? updatedReservation : reserva
+          );
           return prevReservations.map((reserva) =>
             reserva.id === editingReservation.id ? updatedReservation : reserva
           );
@@ -125,6 +135,7 @@ export default function ReservaForm({ editingReservation, setEditingReservation,
           return [...prevReservations, updatedReservation];
         }
       });
+
 
       reset();
       setEditingReservation(null);
@@ -153,6 +164,15 @@ export default function ReservaForm({ editingReservation, setEditingReservation,
                   {/* <SelectGenerico endPoint={Endpoint.typesOfCourt} /> */}
                 {/* </select>           */}
          
+                    
+                {/* <select id='cancha' className="w-full p-3 rounded-md border-acentColor border-2" defaultValue="Elige Deporte" */}
+                  {/* // onChange={(event) => updateFiltroTipoCancha(Number(event.target.value))} */}
+                  {/* // {...register("cancha", { required: "Selecciona una Cancha" })}> */}
+                  {/* <option disabled value=" ">              {" "}              -- selecciona una opción --{" "}            </option> */}
+                  {/* <option value={0} > Elige Deporte </option> */}
+                  {/* <SelectGenerico endPoint={Endpoint.typesOfCourt} /> */}
+                {/* </select>           */}
+         
           <select
             id="cancha"
             className="w-full p-3 rounded-md border-acentColor border-2"
@@ -162,10 +182,15 @@ export default function ReservaForm({ editingReservation, setEditingReservation,
               {" "}
               -- selecciona una opción --{" "}
             </option>
+            <option disabled value=" ">
+              {" "}
+              -- selecciona una opción --{" "}
+            </option>
             <option value="Cancha 1">Cancha 1</option>
             <option value="Cancha 2">Cancha 2</option>
             <option value="Cancha 3">Cancha 3</option>
           </select>
+          {errors.cancha && <ErrorComp>{errors.cancha?.message.toString()}</ErrorComp>}
           {errors.cancha && <ErrorComp>{errors.cancha?.message.toString()}</ErrorComp>}
         </div>
 
