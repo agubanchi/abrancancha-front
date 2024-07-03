@@ -178,6 +178,15 @@ export default function ReservaForm({ editingReservation, setEditingReservation,
           <label htmlFor="cancha" className="text-sm uppercase font-bold">
             Cancha
           </label>
+                    
+                {/* <select id='cancha' className="w-full p-3 rounded-md border-acentColor border-2" defaultValue="Elige Deporte" */}
+                  {/* // onChange={(event) => updateFiltroTipoCancha(Number(event.target.value))} */}
+                  {/* // {...register("cancha", { required: "Selecciona una Cancha" })}> */}
+                  {/* <option disabled value=" ">              {" "}              -- selecciona una opción --{" "}            </option> */}
+                  {/* <option value={0} > Elige Deporte </option> */}
+                  {/* <SelectGenerico endPoint={Endpoint.typesOfCourt} /> */}
+                {/* </select>           */}
+         
           <select
             id="cancha"
             className="w-full p-3 rounded-md border-acentColor border-2"
@@ -197,6 +206,13 @@ export default function ReservaForm({ editingReservation, setEditingReservation,
           <label htmlFor="tipo" className="text-sm uppercase font-bold">
             Tipo
           </label>
+          {/* <select id='tipo' className="w-full p-3 rounded-md border-acentColor border-2" defaultValue=" "
+                  // onChange={(event) => updateFiltroTipoCancha(Number(event.target.value))}
+                  {...register("cancha", { required: "Selecciona un Tipo de Cancha" })}>
+                  <option disabled value=" ">              {" "}              -- selecciona una opción --{" "}            </option>
+                  {/* <option value={0} > Elige Deporte </option> */}
+                  {/* <SelectGenerico endPoint={Endpoint.typesOfCourt} />
+                </select>    */} 
           <select
             id="tipo"
             className="w-full p-3 rounded-md border-acentColor border-2"
