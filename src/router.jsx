@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import RegisterUser from "./components/RegisterUser";
 import LoginUser from "./components/LoginUser";
-import Dashboard from "./pages/Dashboard";
 import Reservations from "./pages/Reservations"
 import Reservas from "./pages/Reservas";
 import ProtectedRoute from "./components/utils/ProtectedRoute"; // Importar ProtectedRoute
@@ -13,6 +12,7 @@ import PrivateRoute from "./components/utils/PrivateRoute";
 import Layout from "./Layouts/Layout";
 import Users from "./pages/Users";
 import Admins from "./pages/Admins";
+import Canchas from "./pages/Canchas";
 
 const AppRouter = () => {
   return (
@@ -29,7 +29,7 @@ const AppRouter = () => {
     <Route path='/reservas' element={<Reservas/>} roles={["user"]}/>
     </Route>
     <Route element={<Layout/>}>
-    <Route path='/dashboard' element={<Dashboard/>} roles={["admin"]}/>
+    <Route path='/canchas' element={<Canchas/>} roles={["admin"]}/>
     <Route path='/reservations' element={<Reservations/>} roles={["admin"]}/>
     <Route path='/users' element={<Users/>} roles={["admin"]}/>
     <Route path='/admins' element={<Admins/>} roles={["admin"]}/>
