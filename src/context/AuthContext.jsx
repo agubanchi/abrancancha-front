@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { fetchAll, HttpMethod } from "../services/fetchs";
+import { Endpoint, fetchAll, HttpMethod } from "../services/fetchs";
 const AuthContext = createContext();
 
 export const useAuth = () => useContext(AuthContext);
@@ -27,6 +27,32 @@ export const AuthProvider = ({ children }) => {
     const storedToken = localStorage.getItem("token");
     return storedToken ? JSON.parse(storedToken) : [];
   });
+  // ################################################################
+  const [typesOfCourt, setTypesOfCourt] = useState(() => {
+    const storedTypesOfCourt = localStorage.getItem("typesOfCourt");
+    return storedTypesOfCourt ? JSON.parse(storedTypesOfCourt) : [];
+  });
+
+  // const getTiposCancha = async () => {
+  //   try {
+  //     const response = await fetchGet({endPoint: Endpoint.typesOfCourt});
+  //     if (!response.ok) {
+  //       throw new Error("Error al cargar los tipos de cancha");
+  //     }
+  //     const allTiposCanchas = await response.json()
+  //     const tiposMap = new Map();
+  //     allTiposCanchas.forEach((tipo) => { tiposMap.set(tipo.id, tipo.name) });
+  //     setTypesOfCourt(tiposMap)
+  //     // setCache(prev => ({ ...prev, tiposCancha: tiposMap }));
+  //   } catch (error) {
+  //     console.log(error)/* alert("ojo") */ /* err = setError(err) */
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   getTiposCancha()
+  // }, [])
+  // ################################################################
   // const [dbHandler, setDbHandler] = useState(() => {
   //   const storedToken = localStorage.getItem('token');
   //   return storedToken ? JSON.parse(storedToken) : [];
@@ -35,9 +61,10 @@ export const AuthProvider = ({ children }) => {
   // const {fetchCreate} = useFetch(Endpoint.login); //<-esta la puse yo: mario
 
   useEffect(() => {
+    localStorage.setItem("typesOfCourt", JSON.stringify(typesOfCourt)); // Guardar Reservas en el almacenamiento local
     localStorage.setItem("reservations", JSON.stringify(reservations)); // Guardar Reservas en el almacenamiento local
     localStorage.setItem("users", JSON.stringify(users)); // Guardar usuarios en el almacenamiento local
-  }, [reservations, users]); //guardar los usuarios y reservas cuando cambian
+  }, [reservations, users, typesOfCourt]); //guardar los usuarios y reservas cuando cambian
 
   const login = (userData, token) => {
     localStorage.setItem("user", JSON.stringify(userData));

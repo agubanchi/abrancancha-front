@@ -5,6 +5,10 @@ import Modal from './Modal';
 import { useAuth } from "../context/AuthContext";
 
 const DashboardUsers = ({ reserva, removeReservation, handleEdit }) => {
+  // ################################################################
+  // const { currentUser } = useAuth();
+  // const user = currentUser;
+  // ################################################################
   const { users } = useAuth();
   const user = users.find(user => user.id === reserva.idUser);
 
