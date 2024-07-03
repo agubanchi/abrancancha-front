@@ -9,21 +9,21 @@ export enum Endpoint {
   reset = "auth/reset",
 
   club = "club",
-  exceptionsTimedate = "exceptionsTimedate",
+  exceptionsTimedate = "exception-timedate",
 
   administrators = "administrators",
   users = "users",
-  statusOfUser = "statusOfUser",
+  statusOfUser = "status-of-user",
 
   courts = "courts",
-  typesOfCourt = "typesOfCourt",
+  typesOfCourt = "type-of-court",
   timetables = "timetables",
   schedules = "schedules",
   tariffs = "tariffs",
-  statusOfCourt = "statusOfCourt",
+  statusOfCourt = "status-of-court",
 
   reservations = "reservations",
-  statusOfReservation = "statusOfReservation",
+  statusOfReservation = "status-of-reservation",
 }
 //------------------------------------------------------------------------------
 export enum HttpMethod {
