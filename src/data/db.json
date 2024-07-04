@@ -55,15 +55,9 @@
   ],
   "users": [
     {
-<<<<<<< HEAD
-      "id": "eb56",
-      "name": "Agustin Banchi",
-      "telefono": "2244445077",
-=======
       "id": "f41f",
       "fullname": "Juan Carlos",
-      "phone": "2244445599",
->>>>>>> c903f26 (se creo dashboard para pestaña de usuarios y de reservas)
+      "phone": "2244445591",
       "email": "correo@correo.com",
       "password": "Milanga"
     }
