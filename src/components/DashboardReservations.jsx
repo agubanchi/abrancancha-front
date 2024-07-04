@@ -21,7 +21,11 @@ const DashboardReservations = ({ reserva, removeReservation, handleEdit }) => {
         <td className="content-start w-40">{reserva.cancha}</td>
         <td className="content-start w-40">{reserva.tipo}</td>
         <td className="content-start w-40">{reserva.date}</td>
+<<<<<<< HEAD
         <td className="content-start w-40">{reserva.hour}</td>
+=======
+        <td className="content-start w-40">{reserva.state}</td>
+>>>>>>> c903f26 (se creo dashboard para pestaña de usuarios y de reservas)
         <td className='flex justify-around py-2 gap-2 items-center w-40'>
           <FaEdit className="cursor-pointer" onClick={handleOpenModal} />
           <MdDelete className="cursor-pointer" onClick={() => removeReservation(reserva.id)} />

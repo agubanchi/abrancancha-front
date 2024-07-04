@@ -83,7 +83,11 @@ export default function Dashboard() {
             <th className='w-40'>Cancha</th>
             <th className='w-40'>Tipo de Cancha</th>
             <th className='w-40'>Fecha</th>
+<<<<<<< HEAD
             <th className='w-40'>Hora</th>
+=======
+            <th className='w-40'>Estado</th>
+>>>>>>> c903f26 (se creo dashboard para pestaña de usuarios y de reservas)
             <th className='w-40'>Acciones</th>
           </tr>
         </thead>

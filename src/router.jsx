@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import RegisterUser from "./components/RegisterUser";
 import LoginUser from "./components/LoginUser";
+import Dashboard from "./pages/Dashboard";
 import Reservations from "./pages/Reservations"
 import Reservas from "./pages/Reservas";
 import ProtectedRoute from "./components/utils/ProtectedRoute"; // Importar ProtectedRoute
@@ -10,8 +11,8 @@ import Home from "./pages/Home";
 import Logueo from "./Layouts/Logueo";
 import PrivateRoute from "./components/utils/PrivateRoute";
 import Layout from "./Layouts/Layout";
+import Users from "./pages/Users";
 import Admins from "./pages/Admins";
-
 
 const AppRouter = () => {
   return (
@@ -29,7 +30,9 @@ const AppRouter = () => {
     </Route>
     <Route element={<Layout/>}>
     <Route path='/dashboard' element={<Dashboard/>} roles={["admin"]}/>
-    <Route path='/Admins' element={<Admins />} roles={["admin"]}/>
+    <Route path='/reservations' element={<Reservations/>} roles={["admin"]}/>
+    <Route path='/users' element={<Users/>} roles={["admin"]}/>
+    <Route path='/admins' element={<Admins/>} roles={["admin"]}/>
     </Route>
     </Route>
     
