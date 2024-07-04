@@ -7,6 +7,7 @@ import RegisterUser from './components/RegisterUser'
 import Layout from './Layouts/Layout'
 import Dashboard from './pages/Dashboard'
 import ProtectedRoute from './components/utils/ProtectedRoute'
+import ListadoAdmins from './pages/ListadoAdmins'
 import { useLocalStorage } from 'react-use'
 
 
@@ -21,10 +22,11 @@ export default function AppRouter() {
     <Route path='/' element={<Home/>} index/>
     <Route element={<Logueo/>}>
     <Route path='/login' element={<LoginUser />} />
-          <Route path='/registrar' element={<RegisterUser />} />
+    <Route path='/registrar' element={<RegisterUser />} />
     <Route element={<ProtectedRoute userActived={user}/>}>
     <Route path='/reservas' element={<Reservas/>}/>
     <Route path='/dashboard' element={<Dashboard/>}/>
+    
     </Route>
     </Route>
    </Routes>

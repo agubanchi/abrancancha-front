@@ -26,7 +26,11 @@ const HeaderDashboard = () => {
             <div className='w-3/4 items-center gap-6 text-center flex justify-center'>
             <NavLink to="/canchas" className="hover:text-acentColor border px-2 py-2  border-acentColor rounded-md">Canchas</NavLink>
             <NavLink to="/reservations" className="hover:text-acentColor border px-2 py-2  border-acentColor rounded-md">Reservas</NavLink>
+<<<<<<< HEAD
             <NavLink to="/admins" className="hover:text-acentColor border px-2 py-2  border-acentColor rounded-md">Administradores</NavLink>
+=======
+            <NavLink to="/ListadoAdmins" className="hover:text-acentColor border px-2 py-2  border-acentColor rounded-md">Administradores</NavLink>
+>>>>>>> 9b447a0 (Creacion e implementacion de listadoAdmins dentro del dashboard de admins)
             <NavLink to="/users" className="hover:text-acentColor border px-2 py-2  border-acentColor rounded-md">Usuarios</NavLink>
             </div>
             <div className='gap-2 flex items-center'>
@@ -57,7 +61,7 @@ const HeaderDashboard = () => {
             <nav className='flex flex-col justify-center h-full text-white font-Bebas text-2xl' onClick={() => setOpen(false)}>
               <div className='pt-5 flex flex-col justify-center gap-6'>
                 <NavLink to="/canchas" className="hover:text-acentColor "> Canchas </NavLink>
-                <NavLink to="/reservations" className="hover:text-acentColor "> Reservas </NavLink>
+                <NavLink to="/reservations" className="hover:text-acentColor " > Reservas </NavLink>
                 <NavLink to="/admin" className="hover:text-acentColor">Administradores</NavLink>
             <NavLink to="/users" className="hover:text-acentColor">Usuarios</NavLink>
               </div>
