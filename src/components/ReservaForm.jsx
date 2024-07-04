@@ -60,12 +60,21 @@ export default function ReservaForm({ editingReservation,  onClose }) {
       setValue('tipo', editingReservation.tipo);
       setValue('date', editingReservation.date);
       setValue('hour', editingReservation.hour);
-      setPrice(precios[editingReservation.tipo] || 0);
-      
+      setPrecio(precios[editingReservation.tipo] || 0);
+      setAnticipo((precios[editingReservation.tipo] || 0) * porcentajeAnticipo);
     }
   }, [editingReservation, setValue]);
 
+  const tipoSeleccionado = watch('tipo');
   
+  useEffect(() => {
+    if (tipoSeleccionado) {
+      const nuevoPrecio = precios[tipoSeleccionado] || 0;
+      setPrecio(nuevoPrecio);
+      setAnticipo(nuevoPrecio * porcentajeAnticipo);
+    }
+  }, [tipoSeleccionado]);
+
   const onSubmit = async (data) => {
    
   
@@ -75,14 +84,16 @@ export default function ReservaForm({ editingReservation,  onClose }) {
         ? `http://localhost:3000/reservations/${editingReservation.id}`
         : 'http://localhost:3000/reservations/';
 
-        const reservationData = {
-          cancha: data.cancha,
-          tipo: data.tipo,
-          date: data.date,
-          hour: data.hour,
-          userId: editingReservation ? editingReservation.userId : currentUser.id
-        };
-  
+      const reservationData = {
+        cancha: data.cancha,
+        tipo: data.tipo,
+        date: data.date,
+        hour: data.hour,
+        userId: editingReservation ? editingReservation.userId : currentUser.id,
+        precio,
+        anticipo
+      };
+
       const response = await fetch(endpoint, {
         method,
         headers: {
@@ -266,13 +277,13 @@ export default function ReservaForm({ editingReservation,  onClose }) {
         
         <div className="mb-5">
           <label className="text-sm uppercase font-bold">
-            Precio: ${price}
+            Precio: ${precio}
           </label>
         </div>
 
         <div className="mb-5">
           <label className="text-sm uppercase font-bold">
-            Seña/Anticipo: ${price * porcentajeAnticipo}
+            Seña/Anticipo: ${anticipo}
           </label>
         </div>
 
