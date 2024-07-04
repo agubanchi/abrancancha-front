@@ -10,13 +10,8 @@ import Home from "./pages/Home";
 import Logueo from "./Layouts/Logueo";
 import PrivateRoute from "./components/utils/PrivateRoute";
 import Layout from "./Layouts/Layout";
-<<<<<<< HEAD
-import Users from "./pages/Users";
 import Admins from "./pages/Admins";
-import Canchas from "./pages/Canchas";
-=======
-import ListadoAdmins from "./pages/ListadoAdmins";
->>>>>>> 9b447a0 (Creacion e implementacion de listadoAdmins dentro del dashboard de admins)
+
 
 const AppRouter = () => {
   return (
@@ -33,15 +28,8 @@ const AppRouter = () => {
     <Route path='/reservas' element={<Reservas/>} roles={["user"]}/>
     </Route>
     <Route element={<Layout/>}>
-<<<<<<< HEAD
-    <Route path='/canchas' element={<Canchas/>} roles={["admin"]}/>
-    <Route path='/reservations' element={<Reservations/>} roles={["admin"]}/>
-    <Route path='/users' element={<Users/>} roles={["admin"]}/>
-    <Route path='/admins' element={<Admins/>} roles={["admin"]}/>
-=======
     <Route path='/dashboard' element={<Dashboard/>} roles={["admin"]}/>
-    <Route path='/ListadoAdmins' element={<ListadoAdmins />} roles={["admin"]}/>
->>>>>>> 9b447a0 (Creacion e implementacion de listadoAdmins dentro del dashboard de admins)
+    <Route path='/Admins' element={<Admins />} roles={["admin"]}/>
     </Route>
     </Route>
     
