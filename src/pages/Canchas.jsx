@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import DashboardReservations from '../components/DashboardReservations';
 import { useAuth } from '../context/AuthContext';
 import Swal from 'sweetalert2';
 import Modal from '../components/Modal';
+import DashboardCanchas from '../components/DashboardCanchas';
 
-export default function Dashboard() {
+export default function Canchas() {
   const { reservations, setReservations } = useAuth();
   const [editingReservation, setEditingReservation] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -68,6 +68,7 @@ export default function Dashboard() {
     setShowModal(false);
     setEditingReservation(null);
   };
+  
 
   return (
     <>
@@ -77,19 +78,16 @@ export default function Dashboard() {
       <table className="w-full h-screen">
         <thead>
           <tr className='text-center text-white flex justify-between gap-2 w-full bg-acentColor px-4'>
-          <th className='w-40'>Nombre y Apellido</th>
-            <th className='w-40'>Email</th>
-            <th className='w-40'>Teléfono</th>
             <th className='w-40'>Cancha</th>
             <th className='w-40'>Tipo de Cancha</th>
-            <th className='w-40'>Fecha</th>
-            <th className='w-40'>Hora</th>
+            <th className='w-40'>Tarfia</th>
+            <th className='w-40'>Observaciones</th>
             <th className='w-40'>Acciones</th>
           </tr>
         </thead>
         <tbody>
           {reservations.map((reserva) => (
-            <DashboardReservations key={reserva.id} reserva={reserva} removeReservation={removeReservation} handleEdit={handleEdit} />
+            <DashboardCanchas key={reserva.id} reserva={reserva} removeReservation={removeReservation} handleEdit={handleEdit} />
           ))}
         </tbody>
       </table>

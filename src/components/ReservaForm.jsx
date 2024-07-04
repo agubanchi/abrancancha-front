@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
 import Error from "./Error";
 import { useEffect, useState } from "react";
-import { useAuth } from "../context/AuthContext"; 
+import { useAuth } from "../context/AuthContext";
 
-export default function ReservaForm({ editingReservation,setEditingReservation, onClose }) {
+export default function ReservaForm({ editingReservation, setEditingReservation, onClose }) {
   const { register, handleSubmit, setValue, formState: { errors }, reset, watch } = useForm();
   const { currentUser, reservations, setReservations } = useAuth();
   const today = new Date();
@@ -11,13 +11,21 @@ export default function ReservaForm({ editingReservation,setEditingReservation, 
   maxDate.setDate(today.getDate() + 7);
 
   const [price, setPrice] = useState(0);
-
+  const [observations, setObservations] = useState("");
 
   const precios = {
     'Futbol 5': 20000,
     'Futbol 7': 32000,
     'Futbol 9': 40000,
     'Futbol 11': 48000
+  };
+
+  const observaciones = {
+    'Cancha 1': 'Cancha al Aire Libre, Hierba',
+    'Cancha 2': 'Cancha cubierta',
+    'Cancha 3': 'Cancha con cesped sintético',
+    'Cancha 4': 'Cancha Iluminación Nocturna',
+    'Cancha 5': 'Cancha al aire libre, Cesped Sintético'
   };
 
   const porcentajeAnticipo = 0.3;
@@ -29,7 +37,7 @@ export default function ReservaForm({ editingReservation,setEditingReservation, 
       setValue('date', editingReservation.date);
       setValue('hour', editingReservation.hour);
       setPrice(precios[editingReservation.tipo] || 0);
-      
+      setObservations(observaciones[editingReservation.cancha] || "");
     }
   }, [editingReservation, setValue]);
 
@@ -39,9 +47,17 @@ export default function ReservaForm({ editingReservation,setEditingReservation, 
     if (tipoSeleccionado) {
       const nuevoPrecio = precios[tipoSeleccionado] || 0;
       setPrice(nuevoPrecio);
-
     }
   }, [tipoSeleccionado]);
+
+  const canchaSeleccionada = watch('cancha');
+  
+  useEffect(() => {
+    if (canchaSeleccionada) {
+      const nuevaObservacion = observaciones[canchaSeleccionada] || "";
+      setObservations(nuevaObservacion);
+    }
+  }, [canchaSeleccionada]);
 
   const onSubmit = async (data) => {
     try {
@@ -56,7 +72,8 @@ export default function ReservaForm({ editingReservation,setEditingReservation, 
         date: data.date,
         hour: data.hour,
         userId: editingReservation ? editingReservation.userId : currentUser.id,
-        price
+        price,
+        observations
       };
 
       const response = await fetch(endpoint, {
@@ -66,6 +83,7 @@ export default function ReservaForm({ editingReservation,setEditingReservation, 
         },
         body: JSON.stringify(reservationData)
       });
+
       if (!response.ok) {
         throw new Error('Error al almacenar la reserva');
       }
@@ -90,7 +108,7 @@ export default function ReservaForm({ editingReservation,setEditingReservation, 
   };
 
   return (
-    <div className="md:w-full mx-5">
+    <div className="md:w-full mx-0">
       <form
         className="bg-white shadow-md rounded-lg py-10 px-5 mb-10"
         onSubmit={handleSubmit(onSubmit)}
@@ -104,10 +122,12 @@ export default function ReservaForm({ editingReservation,setEditingReservation, 
             className="w-full p-3 rounded-md border-acentColor border-2"
             {...register("cancha", { required: "Selecciona una Cancha" })}
           >
-            <option disabled selected value=""> -- selecciona una opción -- </option>
+            <option disabled value=""> -- selecciona una opción -- </option>
             <option value="Cancha 1">Cancha 1</option>
             <option value="Cancha 2">Cancha 2</option>
             <option value="Cancha 3">Cancha 3</option>
+            <option value="Cancha 4">Cancha 4</option>
+            <option value="Cancha 5">Cancha 5</option>
           </select>
           {errors.cancha && (
             <Error>{errors.cancha?.message.toString()}</Error>
@@ -123,7 +143,7 @@ export default function ReservaForm({ editingReservation,setEditingReservation, 
             className="w-full p-3 rounded-md border-acentColor border-2"
             {...register("tipo", { required: "Selecciona un Tipo de Cancha" })}
           >
-            <option disabled selected value=""> -- selecciona una opción -- </option>
+            <option disabled value=""> -- selecciona una opción -- </option>
             <option value="Futbol 5">Futbol 5</option>
             <option value="Futbol 7">Futbol 7</option>
             <option value="Futbol 9">Futbol 9</option>
@@ -162,7 +182,7 @@ export default function ReservaForm({ editingReservation,setEditingReservation, 
             className="w-full p-3 rounded-md border-acentColor border-2"
             {...register("hour", { required: "Selecciona una hora" })}
           >
-            <option disabled selected value> -- selecciona una opción -- </option>
+            <option disabled value=""> -- selecciona una opción -- </option>
             <option value="8:00">8:00hs</option>
             <option value="8:30">8:30hs</option>
             <option value="09:00">09:00hs</option>
@@ -191,6 +211,12 @@ export default function ReservaForm({ editingReservation,setEditingReservation, 
         <div className="mb-5">
           <label className="text-sm uppercase font-bold">
             Seña/Anticipo: ${price * porcentajeAnticipo}
+          </label>
+        </div>
+
+        <div className="mb-5">
+          <label className="text-sm uppercase font-bold">
+            Observaciones: {observations}
           </label>
         </div>
 

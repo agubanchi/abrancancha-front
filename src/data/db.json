@@ -64,44 +64,44 @@
   ],
   "reservations": [
     {
-      "id": "a5be",
+      "id": "c122",
+      "cancha": "Cancha 2",
+      "tipo": "Futbol 5",
+      "date": "2024-07-04",
+      "hour": "10:00",
+      "userId": "f41f",
+      "price": 20000,
+      "observations": "Cancha cubierta"
+    },
+    {
+      "id": "2c7b",
       "cancha": "Cancha 1",
-      "tipo": "Futbol 7",
+      "tipo": "Futbol 9",
       "date": "2024-07-06",
       "hour": "10:30",
-      "userId": "48e7",
-      "precio": 32000,
-      "anticipo": 9600
+      "userId": "f41f",
+      "price": 40000,
+      "observations": "Cancha al Aire Libre, Hierba"
     },
     {
-      "id": "3423",
-      "cancha": "Cancha 1",
-      "tipo": "Futbol 7",
-      "date": "2024-07-06",
-      "hour": "09:00",
-      "userId": "48e7",
-      "precio": 32000,
-      "anticipo": 9600
-    },
-    {
-      "id": "16ce",
-      "cancha": "Cancha 1",
+      "id": "5644",
+      "cancha": "Cancha 4",
       "tipo": "Futbol 5",
       "date": "2024-07-06",
-      "hour": "8:30",
-      "userId": "48e7",
-      "precio": 20000,
-      "anticipo": 6000
+      "hour": "14:00",
+      "userId": "f41f",
+      "price": 20000,
+      "observations": "Cancha Iluminación Nocturna"
     },
     {
-      "id": "bb6d",
-      "cancha": "Cancha 1",
-      "tipo": "Futbol 7",
-      "date": "2024-07-06",
-      "hour": "8:30",
-      "userId": "48e7",
-      "precio": 32000,
-      "anticipo": 9600
+      "id": "3405",
+      "cancha": "Cancha 3",
+      "tipo": "Futbol 9",
+      "date": "2024-07-03",
+      "hour": "11:30",
+      "userId": "f41f",
+      "price": 40000,
+      "observations": "Cancha con cesped sintético"
     }
   ],
   "admin": [
