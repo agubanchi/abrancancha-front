@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
-import { Endpoint, fetchAll, HttpMethod } from "../services/fetchs";
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import { Endpoint, fetchAll, HttpMethod } from '../services/fetchs';
 const AuthContext = createContext();
 
 export const useAuth = () => useContext(AuthContext);
@@ -11,12 +11,12 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(() => {
-    const user = localStorage.getItem("user");
+    const user = localStorage.getItem('user');
     return user ? JSON.parse(user) : null;
   });
 
   const [users, setUsers] = useState(() => {
-    const storedUsers = localStorage.getItem("users");
+    const storedUsers = localStorage.getItem('users');
     return storedUsers ? JSON.parse(storedUsers) : [];
   });
 
@@ -26,19 +26,41 @@ export const AuthProvider = ({ children }) => {
   });
 
   const [reservations, setReservations] = useState(() => {
-    const storedReservations = localStorage.getItem("reservations");
+    const storedReservations = localStorage.getItem('reservations');
     return storedReservations ? JSON.parse(storedReservations) : [];
   });
   const [token, setToken] = useState(() => {
-    const storedToken = localStorage.getItem("token");
+    const storedToken = localStorage.getItem('token');
     return storedToken ? JSON.parse(storedToken) : [];
   });
   // ################################################################
   const [typesOfCourt, setTypesOfCourt] = useState(() => {
-    const storedTypesOfCourt = localStorage.getItem("typesOfCourt");
+    const storedTypesOfCourt = localStorage.getItem('typesOfCourt');
     return storedTypesOfCourt ? JSON.parse(storedTypesOfCourt) : [];
   });
+  const [courts, setCourts] = useState(() => {
+    const storedCourts = localStorage.getItem('Courts');
+    return storedCourts ? JSON.parse(storedCourts) : [];
+  });
 
+  const getData = async (endPoint, setData) => {
+    try {
+      const response = await fetchGet({ endPoint: endPoint });
+      if (!response.ok) {
+        throw new Error('Error al cargar las canchas');
+      }
+      const allCanchas = await response.json();
+      const courtsMap = new Map();
+      allCanchas.forEach((tipo) => {
+        courtsMap.set(tipo.id, tipo.name);
+      });
+      setData(courtsMap);
+      // setCourts(courtsMap);
+      // setCache(prev => ({ ...prev, tiposCancha: tiposMap }));
+    } catch (error) {
+      console.log(error); /* alert("ojo") */ /* err = setError(err) */
+    }
+  };
   // const getTiposCancha = async () => {
   //   try {
   //     const response = await fetchGet({endPoint: Endpoint.typesOfCourt});
@@ -56,14 +78,22 @@ export const AuthProvider = ({ children }) => {
   // }
 
   // useEffect(() => {
-  //   getTiposCancha()
+  //   // getData(Endpoint.courts,setCourts);
+  //   // getData(Endpoint.typesOfCourt,setTypesOfCourt);
+  //   // getData(Endpoint.statusOfCourt,setStatusOfCourt);
+  //   // getData(Endpoint.statusOfReservation,setStatusOfReservation);
+  //   // getData(Endpoint.statusOfUser,setStatusOfUser);
+  //   // getData(Endpoint.timetables,setTimetables);
+  //   // getData(Endpoint.schedules,setSchedules);
+  //   // getData(Endpoint.exeptionTimeDate,setExeptionTimeDate);
+  //   // getTiposCancha()
   // }, [])
   // ################################################################
   // const [dbHandler, setDbHandler] = useState(() => {
   //   const storedToken = localStorage.getItem('token');
   //   return storedToken ? JSON.parse(storedToken) : [];
   // });
-    // const [loginUser, fetchLogin] = useState(""); //<-esta la puse yo: mario
+  // const [loginUser, fetchLogin] = useState(""); //<-esta la puse yo: mario
   // const {fetchCreate} = useFetch(Endpoint.login); //<-esta la puse yo: mario
 
   useEffect(() => {
@@ -73,15 +103,15 @@ export const AuthProvider = ({ children }) => {
   }, [reservations, users, typesOfCourt]);
 
   const login = (userData, token) => {
-    localStorage.setItem("user", JSON.stringify(userData));
+    localStorage.setItem('user', JSON.stringify(userData));
     setCurrentUser(userData);
     setToken(token);
     setUsers((prevUsers) => [...prevUsers, userData]);
   };
 
   const logout = () => {
-    localStorage.removeItem("user");
-    localStorage.removeItem("token");
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
     setCurrentUser(null);
     setToken(null);
   };

@@ -63,7 +63,7 @@ export default function RegisterUser() {
     }
   };
 
-  const mensaje = "Crear Usuario";
+  const mensaje = 'Crear Usuario';
 
   return (
     <div className="flex items-center justify-center h-screen px-5">
@@ -81,21 +81,19 @@ export default function RegisterUser() {
               className="w-full p-3 rounded-md border-acentColor border-2"
               type="text"
               placeholder="Nombre completo"
-              {...register("fullname", {
-                required: "El Nombre de usuario es Obligatorio",
+              {...register('fullname', {
+                required: 'El Nombre de usuario es Obligatorio',
                 pattern: {
                   value: /^[a-zA-Z]{2,40}( [a-zA-Z]{2,40})+$/,
-                  message: "El Nombre de usuario no es correcto",
-                  message: "El Nombre de usuario no es correcto",
+                  message: 'El Nombre de usuario no es correcto',
                 },
                 minLength: {
                   value: 4,
-                  message: "Mínimo 4 caracteres",
-                  message: "Mínimo 4 caracteres",
+                  message: 'Mínimo 4 caracteres',
                 },
                 maxLength: {
                   value: 45,
-                  message: "Máximo 45 caracteres",
+                  message: 'Máximo 45 caracteres',
                 },
                   message: "Máximo 45 caracteres",
                 },
@@ -112,12 +110,12 @@ export default function RegisterUser() {
               className="w-full p-3 rounded-md border-acentColor border-2"
               type="tel"
               placeholder="Teléfono"
-              {...register("phone", {
-                required: "El Número de teléfono es Obligatorio",
+              {...register('phone', {
+                required: 'El Número de teléfono es Obligatorio',
                 pattern: {
                   value:
                     /^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$/,
-                  message: "Teléfono No Válido",
+                  message: 'Teléfono No Válido',
                 },
               })}
             />
@@ -134,11 +132,11 @@ export default function RegisterUser() {
               className="w-full p-3 rounded-md border-acentColor border-2"
               type="email"
               placeholder="Email"
-              {...register("email", {
-                required: "El Email es Obligatorio",
+              {...register('email', {
+                required: 'El Email es Obligatorio',
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: "Email no válido",
+                  message: 'Email no válido',
                 },
               })}
             />
@@ -153,8 +151,8 @@ export default function RegisterUser() {
               className="w-full p-3 rounded-md border-acentColor border-2"
               type="password"
               placeholder="Contraseña"
-              {...register("password", {
-                required: "La contraseña es Obligatoria",
+              {...register('password', {
+                required: 'La contraseña es Obligatoria',
               })}
             />
           </div>
@@ -170,7 +168,7 @@ export default function RegisterUser() {
           </div>
 
           <div className="text-center py-4">
-            ¿Ya tienes una cuenta?{" "}
+            ¿Ya tienes una cuenta?{' '}
             <a className="text-ms border-b-2 border-acentColor" href="/login">
               Iniciar Sesión
             </a>

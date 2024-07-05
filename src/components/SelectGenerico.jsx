@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { useAuth } from "../context/AuthContext";
+import React, { useState, useEffect } from 'react';
+import { useAuth } from '../context/AuthContext';
 
-const SelectGenerico = ({endPoint}) => {
+const SelectGenerico = ({ endPoint }) => {
   const { fetchGet } = useAuth();
   const [data, setData] = useState([]);
   //-------------------------------------------------------------------------
@@ -10,19 +10,19 @@ const SelectGenerico = ({endPoint}) => {
       const response = await fetchGet({ endPoint: endPoint });
       const allData = await response.json();
       allData.sort((a, b) => a.name.localeCompare(b.name));
-    //   allData.sort((a, b) => {
-    //     if (a.name < b.name) return -1;
-    //     else if (a.name > b.name) return 1;
-    //     else return 0;
-    //   });
+      //   allData.sort((a, b) => {
+      //     if (a.name < b.name) return -1;
+      //     else if (a.name > b.name) return 1;
+      //     else return 0;
+      //   });
       //------------------------------------------------------------------------------
-    //   export const arrayToMap = async (array) => {
-    //     const newMap = new Map();
-    //     array.forEach((row) => {
-    //       newMap.set(row.id, row);
-    //     });
-    //     return newMap;
-    //   };
+      //   export const arrayToMap = async (array) => {
+      //     const newMap = new Map();
+      //     array.forEach((row) => {
+      //       newMap.set(row.id, row);
+      //     });
+      //     return newMap;
+      //   };
       //------------------------------------------------------------------------------
       setData(allData);
     } catch (error) {

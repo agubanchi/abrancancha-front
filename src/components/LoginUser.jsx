@@ -8,7 +8,7 @@ import { useAuth } from "../context/AuthContext";
 import { Endpoint } from "../services/fetchs";
 export default function LoginUser() {
   const { login, fetchCreate } = useAuth();
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState('');
 
   const {
     register,
@@ -64,11 +64,11 @@ export default function LoginUser() {
               className="w-full p-3 rounded-md border-acentColor border-2"
               type="email"
               placeholder="Email"
-              {...register("email", {
-                required: "El Email es Obligatorio",
+              {...register('email', {
+                required: 'El Email es Obligatorio',
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: "Email no válido",
+                  message: 'Email no válido',
                 },
               })}
             />
@@ -82,8 +82,8 @@ export default function LoginUser() {
               className="w-full p-3 rounded-md border-acentColor border-2"
               type="password"
               placeholder="Contraseña"
-              {...register("password", {
-                required: "La contraseña es Obligatoria",
+              {...register('password', {
+                required: 'La contraseña es Obligatoria',
               })}
             />
           </div>
@@ -100,7 +100,7 @@ export default function LoginUser() {
             </a>
           </div>
           <div className="text-center py-2">
-            ¿No estás registrado?{" "}
+            ¿No estás registrado?{' '}
             <a
               className="text-ms border-b-2 border-acentColor"
               href="/registrar"

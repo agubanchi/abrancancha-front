@@ -1,37 +1,38 @@
 // const BASE_API_URL="https://abrancancha-backend-type-orm.vercel.app"
-const BASE_API_URL =
-  "https://abrancancha-backend-type-orm-elmarito-marios-projects-4e74595b.vercel.app/api"; // api funcionando
+const BASE_API_URL = 'http://localhost:3000';
+// const BASE_API_URL =
+//   "https://abrancancha-backend-type-orm-elmarito-marios-projects-4e74595b.vercel.app/api"; // api funcionando
 //------------------------------------------------------------------------------
 export enum Endpoint {
   // auth = "auth",
-  login = "auth/login",
-  register = "auth/register",
-  reset = "auth/reset",
+  login = 'auth/login',
+  register = 'auth/register',
+  reset = 'auth/reset',
 
-  club = "club",
-  exceptionsTimedate = "exception-timedate",
+  club = 'club',
+  exceptionsTimedate = 'exception-timedate',
 
-  administrators = "administrators",
-  users = "users",
-  statusOfUser = "status-of-user",
+  administrators = 'administrators',
+  users = 'users',
+  statusOfUser = 'status-of-user',
 
-  courts = "courts",
-  typesOfCourt = "type-of-court",
-  timetables = "timetables",
-  schedules = "schedules",
-  tariffs = "tariffs",
-  statusOfCourt = "status-of-court",
+  courts = 'courts',
+  typesOfCourt = 'type-of-court',
+  timetables = 'timetables',
+  schedules = 'schedules',
+  tariffs = 'tariffs',
+  statusOfCourt = 'status-of-court',
 
-  reservations = "reservations",
-  statusOfReservation = "status-of-reservation",
+  reservations = 'reservations',
+  statusOfReservation = 'status-of-reservation',
 }
 //------------------------------------------------------------------------------
 export enum HttpMethod {
-  GET = "GET",
-  POST = "POST",
-  PUT = "PUT",
-  PATCH = "PATCH",
-  DELETE = "DELETE",
+  GET = 'GET',
+  POST = 'POST',
+  PUT = 'PUT',
+  PATCH = 'PATCH',
+  DELETE = 'DELETE',
 }
 
 type IdData = number;
@@ -65,16 +66,16 @@ type FetchParams = GETParams | POSTParams | PATCHParams | DELETEParams;
 //)  & {token: string};
 //-----------------------------------------------------------------------------
 export const fetchAll = async (params: FetchParams): Promise<Response> => {
-  const data = params["data"];
-  const idData = params["idData"];
-  const baseUrl = params["baseUrl"] ?? BASE_API_URL;
+  const data = params['data'];
+  const idData = params['idData'];
+  const baseUrl = params['baseUrl'] ?? BASE_API_URL;
   const staticURL = `${baseUrl}/${params.endPoint}${
-    idData ? "/" + idData : ""
+    idData ? '/' + idData : ''
   }`;
   const fetchinit = {
     method: params.method,
     headers: {
-      ...(data && { "Content-Type": "application/json" }),
+      ...(data && { 'Content-Type': 'application/json' }),
       ...(params.token && { Authorization: `Bearer ${params.token}` }),
     },
     // body: JSON.stringify(data === undefined ? {} : data),

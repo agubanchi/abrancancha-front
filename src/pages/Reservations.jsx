@@ -41,7 +41,7 @@ export default function Reservations() {
       confirmButtonColor: '#77da7e',
       cancelButtonColor: '#1d1d1d',
       confirmButtonText: 'Sí, eliminar',
-      cancelButtonText: 'Cancelar'
+      cancelButtonText: 'Cancelar',
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
@@ -97,11 +97,22 @@ export default function Reservations() {
         </thead>
         <tbody>
           {reservations.map((reserva) => (
-            <DashboardReservations key={reserva.id} reserva={reserva} removeReservation={removeReservation} handleEdit={handleEdit} />
+            <DashboardReservations
+              key={reserva.id}
+              reserva={reserva}
+              removeReservation={removeReservation}
+              handleEdit={handleEdit}
+            />
           ))}
         </tbody>
       </table>
-      {showModal && <Modal visible={showModal} onClose={handleCloseModal} editingReservation={editingReservation} />}
+      {showModal && (
+        <Modal
+          visible={showModal}
+          onClose={handleCloseModal}
+          editingReservation={editingReservation}
+        />
+      )}
     </>
   );
 }

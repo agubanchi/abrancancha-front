@@ -54,7 +54,9 @@ export default function ListadoReservas({ onEdit }) {
         </>
       ) : (
         <>
-          <h2 className="font-black text-3xl text-center text-acentColor">No hay Reservas</h2>
+          <h2 className="font-black text-3xl text-center text-acentColor">
+            No hay Reservas
+          </h2>
           <p className="text-xl mt-5 mb-10 text-center text-white">
             Comienza agregando tu Reserva{' '}
             <span className="text-acentColor font-bold">y la verás aquí</span>

@@ -22,10 +22,27 @@ function dateFormatToYMD(fechaString) {
 }
 
 
-export default function ReservaForm({ editingReservation, setEditingReservation, onClose }) {
-  const { register, handleSubmit, setValue, formState: { errors }, reset, watch } = useForm();
+export default function ReservaForm({
+  editingReservation,
+  setEditingReservation,
+  onClose,
+}) {
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+    reset,
+    watch,
+  } = useForm();
 
-  const { currentUser, reservations, setReservations, fetchCreate, fetchUpdate } = useAuth();
+  const {
+    currentUser,
+    reservations,
+    setReservations,
+    fetchCreate,
+    fetchUpdate,
+  } = useAuth();
   const today = new Date();
   const maxDate = new Date(today);
   maxDate.setDate(today.getDate() + 7);
@@ -69,7 +86,15 @@ export default function ReservaForm({ editingReservation, setEditingReservation,
     'Futbol 5': 20000,
     'Futbol 7': 32000,
     'Futbol 9': 40000,
-    'Futbol 11': 48000
+    'Futbol 11': 48000,
+  };
+
+  const observaciones = {
+    'Cancha 1': 'Cancha al Aire Libre, Hierba',
+    'Cancha 2': 'Cancha cubierta',
+    'Cancha 3': 'Cancha con cesped sintético',
+    'Cancha 4': 'Cancha Iluminación Nocturna',
+    'Cancha 5': 'Cancha al aire libre, Cesped Sintético'
   };
 
   const observaciones = {
@@ -94,7 +119,7 @@ export default function ReservaForm({ editingReservation, setEditingReservation,
   }, [editingReservation, setValue]);
 
   const tipoSeleccionado = watch('tipo');
-  
+
   useEffect(() => {
     if (tipoSeleccionado) {
       const nuevoPrecio = precios[tipoSeleccionado] || 0;
@@ -138,7 +163,7 @@ export default function ReservaForm({ editingReservation, setEditingReservation,
       });
 
       if (!response.ok) {
-        throw new ErrorComp("Error al almacenar la reserva");
+        throw new ErrorComp('Error al almacenar la reserva');
       }
 
       const updatedReservation = await response.json();
@@ -207,7 +232,7 @@ export default function ReservaForm({ editingReservation, setEditingReservation,
           <select
             id="cancha"
             className="w-full p-3 rounded-md border-acentColor border-2"
-            {...register("cancha", { required: "Selecciona una Cancha" })}
+            {...register('cancha', { required: 'Selecciona una Cancha' })}
           >
             <option disabled value=""> -- selecciona una opción -- </option>
             <option value="Cancha 1">Cancha 1</option>
@@ -216,7 +241,9 @@ export default function ReservaForm({ editingReservation, setEditingReservation,
             <option value="Cancha 4">Cancha 4</option>
             <option value="Cancha 5">Cancha 5</option>
           </select>
-          {errors.cancha && <ErrorComp>{errors.cancha?.message.toString()}</ErrorComp>}
+          {errors.cancha && (
+            <ErrorComp>{errors.cancha?.message.toString()}</ErrorComp>
+          )}
         </div>
 
         <div className="mb-5">
@@ -228,12 +255,12 @@ export default function ReservaForm({ editingReservation, setEditingReservation,
                   {...register("cancha", { required: "Selecciona un Tipo de Cancha" })}>
                   <option disabled value=" ">              {" "}              -- selecciona una opción --{" "}            </option>
                   {/* <option value={0} > Elige Deporte </option> */}
-                  {/* <SelectGenerico endPoint={Endpoint.typesOfCourt} />
-                </select>    */} 
+          {/* <SelectGenerico endPoint={Endpoint.typesOfCourt} />
+                </select>    */}
           <select
             id="tipo"
             className="w-full p-3 rounded-md border-acentColor border-2"
-            {...register("tipo", { required: "Selecciona un Tipo de Cancha" })}
+            {...register('tipo', { required: 'Selecciona un Tipo de Cancha' })}
           >
             <option disabled value=""> -- selecciona una opción -- </option>
             <option value="Futbol 5">Futbol 5</option>
@@ -241,7 +268,9 @@ export default function ReservaForm({ editingReservation, setEditingReservation,
             <option value="Futbol 9">Futbol 9</option>
             <option value="Futbol 11">Futbol 11</option>
           </select>
-          {errors.tipo && <ErrorComp>{errors.tipo?.message.toString()}</ErrorComp>}
+          {errors.tipo && (
+            <ErrorComp>{errors.tipo?.message.toString()}</ErrorComp>
+          )}
         </div>
 
         <div className="mb-5">
@@ -252,13 +281,15 @@ export default function ReservaForm({ editingReservation, setEditingReservation,
             id="date"
             className="w-full p-3 rounded-md border-acentColor border-2"
             type="date"
-            min={new Date().toISOString().split("T")[0]}
-            max={maxDate.toISOString().split("T")[0]}
-            {...register("date", {
-              required: "La fecha es Obligatoria",
+            min={new Date().toISOString().split('T')[0]}
+            max={maxDate.toISOString().split('T')[0]}
+            {...register('date', {
+              required: 'La fecha es Obligatoria',
             })}
           />
-          {errors.date && <ErrorComp>{errors.date?.message.toString()}</ErrorComp>}
+          {errors.date && (
+            <ErrorComp>{errors.date?.message.toString()}</ErrorComp>
+          )}
         </div>
 
         <div className="mb-5">
@@ -268,7 +299,7 @@ export default function ReservaForm({ editingReservation, setEditingReservation,
           <select
             id="hour"
             className="w-full p-3 rounded-md border-acentColor border-2"
-            {...register("hour", { required: "Selecciona una hora" })}
+            {...register('hour', { required: 'Selecciona una hora' })}
           >
             <option disabled value=""> -- selecciona una opción -- </option>
             <option value="08:00">08:00hs</option>

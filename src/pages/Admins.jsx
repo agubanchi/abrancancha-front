@@ -34,7 +34,7 @@ export default function Admins() {
       confirmButtonColor: '#77da7e',
       cancelButtonColor: '#1d1d1d',
       confirmButtonText: 'Sí, eliminar',
-      cancelButtonText: 'Cancelar'
+      cancelButtonText: 'Cancelar',
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
@@ -45,8 +45,12 @@ export default function Admins() {
           setUsers(prevUsers => prevUsers.filter(user => user.id !== id));
           Swal.fire('Eliminado!', 'El usuario ha sido eliminado.', 'success');
         } catch (error) {
-          console.error("Error al eliminar el usuario:", error);
-          Swal.fire('Error', 'Hubo un problema al eliminar el usuario.', 'error');
+          console.error('Error al eliminar el usuario:', error);
+          Swal.fire(
+            'Error',
+            'Hubo un problema al eliminar el usuario.',
+            'error'
+          );
         }
       }
     });
@@ -58,10 +62,16 @@ export default function Admins() {
       if (!response.ok) {
         throw new Error('Error al editar el usuario');
       }
-      setUsers(prevUsers => prevUsers.map(u => (u.id === user.id ? user : u)));
-      Swal.fire('Usuario editado', 'El usuario fue editado con éxito', 'success');
+      setUsers((prevUsers) =>
+        prevUsers.map((u) => (u.id === user.id ? user : u))
+      );
+      Swal.fire(
+        'Usuario editado',
+        'El usuario fue editado con éxito',
+        'success'
+      );
     } catch (error) {
-      console.error("Error al editar el usuario:", error);
+      console.error('Error al editar el usuario:', error);
       Swal.fire('Error', 'Hubo un problema al editar el usuario.', 'error');
     }
     setEditingUser(null);
