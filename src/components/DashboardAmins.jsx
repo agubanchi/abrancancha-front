@@ -2,13 +2,13 @@ import { FaEdit, FaCheckSquare } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { ImCancelCircle } from "react-icons/im";
 
-const DashboardUsers = ({ user, removeUser, handleEdit, editingUser, setEditingUser, updateUser, cancelEdit }) => {
+const DashboardAdmins = ({ user, removeUser, handleEdit, editingUser, setEditingUser, updateUser, cancelEdit }) => {
   const isEditing = editingUser && editingUser.id === user.id;
 
   return (
     <tr className='text-center text-white flex justify-between gap-2 w-full px-4 py-2 items-center'>
       <td className="content-start w-40">{user.id}</td>
-      <td className="content-start w-40"><img className="w-full max-w-20 rounded-lg items-center justify-center" src={user.avatar} alt={user.fullname} /></td>
+      <td className="content-start w-20"><img className="w-full max-w-20 rounded-lg items-center justify-center" src={user.avatar} alt={user.fullname} /></td>
      <td className='w-40'>
         {isEditing ? (
           <input
@@ -62,4 +62,4 @@ const DashboardUsers = ({ user, removeUser, handleEdit, editingUser, setEditingU
   );
 };
 
-export default DashboardUsers;
+export default DashboardAdmins;
