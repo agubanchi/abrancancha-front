@@ -53,6 +53,7 @@
       "url": "./gallery/img13.jpg"
     }
   ],
+<<<<<<< HEAD
   "users": [
     {
       "id": "f41f",
@@ -82,15 +83,23 @@
       "price": 40000
     }
   ],
+=======
+  "users": [],
+  "reservations": [],
+>>>>>>> 19c4bf2f39701bcf228dd5ebd271c0c22d8e08cf
   "admin": [
     {
       "role": "admin",
+      "fullname": "Agustin Banchi",
+      "phone": "2244445077",
       "email": "admin@abrancancha.com",
       "password": "ab1234",
-      "id": "8aca"
+      "id": "9543"
     },
     {
       "role": "admin",
+      "fullname": "Agustin Banchi",
+      "phone": "2244445077",
       "email": "admin@correo.com",
       "password": "admin123",
       "id": "8aca"

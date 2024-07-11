@@ -2,6 +2,24 @@ import { useForm } from "react-hook-form";
 import Error from "./Error";
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
+import { Endpoint, HttpMethod, fetchAll } from "../services/fetchs"; // Asegúrate de que las rutas sean correctas
+
+// Función para combinar fecha y hora
+export function combinarFechaYHora(fechaString, horaString) {
+  const [año, mes, dia] = fechaString.split('-').map(Number); // Formato YYYY-MM-DD
+  const [hora, minuto] = horaString.split(':').map(Number);
+  return new Date(año, mes - 1, dia, hora, minuto); // El mes en JavaScript se cuenta desde 0 (enero = 0, febrero = 1, ...)
+}
+
+// Función para formatear la fecha en YYYY-MM-DD
+function dateFormatToYMD(fechaString) {
+  let [dia, mes, año] = fechaString.split(/[-\/]/); // Permitir tanto '-' como '/' como separadores
+  // Asegurar que el mes y el día tengan dos dígitos (agregar ceros a la izquierda si es necesario)
+  mes = mes.padStart(2, '0');
+  dia = dia.padStart(2, '0');
+  return `${año}-${mes}-${dia}`;
+}
+
 
 export default function ReservaForm({ editingReservation,  onClose }) {
   const { register, handleSubmit, setValue, formState: { errors }, reset } = useForm();
@@ -34,10 +52,10 @@ export default function ReservaForm({ editingReservation,  onClose }) {
     if (editingReservation) {
       setValue('cancha', editingReservation.cancha);
       setValue('tipo', editingReservation.tipo);
-      setValue('date', editingReservation.date);
-      setValue('hour', editingReservation.hour);
-      setPrecio(precios[editingReservation.tipo] || 0);
-      setAnticipo((precios[editingReservation.tipo] || 0) * porcentajeAnticipo);
+      setValue('date', editingReservation.date.split('T')[0]); // Extract only date part
+      setValue('hour', editingReservation.date.split('T')[1].slice(0, 5)); // Extract only time part
+      setPrice(precios[editingReservation.tipo] || 0);
+      setObservations(observaciones[editingReservation.cancha] || "");
     }
   }, [editingReservation, setValue]);
 
@@ -55,10 +73,13 @@ export default function ReservaForm({ editingReservation,  onClose }) {
    
   
     try {
-      const method = editingReservation ? 'PATCH' : 'POST';
-      const endpoint = editingReservation 
-        ? `http://localhost:3000/reservations/${editingReservation.id}`
-        : 'http://localhost:3000/reservations/';
+      const method = editingReservation ? HttpMethod.PATCH : HttpMethod.POST;
+      const endpoint = Endpoint.reservations;
+      const idData = editingReservation ? editingReservation.id : undefined;
+
+      // Combina fecha y hora
+      const combinedDateTime = combinarFechaYHora(data.date, data.hour);
+      const formattedDate = combinedDateTime.toISOString();
 
       const reservationData = {
         cancha: data.cancha,
@@ -66,16 +87,15 @@ export default function ReservaForm({ editingReservation,  onClose }) {
         date: data.date,
         hour: data.hour,
         userId: editingReservation ? editingReservation.userId : currentUser.id,
-        precio,
-        anticipo
+        price,
+        observations
       };
 
-      const response = await fetch(endpoint, {
+      const response = await fetchAll({
         method,
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(reservationData)
+        endPoint: endpoint,
+        idData,
+        data: reservationData,
       });
 
       if (!response.ok) {
@@ -97,6 +117,31 @@ export default function ReservaForm({ editingReservation,  onClose }) {
 
     } catch (error) {
       console.error("Error al guardar la reserva:", error);
+    }
+  };
+
+  const onDelete = async () => {
+    try {
+      const response = await fetchAll({
+        method: HttpMethod.DELETE,
+        endPoint: Endpoint.reservations,
+        idData: editingReservation.id,
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al eliminar la reserva');
+      }
+
+      setReservations(prevReservations => 
+        prevReservations.filter(reserva => reserva.id !== editingReservation.id)
+      );
+
+      reset();
+      setEditingReservation(null);
+      onClose();
+      
+    } catch (error) {
+      console.error("Error al eliminar la reserva:", error);
     }
   };
 
@@ -176,8 +221,8 @@ export default function ReservaForm({ editingReservation,  onClose }) {
             {...register("hour", { required: "Selecciona una hora" })}
           >
             <option disabled value=""> -- selecciona una opción -- </option>
-            <option value="8:00">8:00hs</option>
-            <option value="8:30">8:30hs</option>
+            <option value="08:00">08:00hs</option>
+            <option value="08:30">08:30hs</option>
             <option value="09:00">09:00hs</option>
             <option value="09:30">09:30hs</option>
             <option value="10:00">10:00hs</option>
@@ -213,6 +258,14 @@ export default function ReservaForm({ editingReservation,  onClose }) {
           value='Guardar Reserva'
         />
       </form>
+      {editingReservation && (
+        <button
+          onClick={onDelete}
+          className="bg-red-600 w-full p-3 text-textColor uppercase font-bold hover:bg-red-800 cursor-pointer transition-colors mt-3"
+        >
+          Eliminar Reserva
+        </button>
+      )}
     </div>
   );
 }
