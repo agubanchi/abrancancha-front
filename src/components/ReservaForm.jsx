@@ -1,54 +1,17 @@
 import { useForm } from "react-hook-form";
 import ErrorComp from "./Error";
 import { useEffect, useState } from "react";
-import { useAuth } from "../context/AuthContext";
-import { Endpoint, HttpMethod, fetchAll } from "../services/fetchs"; // Asegúrate de que las rutas sean correctas
+import { useAuth } from "../context/AuthContext"; 
 
-// Función para combinar fecha y hora
-export function combinarFechaYHora(fechaString, horaString) {
-  const [año, mes, dia] = fechaString.split('-').map(Number); // Formato YYYY-MM-DD
-  const [hora, minuto] = horaString.split(':').map(Number);
-  return new Date(año, mes - 1, dia, hora, minuto); // El mes en JavaScript se cuenta desde 0 (enero = 0, febrero = 1, ...)
-}
-
-// Función para formatear la fecha en YYYY-MM-DD
-function dateFormatToYMD(fechaString) {
-  let [dia, mes, año] = fechaString.split(/[-\/]/); // Permitir tanto '-' como '/' como separadores
-  // Asegurar que el mes y el día tengan dos dígitos (agregar ceros a la izquierda si es necesario)
-  mes = mes.padStart(2, '0');
-  dia = dia.padStart(2, '0');
-  return `${año}-${mes}-${dia}`;
-}
-
-
-export default function ReservaForm({
-  editingReservation,
-  setEditingReservation,
-  onClose,
-}) {
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    formState: { errors },
-    reset,
-    watch,
-  } = useForm();
-
-  const {
-    currentUser,
-    reservations,
-    setReservations,
-    fetchCreate,
-    fetchUpdate,
-    fetchDelete,
-  } = useAuth();
+export default function ReservaForm({ editingReservation,setEditingReservation, onClose }) {
+  const { register, handleSubmit, setValue, formState: { errors }, reset, watch } = useForm();
+  const { currentUser, reservations, setReservations } = useAuth();
   const today = new Date();
   const maxDate = new Date(today);
   maxDate.setDate(today.getDate() + 7);
 
   const [price, setPrice] = useState(0);
-  const [observations, setObservations] = useState("");
+
 
   // crear un estado local? o traer las canchas del contexto?
   // useEffect(() => {
@@ -89,24 +52,16 @@ export default function ReservaForm({
     'Futbol 11': 48000,
   };
 
-  const observaciones = {
-    'Cancha 1': 'Cancha al Aire Libre, Hierba',
-    'Cancha 2': 'Cancha cubierta',
-    'Cancha 3': 'Cancha con cesped sintético',
-    'Cancha 4': 'Cancha Iluminación Nocturna',
-    'Cancha 5': 'Cancha al aire libre, Cesped Sintético',
-  };
-
   const porcentajeAnticipo = 0.3;
 
   useEffect(() => {
     if (editingReservation) {
       setValue('cancha', editingReservation.cancha);
       setValue('tipo', editingReservation.tipo);
-      setValue('date', editingReservation.date.split('T')[0]); // Extract only date part
-      setValue('hour', editingReservation.date.split('T')[1].slice(0, 5)); // Extract only time part
+      setValue('date', editingReservation.date);
+      setValue('hour', editingReservation.hour);
       setPrice(precios[editingReservation.tipo] || 0);
-      setObservations(observaciones[editingReservation.cancha] || "");
+      
     }
   }, [editingReservation, setValue]);
 
@@ -116,23 +71,16 @@ export default function ReservaForm({
     if (tipoSeleccionado) {
       const nuevoPrecio = precios[tipoSeleccionado] || 0;
       setPrice(nuevoPrecio);
+
     }
   }, [tipoSeleccionado]);
 
-  const canchaSeleccionada = watch('cancha');
-  
-  useEffect(() => {
-    if (canchaSeleccionada) {
-      const nuevaObservacion = observaciones[canchaSeleccionada] || "";
-      setObservations(nuevaObservacion);
-    }
-  }, [canchaSeleccionada]);
-
   const onSubmit = async (data) => {
     try {
-      // Combina fecha y hora
-      const combinedDateTime = combinarFechaYHora(data.date, data.hour);
-      const formattedDate = combinedDateTime.toISOString();
+      const method = editingReservation ? 'PATCH' : 'POST';
+      const endpoint = editingReservation 
+        ? `http://localhost:3000/reservations/${editingReservation.id}`
+        : 'http://localhost:3000/reservations/';
 
       const reservationData = {
           // timedate: new Date(`${data.date} ${data.hour}`),
@@ -143,30 +91,19 @@ export default function ReservaForm({
           //   ...(editingReservation && {id: editingReservation}),
         cancha: data.cancha,
         tipo: data.tipo,
-        date: formattedDate,
-        idUser: editingReservation ? editingReservation.idUser : currentUser.id,
-        price,
-        idCourt: canchaSeleccionada,  // Suponiendo que tienes un campo idCourt
+        date: data.date,
+        hour: data.hour,
+        userId: editingReservation ? editingReservation.userId : currentUser.id,
+        price
       };
-      const response = editingReservation
-      ? await fetchUpdate({
-          endPoint: Endpoint.reservations,
-          data: data,
-          idData: editingReservation.id,
-        })
-      : await fetchCreate({
-          endPoint: Endpoint.reservations,
-          data: data,
-        });
-      // const method = editingReservation ? HttpMethod.PATCH : HttpMethod.POST;
-      // // const endpoint = Endpoint.reservations;
-      // const idData = editingReservation ? editingReservation.id : undefined;
-      // const response = await fetchAll({
-      //   method,
-      //   endPoint: Endpoint.reservations,
-      //   idData,
-      //   data: reservationData,
-      // });
+
+      const response = await fetch(endpoint, {
+        method,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(reservationData)
+      });
 
       if (!response.ok) {
         throw new ErrorComp('Error al almacenar la reserva');
@@ -223,7 +160,7 @@ export default function ReservaForm({
   };
 
   return (
-    <div className="md:w-full mx-0">
+    <div className="md:w-full mx-5">
       <form
         className="bg-white shadow-md rounded-lg py-10 px-5 mb-10"
         onSubmit={handleSubmit(onSubmit)}
@@ -351,12 +288,6 @@ export default function ReservaForm({
         <div className="mb-5">
           <label className="text-sm uppercase font-bold">
             Seña/Anticipo: ${price * porcentajeAnticipo}
-          </label>
-        </div>
-
-        <div className="mb-5">
-          <label className="text-sm uppercase font-bold">
-            Observaciones: {observations}
           </label>
         </div>
 
