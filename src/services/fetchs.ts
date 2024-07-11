@@ -1,7 +1,7 @@
 // const BASE_API_URL="https://abrancancha-backend-type-orm.vercel.app"
-const BASE_API_URL = 'http://localhost:3000';
-// const BASE_API_URL =
-//   "https://abrancancha-backend-type-orm-elmarito-marios-projects-4e74595b.vercel.app/api"; // api funcionando
+// const BASE_API_URL = 'http://localhost:3000';
+const BASE_API_URL =
+  "https://abrancancha-backend-type-orm-elmarito-marios-projects-4e74595b.vercel.app/api"; // api funcionando
 //------------------------------------------------------------------------------
 export enum Endpoint {
   // auth = "auth",

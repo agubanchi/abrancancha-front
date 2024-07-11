@@ -57,6 +57,7 @@
   "reservations": [],
   "admin": [
     {
+      "id": "8aca",
       "role": "admin",
       "fullname": "Agustin Banchi",
       "phone": "2244445077",
@@ -65,12 +66,13 @@
       "id": "9543"
     },
     {
+      "id": "8aca",
       "role": "admin",
       "fullname": "Agustin Banchi",
       "phone": "2244445077",
       "email": "admin@correo.com",
       "password": "admin123",
-      "id": "8aca"
+      "phone": "2244445599"
     }
   ]
 }

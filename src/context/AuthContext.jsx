@@ -1,7 +1,11 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Endpoint, fetchAll, HttpMethod } from '../services/fetchs';
 const AuthContext = createContext();
-
+export const Role = {
+  User: 'user',
+  Admin: 'admin',
+  Guest: 'guest',
+};
 export const useAuth = () => useContext(AuthContext);
 // export const useAuth = () => {
 //   const { auth } = useContext(AuthContext);

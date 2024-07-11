@@ -97,7 +97,7 @@ export default function RegisterUser() {
                 },
                   message: "Máximo 45 caracteres",
                 },
-              })}
+              )}
             />
           </div>
           {errors.fullname && <ErrorComp>{errors.fullname.message}</ErrorComp>}

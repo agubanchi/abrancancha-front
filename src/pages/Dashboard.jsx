@@ -17,7 +17,7 @@ export default function Dashboard() {
         // fetch('http://localhost:3000/reservations/')
           fetchGet({endPoint: Endpoint.reservations})
           .then((res) => res.json())
-          .then((json) => setReservations(json))
+          .then((json) => res.ok??setReservations(json))
           .catch((err) => console.error('Error fetching reservations:', err));
       }
       fetchData();

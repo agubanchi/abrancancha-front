@@ -96,7 +96,7 @@ export default function Reservations() {
           </tr>
         </thead>
         <tbody>
-          {reservations.map((reserva) => (
+          {reservations && reservations.map((reserva) => (
             <DashboardReservations
               key={reserva.id}
               reserva={reserva}
