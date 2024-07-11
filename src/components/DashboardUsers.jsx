@@ -1,7 +1,10 @@
 import { FaEdit, FaCheckSquare } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { ImCancelCircle } from "react-icons/im";
+import { ImCancelCircle } from "react-icons/im";
 
+const DashboardUsers = ({ user, removeUser, handleEdit, editingUser, setEditingUser, updateUser, cancelEdit }) => {
+  const isEditing = editingUser && editingUser.id === user.id;
 const DashboardUsers = ({ user, removeUser, handleEdit, editingUser, setEditingUser, updateUser, cancelEdit }) => {
   const isEditing = editingUser && editingUser.id === user.id;
 
@@ -61,5 +64,5 @@ const DashboardUsers = ({ user, removeUser, handleEdit, editingUser, setEditingU
     </tr>
   );
 };
-
+}
 export default DashboardUsers;

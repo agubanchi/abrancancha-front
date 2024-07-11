@@ -12,56 +12,63 @@ export default function RegisterUser() {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
 
-  const onSubmit = async (userData) => {
-    // Verificar si el email ya está registrado
-    const emailExists = users.some(user => user.email === userData.email);
+  const onSubmit = (userData) => {
+    setUsers([...users, userData]); // Establecer los datos del contacto en el state
+      // Verificar si el email ya está registrado
+      const emailExists = users.some(user => user.email === userData.email);
 
-    if (emailExists) {
-      Swal.fire({
-        title: "Error",
-        text: "El correo electrónico ya está registrado",
-        icon: "error",
-        iconColor: "#1d1d1d",
-        confirmButtonColor: "#77da7e"
-      });
-      return;
-    }
-
-    try {
-      const response = await fetchCreate({
-        endPoint: Endpoint.register,
-        data: userData
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || 'Error al registrar usuario');
+      if (emailExists) {
+        Swal.fire({
+          title: "Error",
+          text: "El correo electrónico ya está registrado",
+          icon: "error",
+          color:"#1d1d1d",
+          iconColor:"#1d1d1d",
+          confirmButtonColor:"#77da7e"
+        });
+        return;
       }
-
-      Swal.fire({
-        title: "Usuario registrado!",
-        text: "Usuario registrado exitosamente",
-        icon: "success",
-        iconColor: "#77da7e",
-        confirmButtonColor: "#77da7e"
-      });
-
-      login(userData); // Almacenar datos del usuario en el contexto
-      localStorage.setItem("user", JSON.stringify(userData)); // Almacenar datos del usuario en localStorage
-
-      // Redirigir a la vista de inicio de sesión
-      navigate('/login');
-    } catch (error) {
-      Swal.fire({
-        title: "Error",
-        text: error.message || 'Error al registrar usuario',
-        icon: "error",
-        iconColor: "#1d1d1d",
-        confirmButtonColor: "#77da7e"
-      });
+    
     }
-  };
+  //     fetch('http://localhost:3000/users', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json'
+  //       },
+  //       body: JSON.stringify(userData)
+  //     })
+  //     .then(response => {
+  //       if (!response.ok) {
+  //         return response.json().then(data => {
+  //           throw new Error(data.message || 'Error al registrar usuario');
+  //         });
+  //       }
+  //       return response.json();
+  //     })
+  //     .then(data => {
+  //       Swal.fire({
+  //         title: "Usuario registrado!",
+  //         text: "Usuario registrado exitosamente",
+  //         icon: "success",
+  //         iconColor: "#77da7e",
+  //         confirmButtonColor: "#77da7e"
+  //       });
+
+  //     login(userData); // Almacenar datos del usuario en el contexto
+  //     localStorage.setItem("user", JSON.stringify(userData)); // Almacenar datos del usuario en localStorage
+
+  //     // Redirigir a la vista de inicio de sesión
+  //     navigate('/login');
+  //   } catch (error) {
+  //     Swal.fire({
+  //       title: "Error",
+  //       text: error.message || 'Error al registrar usuario',
+  //       icon: "error",
+  //       iconColor: "#1d1d1d",
+  //       confirmButtonColor: "#77da7e"
+  //     });
+  //   }
+  // };
 
   const mensaje = 'Crear Usuario';
 
@@ -101,7 +108,7 @@ export default function RegisterUser() {
           <div className="mb-5 font-Onest font-normal flex items-center gap-2">
             <FaPhoneAlt className="w-4 text-textColor" />
             <input
-              name='phone'
+            name='phone'
               id="phone"
               className="w-full p-3 rounded-md border-acentColor border-2"
               type="tel"

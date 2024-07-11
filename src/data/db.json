@@ -53,40 +53,8 @@
       "url": "./gallery/img13.jpg"
     }
   ],
-<<<<<<< HEAD
-  "users": [
-    {
-      "id": "f41f",
-      "fullname": "Juan Carlosa",
-      "phone": "2244445591",
-      "email": "correo@correo.com",
-      "password": "Milanga"
-    }
-  ],
-  "reservations": [
-    {
-      "id": "9858",
-      "cancha": "Cancha 2",
-      "tipo": "Futbol 9",
-      "date": "2024-07-04",
-      "hour": "10:00",
-      "userId": "f41f",
-      "price": 40000
-    },
-    {
-      "id": "96ba",
-      "cancha": "Cancha 2",
-      "tipo": "Futbol 9",
-      "date": "2024-07-05",
-      "hour": "09:30",
-      "userId": "f41f",
-      "price": 40000
-    }
-  ],
-=======
   "users": [],
   "reservations": [],
->>>>>>> 19c4bf2f39701bcf228dd5ebd271c0c22d8e08cf
   "admin": [
     {
       "role": "admin",

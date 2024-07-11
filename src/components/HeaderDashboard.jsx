@@ -29,7 +29,11 @@ const HeaderDashboard = () => {
             <NavLink to="/admins" className="hover:text-acentColor border px-2 py-2  border-acentColor rounded-md">Administradores</NavLink>
             <NavLink to="/users" className="hover:text-acentColor border px-2 py-2  border-acentColor rounded-md">Usuarios</NavLink>
             </div>
+<<<<<<< HEAD
             <div className='gap-2 flex items-center'>a
+=======
+            <div className='gap-2 flex items-center'>
+>>>>>>> 90682c4dbea249fca3148bb0a70f5ec12bb9e688
               {currentUser ? (
                 <button onClick={handleLogout} className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor">Cerrar Sesión</button>
               ) : (

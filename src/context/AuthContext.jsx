@@ -45,6 +45,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const confirmReservation = (reservationId) => {
+<<<<<<< HEAD
     const updatedReservations = reservations.map(reservation => {
       if (reservation.id === reservationId) {
         return { ...reservation, statusOfReservation: 'Confirmada' };
@@ -61,10 +62,20 @@ export const AuthProvider = ({ children }) => {
       }
       return reservation;
     });
+=======
+    const updatedReservations = reservations.map(res => {
+      if (res.id === reservationId) {
+        return { ...res, status: 'confirmada' }; // Actualiza el estado de la reserva a 'confirmada'
+      }
+      return res;
+    });
+
+>>>>>>> 90682c4dbea249fca3148bb0a70f5ec12bb9e688
     setReservations(updatedReservations);
   };
 
   const removeReservation = (reservationId) => {
+<<<<<<< HEAD
     const updatedReservations = reservations.filter(reservation => reservation.id !== reservationId);
     setReservations(updatedReservations);
   };
@@ -126,6 +137,14 @@ const fetchDelete = async ({ endPoint, idData, token }) => {
 
       
     }}>
+=======
+    const updatedReservations = reservations.filter(res => res.id !== reservationId);
+    setReservations(updatedReservations);
+  };
+
+  return (
+    <AuthContext.Provider value={{ currentUser, users, setUsers, reservations, setReservations, login, logout, confirmReservation, removeReservation }}>
+>>>>>>> 90682c4dbea249fca3148bb0a70f5ec12bb9e688
       {children}
     </AuthContext.Provider>
   );

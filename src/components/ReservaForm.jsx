@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import Error from "./Error";
 import { useEffect, useState } from "react";
+<<<<<<< HEAD
 import { useAuth } from "../context/AuthContext";
 import { Endpoint, HttpMethod, fetchAll } from "../services/fetchs"; // Asegúrate de que las rutas sean correctas
 
@@ -23,6 +24,12 @@ function dateFormatToYMD(fechaString) {
 
 export default function ReservaForm({ editingReservation,  onClose }) {
   const { register, handleSubmit, setValue, formState: { errors }, reset } = useForm();
+=======
+import { useAuth } from "../context/AuthContext"; 
+
+export default function ReservaForm({ editingReservation,setEditingReservation, onClose }) {
+  const { register, handleSubmit, setValue, formState: { errors }, reset, watch } = useForm();
+>>>>>>> 90682c4dbea249fca3148bb0a70f5ec12bb9e688
   const { currentUser, reservations, setReservations } = useAuth();
   const today = new Date();
   const maxDate = new Date(today);
@@ -38,6 +45,7 @@ export default function ReservaForm({ editingReservation,  onClose }) {
     'Futbol 11': 48000
   };
 
+<<<<<<< HEAD
   const observaciones = {
     'Cancha 1': 'Cancha al Aire Libre, Hierba',
     'Cancha 2': 'Cancha cubierta',
@@ -46,16 +54,25 @@ export default function ReservaForm({ editingReservation,  onClose }) {
     'Cancha 5': 'Cancha al aire libre, Cesped Sintético'
   };
 
+=======
+>>>>>>> 90682c4dbea249fca3148bb0a70f5ec12bb9e688
   const porcentajeAnticipo = 0.3;
 
   useEffect(() => {
     if (editingReservation) {
       setValue('cancha', editingReservation.cancha);
       setValue('tipo', editingReservation.tipo);
+<<<<<<< HEAD
       setValue('date', editingReservation.date.split('T')[0]); // Extract only date part
       setValue('hour', editingReservation.date.split('T')[1].slice(0, 5)); // Extract only time part
       setPrice(precios[editingReservation.tipo] || 0);
       setObservations(observaciones[editingReservation.cancha] || "");
+=======
+      setValue('date', editingReservation.date);
+      setValue('hour', editingReservation.hour);
+      setPrice(precios[editingReservation.tipo] || 0);
+      
+>>>>>>> 90682c4dbea249fca3148bb0a70f5ec12bb9e688
     }
   }, [editingReservation, setValue]);
 
@@ -64,12 +81,18 @@ export default function ReservaForm({ editingReservation,  onClose }) {
   useEffect(() => {
     if (tipoSeleccionado) {
       const nuevoPrecio = precios[tipoSeleccionado] || 0;
+<<<<<<< HEAD
       setPrecio(nuevoPrecio);
       setAnticipo(nuevoPrecio * porcentajeAnticipo);
+=======
+      setPrice(nuevoPrecio);
+
+>>>>>>> 90682c4dbea249fca3148bb0a70f5ec12bb9e688
     }
   }, [tipoSeleccionado]);
 
   const onSubmit = async (data) => {
+<<<<<<< HEAD
    
   
     try {
@@ -80,6 +103,13 @@ export default function ReservaForm({ editingReservation,  onClose }) {
       // Combina fecha y hora
       const combinedDateTime = combinarFechaYHora(data.date, data.hour);
       const formattedDate = combinedDateTime.toISOString();
+=======
+    try {
+      const method = editingReservation ? 'PATCH' : 'POST';
+      const endpoint = editingReservation 
+        ? `http://localhost:3000/reservations/${editingReservation.id}`
+        : 'http://localhost:3000/reservations/';
+>>>>>>> 90682c4dbea249fca3148bb0a70f5ec12bb9e688
 
       const reservationData = {
         cancha: data.cancha,
@@ -87,6 +117,7 @@ export default function ReservaForm({ editingReservation,  onClose }) {
         date: data.date,
         hour: data.hour,
         userId: editingReservation ? editingReservation.userId : currentUser.id,
+<<<<<<< HEAD
         price,
         observations
       };
@@ -96,6 +127,17 @@ export default function ReservaForm({ editingReservation,  onClose }) {
         endPoint: endpoint,
         idData,
         data: reservationData,
+=======
+        price
+      };
+
+      const response = await fetch(endpoint, {
+        method,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(reservationData)
+>>>>>>> 90682c4dbea249fca3148bb0a70f5ec12bb9e688
       });
 
       if (!response.ok) {
@@ -113,6 +155,10 @@ export default function ReservaForm({ editingReservation,  onClose }) {
       });
       
       reset();
+<<<<<<< HEAD
+=======
+      setEditingReservation(null);
+>>>>>>> 90682c4dbea249fca3148bb0a70f5ec12bb9e688
       onClose();
 
     } catch (error) {
@@ -146,7 +192,11 @@ export default function ReservaForm({ editingReservation,  onClose }) {
   };
 
   return (
+<<<<<<< HEAD
     <div className="md:w-full mx-0">
+=======
+    <div className="md:w-full mx-5">
+>>>>>>> 90682c4dbea249fca3148bb0a70f5ec12bb9e688
       <form
         className="bg-white shadow-md rounded-lg py-10 px-5 mb-10"
         onSubmit={handleSubmit(onSubmit)}
@@ -242,13 +292,21 @@ export default function ReservaForm({ editingReservation,  onClose }) {
 
         <div className="mb-5">
           <label className="text-sm uppercase font-bold">
+<<<<<<< HEAD
             Precio: ${precio}
+=======
+            Precio: ${price}
+>>>>>>> 90682c4dbea249fca3148bb0a70f5ec12bb9e688
           </label>
         </div>
 
         <div className="mb-5">
           <label className="text-sm uppercase font-bold">
+<<<<<<< HEAD
             Seña/Anticipo: ${anticipo}
+=======
+            Seña/Anticipo: ${price * porcentajeAnticipo}
+>>>>>>> 90682c4dbea249fca3148bb0a70f5ec12bb9e688
           </label>
         </div>
 

@@ -41,7 +41,11 @@ export default function ListadoReservas({ onEdit }) {
   };
 
   return (
+<<<<<<< HEAD
     <div className="md:w-1/2 lg:3/5 md:h-screen overflow-y-scroll">
+=======
+    <div className="md:w-1/2 lg:3/5 md:h-screen overflow-y-scroll ">
+>>>>>>> 90682c4dbea249fca3148bb0a70f5ec12bb9e688
       {reservations.length ? (
         <>
           <h2 className="font-black text-3xl text-center text-acentColor">Listado de Reservas</h2>
