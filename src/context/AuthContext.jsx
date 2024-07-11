@@ -45,87 +45,23 @@ export const AuthProvider = ({ children }) => {
   };
 
   const confirmReservation = (reservationId) => {
-    const updatedReservations = reservations.map(reservation => {
-      if (reservation.id === reservationId) {
-        return { ...reservation, statusOfReservation: 'Confirmada' };
+    const updatedReservations = reservations.map(res => {
+      if (res.id === reservationId) {
+        return { ...res, status: 'confirmada' }; // Actualiza el estado de la reserva a 'confirmada'
       }
-      return reservation;
+      return res;
     });
-    setReservations(updatedReservations);
-  };
 
-  const cancelReservation = (reservationId) => {
-    const updatedReservations = reservations.map(reservation => {
-      if (reservation.id === reservationId) {
-        return { ...reservation, statusOfReservation: 'Cancelada' };
-      }
-      return reservation;
-    });
     setReservations(updatedReservations);
   };
 
   const removeReservation = (reservationId) => {
-    const updatedReservations = reservations.filter(reservation => reservation.id !== reservationId);
+    const updatedReservations = reservations.filter(res => res.id !== reservationId);
     setReservations(updatedReservations);
   };
 
-  const fetchGet = async ({ endPoint, idData })  =>
-  fetchAll({ endPoint, method: HttpMethod.GET, idData, token });
-//-----------------------------------------------------------------------------+
-const fetchCreate = async ({ endPoint, data, token }) => {
-  try {
-    const response = await fetchAll({ endPoint, method: HttpMethod.POST, data, token });
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || 'Error al procesar la solicitud');
-    }
-    return response;
-  } catch (error) {
-    console.error('Error al realizar la solicitud de creación:', error);
-    throw error;
-  }
-};
-//-----------------------------------------------------------------------------+
-const fetchUpdate = async ({ endPoint, idData, data })  =>
-  fetchAll({ endPoint, method: HttpMethod.PATCH, idData, data, token });
-//-----------------------------------------------------------------------------+
-const fetchDelete = async ({ endPoint, idData, token }) => {
-  try {
-    const response = await fetchAll({ endPoint, method: HttpMethod.DELETE, idData, token });
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || 'Error al procesar la solicitud de eliminación');
-    }
-    return response;
-  } catch (error) {
-    console.error('Error al realizar la solicitud de eliminación:', error);
-    throw error;
-  }
-};
-
-
-
-//
   return (
-     <AuthContext.Provider value={{
-      currentUser,
-      users,
-      setUsers,
-      token,
-      reservations,
-      setReservations,
-      login,
-      logout,
-      confirmReservation,
-      cancelReservation,
-      removeReservation,
-      fetchGet,
-      fetchCreate,
-      fetchUpdate,
-      fetchDelete
-
-      
-    }}>
+    <AuthContext.Provider value={{ currentUser, users, setUsers, reservations, setReservations, login, logout, confirmReservation, removeReservation }}>
       {children}
     </AuthContext.Provider>
   );

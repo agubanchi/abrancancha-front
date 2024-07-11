@@ -57,7 +57,7 @@ const HeaderDashboard = () => {
             <nav className='flex flex-col justify-center h-full text-white font-Bebas text-2xl' onClick={() => setOpen(false)}>
               <div className='pt-5 flex flex-col justify-center gap-6'>
                 <NavLink to="/canchas" className="hover:text-acentColor "> Canchas </NavLink>
-                <NavLink to="/reservations" className="hover:text-acentColor "> Reservas </NavLink>
+                <NavLink to="/reservations" className="hover:text-acentColor " > Reservas </NavLink>
                 <NavLink to="/admin" className="hover:text-acentColor">Administradores</NavLink>
             <NavLink to="/users" className="hover:text-acentColor">Usuarios</NavLink>
               </div>

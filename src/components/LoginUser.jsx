@@ -14,16 +14,27 @@ export default function LoginUser() {
 
   const onSubmit = async (formData) => {
     try {
-  
-      const response = await fetchCreate({
-        endPoint: Endpoint.login,
-      // data: { email: "marioepatronelli@gmail.com", password: "Ab*12345" },
-      data: formData
-      });
-      const data = await response.json();
-      if (!response.ok) {
-      
-        throw new Error(data.message);
+      const responseUsers = await fetch('http://localhost:3000/users');
+      const responseAdmins = await fetch('http://localhost:3000/admin');
+
+      if (!responseUsers.ok || !responseAdmins.ok) {
+        throw new Error('Error al obtener los usuarios o los administradores');
+      }
+
+      const users = await responseUsers.json();
+      const admins = await responseAdmins.json();
+
+      const user = users.find(user => user.email === formData.email && user.password === formData.password);
+      const admin = admins.find(admin => admin.email === formData.email && admin.password === formData.password);
+
+      if (user) {
+        login(user);
+        navigate('/reservas');
+      } else if (admin) {
+        login(admin);
+        navigate('/reservations');
+      } else {
+        throw new Error('Credenciales incorrectas');
         
       }
       login(data.user,data.token);

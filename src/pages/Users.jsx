@@ -1,29 +1,18 @@
 import { useEffect, useState } from 'react';
 import DashboardUsers from '../components/DashboardUsers';
 import { useAuth } from '../context/AuthContext';
-import { Endpoint, HttpMethod, fetchAll } from "../services/fetchs";
 import Swal from 'sweetalert2';
 
 export default function Users() {
-  const { users, setUsers, fetchGet, fetchDelete, fetchUpdate } = useAuth();
+  const { users, setUsers } = useAuth();
   const [editingUser, setEditingUser] = useState(null);
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await fetchGet({ endPoint: Endpoint.users });
-        if (!response.ok) {
-          throw new Error('Error al obtener los usuarios');
-        }
-        const data = await response.json();
-        setUsers(data);
-      } catch (error) {
-        console.error('Error fetching users:', error);
-      }
-    };
-
-    fetchUsers();
-  }, [fetchGet, setUsers]);
+    fetch('http://localhost:3000/users/')
+      .then(res => res.json())
+      .then(json => setUsers(json))
+      .catch(err => console.error('Error fetching users:', err));
+  }, [setUsers]);
 
   const removeUser = async (id) => {
     Swal.fire({
@@ -31,19 +20,34 @@ export default function Users() {
       text: 'Esta acción eliminará el usuario',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#77da7e',
+      color: "#1d1d1d",
+      iconColor: "#1d1d1d",
+      confirmButtonColor: "#77da7e",
       cancelButtonColor: '#1d1d1d',
       confirmButtonText: 'Sí, eliminar',
       cancelButtonText: 'Cancelar'
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const response = await fetchDelete({ endPoint: Endpoint.users, idData: id });
+          const response = await fetch(`http://localhost:3000/users/${id}`, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
           if (!response.ok) {
             throw new Error('Error al eliminar el usuario');
           }
           setUsers(prevUsers => prevUsers.filter(user => user.id !== id));
-          Swal.fire('Eliminado!', 'El usuario ha sido eliminado.', 'success');
+          Swal.fire({
+            title: 'Eliminado!',
+            text: 'El usuario ha sido eliminado.',
+            icon:  'success',
+            color: '#1d1d1d',
+            iconColor: "#1d1d1d",
+            confirmButtonColor: '#77da7e',
+            cancelButtonColor: '#1d1d1d',
+          });
         } catch (error) {
           console.error("Error al eliminar el usuario:", error);
           Swal.fire('Error', 'Hubo un problema al eliminar el usuario.', 'error');
@@ -54,7 +58,13 @@ export default function Users() {
 
   const updateUser = async (user) => {
     try {
-      const response = await fetchUpdate({ endPoint: Endpoint.users, idData: user.id, data: user });
+      const response = await fetch(`http://localhost:3000/users/${user.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+      });
       if (!response.ok) {
         throw new Error('Error al editar el usuario');
       }
@@ -83,8 +93,6 @@ export default function Users() {
       <table className="w-full h-screen">
         <thead>
           <tr className='text-center text-white flex justify-between gap-2 w-full bg-acentColor px-4'>
-          <th className='w-40'>ID</th>
-          <th className='w-40'>Avatar</th>
             <th className='w-40'>Nombre y Apellido</th>
             <th className='w-40'>Email</th>
             <th className='w-40'>Teléfono</th>
