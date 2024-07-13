@@ -66,7 +66,6 @@ export default function LoginUser() {
             />
           </div>
           {errors.email && <ErrorComp>{errors.email.message}</ErrorComp>}
-          {errors.email && <ErrorComp>{errors.email.message}</ErrorComp>}
           <div className="mb-5 font-Onest font-normal flex items-center gap-2">
             <FaLock className="w-4 text-textColor" />
             <input
@@ -82,20 +81,12 @@ export default function LoginUser() {
           </div>
           {errors.password && <ErrorComp>{errors.password.message}</ErrorComp>}
           {errorMessage && <ErrorComp>{errorMessage}</ErrorComp>}
-          {errors.password && <ErrorComp>{errors.password.message}</ErrorComp>}
-          {errorMessage && <ErrorComp>{errorMessage}</ErrorComp>}
           <div className="items-center justify-around text-center flex py-4 gap-2">
-            <button className="bg-textColor rounded-md text-acentColor px-6 py-3 md:text-[.9rem] font-Onest uppercase hover:bg-acentColor hover:text-textColor">
-              Iniciar Sesión
-            </button>
             <button className="bg-textColor rounded-md text-acentColor px-6 py-3 md:text-[.9rem] font-Onest uppercase hover:bg-acentColor hover:text-textColor">
               Iniciar Sesión
             </button>
           </div>
           <div className="text-center py-2">
-            <a className="text-ms border-b-2 border-acentColor" href="#">
-              ¿Olvidaste tu Contraseña?
-            </a>
             <a className="text-ms border-b-2 border-acentColor" href="#">
               ¿Olvidaste tu Contraseña?
             </a>

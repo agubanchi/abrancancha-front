@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { FaUser, FaLock, FaEnvelope, FaPhoneAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
-import Error from "./Error";
+import ErrorComp from "./Error";
 import { useAuth } from '../context/AuthContext';
 import { Endpoint } from "../services/fetchs";
 
@@ -37,7 +37,7 @@ export default function RegisterUser() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || 'Error al registrar usuario');
+        throw new ErrorComp(data.message || 'Error al registrar usuario');
       }
 
       Swal.fire({
@@ -73,9 +73,6 @@ export default function RegisterUser() {
           <h1 className="font-black text-2xl py-4 text-center text-textColor ">
             {mensaje}
           </h1>
-          <h1 className="font-black text-2xl py-4 text-center text-textColor ">
-            {mensaje}
-          </h1>
 
           <div className="mb-5 font-Onest font-normal flex items-center gap-2">
             <FaUser className="w-4 text-textColor" />
@@ -98,13 +95,11 @@ export default function RegisterUser() {
                 maxLength: {
                   value: 45,
                   message: 'Máximo 45 caracteres',
-                },
-                  message: "Máximo 45 caracteres",
+                },                  
                 },
               )}
             />
           </div>
-          {errors.fullname && <ErrorComp>{errors.fullname.message}</ErrorComp>}
           {errors.fullname && <ErrorComp>{errors.fullname.message}</ErrorComp>}
 
           <div className="mb-5 font-Onest font-normal flex items-center gap-2">
@@ -128,9 +123,6 @@ export default function RegisterUser() {
           {errors.phone && (
             <ErrorComp>{errors.phone?.message.toString()}</ErrorComp>
           )}
-          {errors.phone && (
-            <ErrorComp>{errors.phone?.message.toString()}</ErrorComp>
-          )}
 
           <div className="mb-5 font-Onest font-normal flex items-center gap-2">
             <FaEnvelope className="w-4 text-textColor" />
@@ -150,7 +142,6 @@ export default function RegisterUser() {
             />
           </div>
           {errors.email && <ErrorComp>{errors.email.message}</ErrorComp>}
-          {errors.email && <ErrorComp>{errors.email.message}</ErrorComp>}
 
           <div className="mb-5 font-Onest font-normal flex items-center gap-2">
             <FaLock className="w-4 text-textColor" />
@@ -165,7 +156,6 @@ export default function RegisterUser() {
               })}
             />
           </div>
-          {errors.password && <ErrorComp>{errors.password.message}</ErrorComp>}
           {errors.password && <ErrorComp>{errors.password.message}</ErrorComp>}
 
           <div className="items-center justify-around text-center flex py-4 gap-2">

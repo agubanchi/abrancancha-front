@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
 import ErrorComp from "./Error";
-import ErrorComp from "./Error";
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { Endpoint, HttpMethod, fetchAll } from "../services/fetchs"; // Asegúrate de que las rutas sean correctas
@@ -87,14 +86,6 @@ export default function ReservaForm({
     'Futbol 7': 32000,
     'Futbol 9': 40000,
     'Futbol 11': 48000,
-  };
-
-  const observaciones = {
-    'Cancha 1': 'Cancha al Aire Libre, Hierba',
-    'Cancha 2': 'Cancha cubierta',
-    'Cancha 3': 'Cancha con cesped sintético',
-    'Cancha 4': 'Cancha Iluminación Nocturna',
-    'Cancha 5': 'Cancha al aire libre, Cesped Sintético'
   };
 
   const observaciones = {
@@ -324,7 +315,6 @@ export default function ReservaForm({
           </select>
           {errors.hour && (
             <ErrorComp>{errors.hour?.message.toString()}</ErrorComp>
-            <ErrorComp>{errors.hour?.message.toString()}</ErrorComp>
           )}
         </div>
         
@@ -349,7 +339,6 @@ export default function ReservaForm({
         <input
           type="submit"
           className="bg-acentColor w-full p-3 text-textColor uppercase font-bold hover:bg-textColor hover:text-acentColor cursor-pointer transition-colors"
-          value="Guardar Reserva"
           value="Guardar Reserva"
         />
       </form>
