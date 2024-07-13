@@ -5,15 +5,25 @@ import Swal from 'sweetalert2';
 import { Endpoint } from '../services/fetchs';
 
 export default function Users() {
-  const { users, setUsers } = useAuth();
+  const { users, setUsers, fetchGet, fetchDelete, fetchUpdate, token } = useAuth();
   const [editingUser, setEditingUser] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:3000/users/')
-      .then(res => res.json())
-      .then(json => setUsers(json))
-      .catch(err => console.error('Error fetching users:', err));
-  }, [setUsers]);
+    const fetchUsers = async () => {
+      try {
+        const response = await fetchGet({ endPoint: Endpoint.users, token });
+        if (!response.ok) {
+          throw new Error('Error al obtener los usuarios');
+        }
+        const data = await response.json();
+        setUsers(data, token);
+      } catch (error) {
+        console.error('Error fetching users:', error);
+      }
+    };
+
+    fetchUsers();
+  }, [setUsers, token]);
 
   const removeUser = async (id) => {
     //     if (endPoint=== Endpoint.administrators){

@@ -11,12 +11,11 @@ export default function ListadoReservas({ onEdit }) {
     const fetchReservations = async () => {
       try {
         if (currentUser && currentUser.id) {
-          const response = await fetchGet({ endPoint: `${Endpoint.reservations}?userId=${currentUser.id}` });
-          // const response = await fetchAll({
-          //   method: HttpMethod.GET,
-          //   endPoint: `${Endpoint.reservations}?idUser=${currentUser.id}`, // Endpoint modificado para filtrar por userId
-          //   token: token,
-          // });
+          const response = await fetchAll({
+            method: HttpMethod.GET,
+            endPoint: `${Endpoint.reservations}?idUser=${currentUser.id}`, // Endpoint modificado para filtrar por userId
+            token: token,
+          });
 
           if (!response.ok) {
             throw new Error('Error al obtener las reservas');
@@ -33,12 +32,11 @@ export default function ListadoReservas({ onEdit }) {
     fetchReservations();
   }, [currentUser, setReservations, token]);
 
-  const removeReservation = async (id) => {
-    // Función para eliminar la reserva, similar a tu implementación actual
-  };
+
 
   const handleEditar = (id) => {
-    // Función para editar la reserva, similar a tu implementación actual
+    const reservaEdit = reservations.find(reserva => reserva.id === id);
+    onEdit(reservaEdit); // Pasar la reserva a editar al formulario
   };
 
   return (
@@ -50,7 +48,7 @@ export default function ListadoReservas({ onEdit }) {
             <span className="text-acentColor font-bold">Reservas</span>
           </p>
           {reservations.map((reserva) => (
-            <DetalleReserva key={reserva.id} reserva={reserva} removeReservation={removeReservation} handleEditar={handleEditar} />
+            <DetalleReserva key={reserva.id} reserva={reserva}  handleEditar={handleEditar} />
           ))}
         </>
       ) : (

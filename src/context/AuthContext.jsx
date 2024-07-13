@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { Endpoint, fetchAll, HttpMethod } from '../services/fetchs';
+import React, { createContext, useContext, useState, useEffect } from "react";
+import { Endpoint, fetchAll, HttpMethod } from "../services/fetchs";
+
 const AuthContext = createContext();
 export const Role = {
   User: 'user',
@@ -27,11 +28,6 @@ export const AuthProvider = ({ children }) => {
   const [users, setUsers] = useState(() => {
     const storedUsers = localStorage.getItem("users");
     return storedUsers ? JSON.parse(storedUsers) : [];
-  });
-
-  const [token, setToken] = useState(() => {
-    const storedToken = localStorage.getItem("token");
-    return storedToken;
   });
 
   const [reservations, setReservations] = useState(() => {
@@ -101,16 +97,25 @@ export const AuthProvider = ({ children }) => {
   // const [loginUser, fetchLogin] = useState(""); //<-esta la puse yo: mario
   // const {fetchCreate} = useFetch(Endpoint.login); //<-esta la puse yo: mario
 
+  const [token, setToken] = useState(() => {
+    const storedToken = localStorage.getItem("token");
+    return storedToken || null; // Aquí no se debe usar JSON.parse ya que el token es una string.
+  });
+
+  const [typesOfCourt, setTypesOfCourt] = useState(() => {
+    const storedTypesOfCourt = localStorage.getItem("typesOfCourt");
+    return storedTypesOfCourt ? JSON.parse(storedTypesOfCourt) : [];
+  });
+
   useEffect(() => {
-    localStorage.setItem('typesOfCourt', JSON.stringify(typesOfCourt)); // Guardar Reservas en el almacenamiento local
-    localStorage.setItem('typesOfCourt', JSON.stringify(typesOfCourt)); // Guardar Reservas en el almacenamiento local
+    localStorage.setItem('typesOfCourt', JSON.stringify(typesOfCourt));
     localStorage.setItem('reservations', JSON.stringify(reservations));
     localStorage.setItem('users', JSON.stringify(users));
   }, [reservations, users, typesOfCourt]);
-  
+
   const login = (userData, token) => {
-    localStorage.setItem('user', JSON.stringify(userData));
-    localStorage.setItem("token", token)
+    localStorage.setItem("user", JSON.stringify(userData));
+    localStorage.setItem("token", token); // Aquí se almacena el token como una string.
     setCurrentUser(userData);
     setToken(token);
     setUsers((prevUsers) => [...prevUsers, userData]);
@@ -126,11 +131,10 @@ export const AuthProvider = ({ children }) => {
   const confirmReservation = (reservationId) => {
     const updatedReservations = reservations.map(res => {
       if (res.id === reservationId) {
-        return { ...res, status: 'confirmada' }; // Actualiza el estado de la reserva a 'confirmada'
+        return { ...res, status: 'confirmada' };
       }
       return res;
     });
-
     setReservations(updatedReservations);
   };
 
@@ -139,24 +143,37 @@ export const AuthProvider = ({ children }) => {
     setReservations(updatedReservations);
   };
 
-  const confirmReservation = (reservationId) => {
-    const updatedReservations = reservations.map(res => {
-      if (res.id === reservationId) {
-        return { ...res, status: 'confirmada' }; // Actualiza el estado de la reserva a 'confirmada'
-      }
-      return res;
-    });
+  const fetchGet = async ({ endPoint, idData }) =>
+    fetchAll({ endPoint, method: HttpMethod.GET, idData, token });
 
-    setReservations(updatedReservations);
-  };
+  const fetchCreate = async ({ endPoint, data }) =>
+    fetchAll({ endPoint, method: HttpMethod.POST, data, token });
 
-  const removeReservation = (reservationId) => {
-    const updatedReservations = reservations.filter(res => res.id !== reservationId);
-    setReservations(updatedReservations);
-  };
+  const fetchUpdate = async ({ endPoint, idData, data }) =>
+    fetchAll({ endPoint, method: HttpMethod.PATCH, idData, data, token });
+
+  const fetchDelete = async ({ endPoint, idData }) =>
+    fetchAll({ endPoint, method: HttpMethod.DELETE, idData, token });
 
   return (
-    <AuthContext.Provider value={{ currentUser, users, setUsers, reservations, setReservations, login, logout, confirmReservation, removeReservation }}>
+    <AuthContext.Provider
+      value={{
+        currentUser,
+        token,
+        users,
+        setUsers,
+        reservations,
+        setReservations,
+        login,
+        logout,
+        confirmReservation,
+        removeReservation,
+        fetchGet,
+        fetchCreate,
+        fetchUpdate,
+        fetchDelete,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
