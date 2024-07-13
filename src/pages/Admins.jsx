@@ -5,25 +5,25 @@ import Swal from 'sweetalert2';
 import DashboardAdmins from '../components/DashboardAmins';
 
 export default function Admins() {
-  const { users, setUsers, fetchGet, fetchDelete, fetchUpdate } = useAuth();
+  const { users, setUsers, fetchGet, fetchDelete, fetchUpdate, token } = useAuth();
   const [editingUser, setEditingUser] = useState(null);
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetchGet({ endPoint: Endpoint.administrators });
+        const response = await fetchGet({ endPoint: Endpoint.administrators, token });
         if (!response.ok) {
-          throw new Error('Error al obtener los usuarios');
+          throw new Error('Error al obtener los administradores');
         }
         const data = await response.json();
-        setUsers(data);
+        setUsers(data, token);
       } catch (error) {
-        console.error('Error fetching users:', error);
+        console.error('Error fetching administrators:', error);
       }
     };
 
     fetchUsers();
-  }, [fetchGet, setUsers]);
+  }, [setUsers, token]);
 
   const removeUser = async (id) => {
     Swal.fire({
