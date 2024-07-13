@@ -12,15 +12,20 @@ export const useAuth = () => useContext(AuthContext);
 //   // useDebugValue(auth, (auth) => (auth?.user ? "Logged In" : "Logged Out"));
 //   return useContext(AuthContext);
 // };
+// export const useAuth = () => {
+//   const { auth } = useContext(AuthContext);
+//   // useDebugValue(auth, (auth) => (auth?.user ? "Logged In" : "Logged Out"));
+//   return useContext(AuthContext);
+// };
 
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(() => {
-    const user = localStorage.getItem('user');
+    const user = localStorage.getItem("user");
     return user ? JSON.parse(user) : null;
   });
 
   const [users, setUsers] = useState(() => {
-    const storedUsers = localStorage.getItem('users');
+    const storedUsers = localStorage.getItem("users");
     return storedUsers ? JSON.parse(storedUsers) : [];
   });
 
@@ -30,7 +35,7 @@ export const AuthProvider = ({ children }) => {
   });
 
   const [reservations, setReservations] = useState(() => {
-    const storedReservations = localStorage.getItem('reservations');
+    const storedReservations = localStorage.getItem("reservations");
     return storedReservations ? JSON.parse(storedReservations) : [];
   });
   const [token, setToken] = useState(() => {
@@ -102,13 +107,17 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem('typesOfCourt', JSON.stringify(typesOfCourt)); // Guardar Reservas en el almacenamiento local
+    localStorage.setItem('typesOfCourt', JSON.stringify(typesOfCourt)); // Guardar Reservas en el almacenamiento local
     localStorage.setItem('reservations', JSON.stringify(reservations));
     localStorage.setItem('users', JSON.stringify(users));
+  }, [reservations, users, typesOfCourt]);
   }, [reservations, users, typesOfCourt]);
 
   const login = (userData, token) => {
     localStorage.setItem('user', JSON.stringify(userData));
     setCurrentUser(userData);
+    setToken(token);
+    setUsers((prevUsers) => [...prevUsers, userData]);
     setToken(token);
     setUsers((prevUsers) => [...prevUsers, userData]);
   };
@@ -117,6 +126,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('user');
     localStorage.removeItem('token');
     setCurrentUser(null);
+    setToken(null);
     setToken(null);
   };
 

@@ -1,4 +1,5 @@
 import React from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { FaUser, FaLock, FaEnvelope, FaPhoneAlt } from "react-icons/fa";
@@ -63,12 +64,15 @@ export default function RegisterUser() {
     }
   };
 
-  const mensaje = 'Crear Usuario';
+  const mensaje = "Crear Usuario";
 
   return (
     <div className="flex items-center justify-center h-screen px-5">
       <div className="bg-white shadow-md rounded-lg py-10 px-5 mb-10 md:w-1/2 w-full">
         <form onSubmit={handleSubmit(onSubmit)}>
+          <h1 className="font-black text-2xl py-4 text-center text-textColor ">
+            {mensaje}
+          </h1>
           <h1 className="font-black text-2xl py-4 text-center text-textColor ">
             {mensaje}
           </h1>
@@ -81,8 +85,8 @@ export default function RegisterUser() {
               className="w-full p-3 rounded-md border-acentColor border-2"
               type="text"
               placeholder="Nombre completo"
-              {...register('fullname', {
-                required: 'El Nombre de usuario es Obligatorio',
+              {...register("fullname", {
+                required: "El Nombre de usuario es Obligatorio",
                 pattern: {
                   value: /^[a-zA-Z]{2,40}( [a-zA-Z]{2,40})+$/,
                   message: 'El Nombre de usuario no es correcto',
@@ -100,6 +104,7 @@ export default function RegisterUser() {
               )}
             />
           </div>
+          {errors.fullname && <ErrorComp>{errors.fullname.message}</ErrorComp>}
           {errors.fullname && <ErrorComp>{errors.fullname.message}</ErrorComp>}
 
           <div className="mb-5 font-Onest font-normal flex items-center gap-2">
@@ -123,6 +128,9 @@ export default function RegisterUser() {
           {errors.phone && (
             <ErrorComp>{errors.phone?.message.toString()}</ErrorComp>
           )}
+          {errors.phone && (
+            <ErrorComp>{errors.phone?.message.toString()}</ErrorComp>
+          )}
 
           <div className="mb-5 font-Onest font-normal flex items-center gap-2">
             <FaEnvelope className="w-4 text-textColor" />
@@ -142,6 +150,7 @@ export default function RegisterUser() {
             />
           </div>
           {errors.email && <ErrorComp>{errors.email.message}</ErrorComp>}
+          {errors.email && <ErrorComp>{errors.email.message}</ErrorComp>}
 
           <div className="mb-5 font-Onest font-normal flex items-center gap-2">
             <FaLock className="w-4 text-textColor" />
@@ -156,6 +165,7 @@ export default function RegisterUser() {
               })}
             />
           </div>
+          {errors.password && <ErrorComp>{errors.password.message}</ErrorComp>}
           {errors.password && <ErrorComp>{errors.password.message}</ErrorComp>}
 
           <div className="items-center justify-around text-center flex py-4 gap-2">

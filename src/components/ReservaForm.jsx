@@ -147,6 +147,12 @@ export default function ReservaForm({
       const formattedDate = combinedDateTime.toISOString();
 
       const reservationData = {
+          // timedate: new Date(`${data.date} ${data.hour}`),
+          // price: data.court.tariff.price /* 5000 */,
+          // idCourt: data.court.id,
+          // idUser: currentUser.id,
+          // idStatus: 1,
+          //   ...(editingReservation && {id: editingReservation}),
         cancha: data.cancha,
         tipo: data.tipo,
         date: formattedDate,
@@ -318,6 +324,7 @@ export default function ReservaForm({
           </select>
           {errors.hour && (
             <ErrorComp>{errors.hour?.message.toString()}</ErrorComp>
+            <ErrorComp>{errors.hour?.message.toString()}</ErrorComp>
           )}
         </div>
         
@@ -342,6 +349,7 @@ export default function ReservaForm({
         <input
           type="submit"
           className="bg-acentColor w-full p-3 text-textColor uppercase font-bold hover:bg-textColor hover:text-acentColor cursor-pointer transition-colors"
+          value="Guardar Reserva"
           value="Guardar Reserva"
         />
       </form>

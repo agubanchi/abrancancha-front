@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import Swal from "sweetalert2";
 import DetalleReserva from "./DetalleReserva";
+import useStore from "../userStore";
 import { useAuth } from "../context/AuthContext";
 import { Endpoint, HttpMethod, fetchAll } from "../services/fetchs";
 
