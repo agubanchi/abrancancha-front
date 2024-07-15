@@ -4,15 +4,25 @@ import { useAuth } from '../context/AuthContext';
 import Swal from 'sweetalert2';
 
 export default function Admins() {
-  const { users, setUsers } = useAuth();
+  const { users, setUsers, fetchGet, fetchDelete, fetchUpdate, token } = useAuth();
   const [editingUser, setEditingUser] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:3000/users/')
-      .then(res => res.json())
-      .then(json => setUsers(json))
-      .catch(err => console.error('Error fetching users:', err));
-  }, [setUsers]);
+    const fetchUsers = async () => {
+      try {
+        const response = await fetchGet({ endPoint: Endpoint.administrators, token });
+        if (!response.ok) {
+          throw new Error('Error al obtener los administradores');
+        }
+        const data = await response.json();
+        setUsers(data, token);
+      } catch (error) {
+        console.error('Error fetching administrators:', error);
+      }
+    };
+
+    fetchUsers();
+  }, [setUsers, token]);
 
   const removeUser = async (id) => {
     Swal.fire({

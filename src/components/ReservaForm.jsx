@@ -24,16 +24,16 @@ export default function ReservaForm({ editingReservation,setEditingReservation, 
 
   useEffect(() => {
     if (editingReservation) {
-      setValue('cancha', editingReservation.cancha);
-      setValue('tipo', editingReservation.tipo);
-      setValue('date', editingReservation.date);
-      setValue('hour', editingReservation.hour);
-      setPrice(precios[editingReservation.tipo] || 0);
-      
+      setValue('court', editingReservation.court);
+      setValue('idType', editingReservation.idType);
+      setValue('timedate', editingReservation.timedate.split('T')[0]); // Extract only date part
+      setValue('hour', editingReservation.timedate.split('T')[1].slice(0, 5)); // Extract only time part
+      setPrice(precios[editingReservation.idType] || 0);
+      setObservations(observaciones[editingReservation.court] || "");
     }
   }, [editingReservation, setValue]);
 
-  const tipoSeleccionado = watch('tipo');
+  const tipoSeleccionado = watch('idType');
   
   useEffect(() => {
     if (tipoSeleccionado) {
@@ -43,6 +43,15 @@ export default function ReservaForm({ editingReservation,setEditingReservation, 
     }
   }, [tipoSeleccionado]);
 
+  const canchaSeleccionada = watch('court');
+  
+  useEffect(() => {
+    if (canchaSeleccionada) {
+      const nuevaObservacion = observaciones[canchaSeleccionada] || "";
+      setObservations(nuevaObservacion);
+    }
+  }, [canchaSeleccionada]);
+
   const onSubmit = async (data) => {
     try {
       const method = editingReservation ? 'PATCH' : 'POST';
@@ -51,12 +60,12 @@ export default function ReservaForm({ editingReservation,setEditingReservation, 
         : 'http://localhost:3000/reservations/';
 
       const reservationData = {
-        cancha: data.cancha,
-        tipo: data.tipo,
-        date: data.date,
-        hour: data.hour,
-        userId: editingReservation ? editingReservation.userId : currentUser.id,
-        price
+        court: data.court,
+        idType: data.idType,
+        timedate: formattedDate,
+        idUser: editingReservation ? editingReservation.idUser : currentUser.id,
+        price,
+        idCourt: canchaSeleccionada,  // Suponiendo que tienes un campo idCourt
       };
 
       const response = await fetch(endpoint, {
@@ -90,30 +99,7 @@ export default function ReservaForm({ editingReservation,setEditingReservation, 
     }
   };
 
-  const onDelete = async () => {
-    try {
-      const response = await fetchAll({
-        method: HttpMethod.DELETE,
-        endPoint: Endpoint.reservations,
-        idData: editingReservation.id,
-      });
 
-      if (!response.ok) {
-        throw new Error('Error al eliminar la reserva');
-      }
-
-      setReservations(prevReservations => 
-        prevReservations.filter(reserva => reserva.id !== editingReservation.id)
-      );
-
-      reset();
-      setEditingReservation(null);
-      onClose();
-      
-    } catch (error) {
-      console.error("Error al eliminar la reserva:", error);
-    }
-  };
 
   return (
     <div className="md:w-full mx-5">
@@ -122,13 +108,13 @@ export default function ReservaForm({ editingReservation,setEditingReservation, 
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className="mb-5">
-          <label htmlFor="cancha" className="text-sm uppercase font-bold">
+          <label htmlFor="court" className="text-sm uppercase font-bold">
             Cancha
           </label>
           <select
-            id="cancha"
+            id="court"
             className="w-full p-3 rounded-md border-acentColor border-2"
-            {...register("cancha", { required: "Selecciona una Cancha" })}
+            {...register("court", { required: "Selecciona una Cancha" })}
           >
             <option disabled value=""> -- selecciona una opción -- </option>
             <option value="Cancha 1">Cancha 1</option>
@@ -137,19 +123,19 @@ export default function ReservaForm({ editingReservation,setEditingReservation, 
             <option value="Cancha 4">Cancha 4</option>
             <option value="Cancha 5">Cancha 5</option>
           </select>
-          {errors.cancha && (
-            <Error>{errors.cancha?.message.toString()}</Error>
+          {errors.court && (
+            <Error>{errors.court?.message.toString()}</Error>
           )}
         </div>
 
         <div className="mb-5">
-          <label htmlFor="tipo" className="text-sm uppercase font-bold">
+          <label htmlFor="idType" className="text-sm uppercase font-bold">
             Tipo
           </label>
           <select
-            id="tipo"
+            id="idType"
             className="w-full p-3 rounded-md border-acentColor border-2"
-            {...register("tipo", { required: "Selecciona un Tipo de Cancha" })}
+            {...register("idType", { required: "Selecciona un Tipo de Cancha" })}
           >
             <option disabled value=""> -- selecciona una opción -- </option>
             <option value="Futbol 5">Futbol 5</option>
@@ -157,8 +143,8 @@ export default function ReservaForm({ editingReservation,setEditingReservation, 
             <option value="Futbol 9">Futbol 9</option>
             <option value="Futbol 11">Futbol 11</option>
           </select>
-          {errors.tipo && (
-            <Error>{errors.tipo?.message.toString()}</Error>
+          {errors.idType && (
+            <Error>{errors.idType?.message.toString()}</Error>
           )}
         </div>
 
@@ -228,14 +214,7 @@ export default function ReservaForm({ editingReservation,setEditingReservation, 
           value='Guardar Reserva'
         />
       </form>
-      {editingReservation && (
-        <button
-          onClick={onDelete}
-          className="bg-red-600 w-full p-3 text-textColor uppercase font-bold hover:bg-red-800 cursor-pointer transition-colors mt-3"
-        >
-          Eliminar Reserva
-        </button>
-      )}
+  
     </div>
   );
 }

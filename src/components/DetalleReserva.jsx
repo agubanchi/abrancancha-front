@@ -47,17 +47,15 @@ export default function DetalleReserva({ reserva, handleEditar }) {
                 <span className='text-sm uppercase font-light text-textColor font-Onest'>{currentUser.phone}</span>
               </p>
               <p className='text-sm uppercase font-bold mb-3 text-textColor items-center flex gap-2'> Cancha: {''}
-                <span className='text-sm uppercase font-light text-textColor font-Onest'>{reserva.cancha}</span>
+                <span className='text-sm uppercase font-light text-textColor font-Onest'>{reserva.court.name}</span>
               </p>
               <p className='text-sm uppercase font-bold mb-3 text-textColor items-center flex gap-2'> Tipo de Cancha: {''}
                 <span className='text-sm uppercase font-light text-textColor font-Onest'>{reserva.tipo}</span>
               </p>
               <p className='text-sm uppercase font-bold mb-3 text-textColor items-center flex gap-2'> Fecha: {''}
-                <span className='text-sm uppercase font-light text-textColor font-Onest'>{reserva.date}</span>
+                <span className='text-sm uppercase font-light text-textColor font-Onest'>{new Date(reserva.timedate).toLocaleString()}</span>
               </p>
-              <p className='text-sm uppercase font-bold mb-3 text-textColor items-center flex gap-2'> Hora: {''}
-                <span className='text-sm uppercase font-light text-textColor font-Onest'>{reserva.hour}</span>
-              </p>
+              
               <p className='text-sm uppercase font-bold mb-3 text-textColor items-center flex gap-2'> Precio: {''}
                 <span className='text-sm uppercase font-light text-textColor font-Onest'>$ {reserva.price}</span>
               </p>
@@ -65,7 +63,7 @@ export default function DetalleReserva({ reserva, handleEditar }) {
                 <span className='text-sm uppercase font-light text-textColor font-Onest'>$ {reserva.price * 0.3}</span>
               </p>
               <p className='text-sm uppercase font-bold mb-3 text-textColor items-center flex gap-2'> Estado: {''}
-                <span className='text-sm uppercase font-light text-textColor font-Onest'>{reserva.statusOfReservation || 'Pendiente'}</span>
+                <span className='text-sm uppercase font-light text-textColor font-Onest'>{reserva.status.name|| 'Pendiente'}</span>
               </p>
             </div>
 
