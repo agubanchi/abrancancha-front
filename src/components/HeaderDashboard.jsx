@@ -3,6 +3,7 @@ import { IoClose } from "react-icons/io5";
 import { RiFootballFill } from "react-icons/ri";
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext'; // Importa el contexto de autenticación
+import ButtonCerrarSesion from './ButtonCerrarSesion';
 
 const HeaderDashboard = () => {
     const [sticky, setSticky] = useState(false);
@@ -28,10 +29,19 @@ const HeaderDashboard = () => {
             <NavLink to="/reservations" className="hover:text-acentColor border px-2 py-2  border-acentColor rounded-md">Reservas</NavLink>
             <NavLink to="/admins" className="hover:text-acentColor border px-2 py-2  border-acentColor rounded-md">Administradores</NavLink>
             <NavLink to="/users" className="hover:text-acentColor border px-2 py-2  border-acentColor rounded-md">Usuarios</NavLink>
+            <NavLink to="/tiposCanchas" className="hover:text-acentColor border px-2 py-2  border-acentColor rounded-md">Tipos de cancha</NavLink>
+            <NavLink to="/estadosCanchas" className="hover:text-acentColor border px-2 py-2  border-acentColor rounded-md">Estados de cancha</NavLink>
+            <NavLink to="/estadosReservas" className="hover:text-acentColor border px-2 py-2  border-acentColor rounded-md">Estados de reserva</NavLink>
+            <NavLink to="/estadosUsuarios" className="hover:text-acentColor border px-2 py-2  border-acentColor rounded-md">Estados de usuario</NavLink>
+            <NavLink to="/estadosUsuarios" className="hover:text-acentColor border px-2 py-2  border-acentColor rounded-md">Tarifas</NavLink>
+            <NavLink to="/estadosUsuarios" className="hover:text-acentColor border px-2 py-2  border-acentColor rounded-md">Club</NavLink>
+            <NavLink to="/estadosUsuarios" className="hover:text-acentColor border px-2 py-2  border-acentColor rounded-md">Horarios</NavLink>
+            <NavLink to="/estadosUsuarios" className="hover:text-acentColor border px-2 py-2  border-acentColor rounded-md">Configuracion</NavLink>
             </div>
             <div className='gap-2 flex items-center'>
+              {/* <button onClick={handleLogout} className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor">Cerrar Sesión</button> */}
               {currentUser ? (
-                <button onClick={handleLogout} className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor">Cerrar Sesión</button>
+                <ButtonCerrarSesion/>
               ) : (
                 <NavLink to="/login" className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor">Iniciar Sesión</NavLink>
               )}
@@ -62,8 +72,9 @@ const HeaderDashboard = () => {
             <NavLink to="/users" className="hover:text-acentColor">Usuarios</NavLink>
               </div>
               <div className='py-6'>
+                {/* <button onClick={handleLogout} className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor">Cerrar Sesión</button> */}
                 {currentUser ? (
-                  <button onClick={handleLogout} className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor">Cerrar Sesión</button>
+                  <ButtonCerrarSesion/>
                 ) : (
                   <NavLink to="/login" className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor">Iniciar Sesión</NavLink>
                 )}

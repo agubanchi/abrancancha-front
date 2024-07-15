@@ -5,6 +5,7 @@ import Modal from "./Modal";
 import { IoClose } from "react-icons/io5";
 import { RiFootballFill } from "react-icons/ri";
 import { useAuth } from "../context/AuthContext";
+import ButtonCerrarSesion from "./ButtonCerrarSesion";
 
 const Header = () => {
   const { currentUser, logout } = useAuth();
@@ -41,8 +42,9 @@ const Header = () => {
               <a href="#frecuentes" className="hover:text-acentColor"> Preguntas Frecuentes </a>
             </div>
             <div className='gap-2 flex items-center'>
+              {/* <button onClick={handleLogout} className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor">Cerrar Sesión</button> */}
               {currentUser ? (
-                <button onClick={handleLogout} className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor">Cerrar Sesión</button>
+                <ButtonCerrarSesion/>
               ) : (
                 <NavLink to="/login" className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor">Iniciar Sesión</NavLink>
               )}
@@ -74,8 +76,9 @@ const Header = () => {
                 <a href="#frecuentes" className="hover:text-acentColor"> Preguntas Frecuentes </a>
               </div>
               <div className='py-6'>
+                {/* <button onClick={handleLogout} className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor">Cerrar Sesión</button> */}
                 {currentUser ? (
-                  <button onClick={handleLogout} className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor">Cerrar Sesión</button>
+                  <ButtonCerrarSesion/>
                 ) : (
                   <NavLink to="/login" className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor">Iniciar Sesión</NavLink>
                 )}
