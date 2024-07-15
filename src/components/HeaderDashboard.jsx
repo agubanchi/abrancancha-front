@@ -20,9 +20,9 @@ const HeaderDashboard = () => {
     <header className="bg-textColor shadow-md relative lef-0 top-0  w-full z-[9999]">
       <div className="mx-auto container px-5 py-4">
         <div className="flex justify-between items-center">
-          <div className="z-[999] w-48">
+          {/* <div className="z-[999] w-48">
             <NavLink to="/"> <h3 className='text-bold text-white'>Volver a Home</h3></NavLink>
-          </div>
+          </div> */}
           <nav className='w-full md:flex hidden items-center gap-4 justify-around text-white font-Bebas text-2xl'>
             <div className='w-3/4 items-center gap-6 text-center flex justify-center'>
             <NavLink to="/canchas" className="hover:text-acentColor border px-2 py-2  border-acentColor rounded-md">Canchas</NavLink>
