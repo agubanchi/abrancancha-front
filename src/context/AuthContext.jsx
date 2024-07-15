@@ -31,18 +31,14 @@ export const AuthProvider = ({ children }) => {
 
   const [token, setToken] = useState(() => {
     const storedToken = localStorage.getItem("token");
-    return storedToken ? JSON.parse(storedToken) : [];
+    return storedToken;
   });
 
   const [reservations, setReservations] = useState(() => {
     const storedReservations = localStorage.getItem("reservations");
     return storedReservations ? JSON.parse(storedReservations) : [];
   });
-  const [token, setToken] = useState(() => {
-    const storedToken = localStorage.getItem('token');
-    return storedToken ? JSON.parse(storedToken) : [];
-  });
-  // ################################################################
+  
   const [typesOfCourt, setTypesOfCourt] = useState(() => {
     const storedTypesOfCourt = localStorage.getItem('typesOfCourt');
     return storedTypesOfCourt ? JSON.parse(storedTypesOfCourt) : [];
@@ -111,13 +107,11 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem('reservations', JSON.stringify(reservations));
     localStorage.setItem('users', JSON.stringify(users));
   }, [reservations, users, typesOfCourt]);
-  }, [reservations, users, typesOfCourt]);
-
+  
   const login = (userData, token) => {
     localStorage.setItem('user', JSON.stringify(userData));
+    localStorage.setItem("token", token)
     setCurrentUser(userData);
-    setToken(token);
-    setUsers((prevUsers) => [...prevUsers, userData]);
     setToken(token);
     setUsers((prevUsers) => [...prevUsers, userData]);
   };
@@ -126,7 +120,6 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('user');
     localStorage.removeItem('token');
     setCurrentUser(null);
-    setToken(null);
     setToken(null);
   };
 
@@ -155,43 +148,42 @@ export const AuthProvider = ({ children }) => {
     setReservations(updatedReservations);
   };
 
+  const getToken = () => {  return  token  };
+
   const fetchGet = async ({ endPoint, idData })  =>
-  fetchAll({ endPoint, method: HttpMethod.GET, idData, token });
+  fetchAll({ endPoint, method: HttpMethod.GET, idData, token:getToken });
 //-----------------------------------------------------------------------------+
 const fetchCreate = async ({ endPoint, data, token }) => {
-  try {
-    const response = await fetchAll({ endPoint, method: HttpMethod.POST, data, token });
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || 'Error al procesar la solicitud');
-    }
+  // try {
+    const response = await fetchAll({ endPoint, method: HttpMethod.POST, data, token:getToken });
+    // if (!response.ok) {
+    //   const errorData = await response.json();
+    //   throw new Error(errorData.message || 'Error al procesar la solicitud');
+    // }
     return response;
-  } catch (error) {
-    console.error('Error al realizar la solicitud de creación:', error);
-    throw error;
-  }
+  // } catch (error) {
+  //   console.error('Error al realizar la solicitud de creación:', error);
+  //   throw error;
+  // }
 };
 //-----------------------------------------------------------------------------+
 const fetchUpdate = async ({ endPoint, idData, data })  =>
-  fetchAll({ endPoint, method: HttpMethod.PATCH, idData, data, token });
+  fetchAll({ endPoint, method: HttpMethod.PATCH, idData, data, token:getToken });
 //-----------------------------------------------------------------------------+
 const fetchDelete = async ({ endPoint, idData, token }) => {
-  try {
-    const response = await fetchAll({ endPoint, method: HttpMethod.DELETE, idData, token });
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || 'Error al procesar la solicitud de eliminación');
-    }
+  // try {
+    const response = await fetchAll({ endPoint, method: HttpMethod.DELETE, idData, token:getToken });
+    // if (!response.ok) {
+    //   const errorData = await response.json();
+    //   throw new Error(errorData.message || 'Error al procesar la solicitud de eliminación');
+    // }
     return response;
-  } catch (error) {
-    console.error('Error al realizar la solicitud de eliminación:', error);
-    throw error;
-  }
+  // } catch (error) {
+  //   console.error('Error al realizar la solicitud de eliminación:', error);
+  //   throw error;
+  // }
 };
 
-
-
-//
   return (
      <AuthContext.Provider value={{
       currentUser,
@@ -208,9 +200,7 @@ const fetchDelete = async ({ endPoint, idData, token }) => {
       fetchGet,
       fetchCreate,
       fetchUpdate,
-      fetchDelete
-
-      
+      fetchDelete      
     }}>
       {children}
     </AuthContext.Provider>

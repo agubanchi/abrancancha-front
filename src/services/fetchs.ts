@@ -41,7 +41,8 @@ type Data = any;
 type UseFetchParams = {
   endPoint: Endpoint;
   baseUrl?: string;
-  token?: string;
+  token?: () => string;
+  // token?: string;
 };
 export interface FetchGetParams extends UseFetchParams {
   idData: IdData;
@@ -76,10 +77,23 @@ export const fetchAll = async (params: FetchParams): Promise<Response> => {
     method: params.method,
     headers: {
       ...(data && { 'Content-Type': 'application/json' }),
-      ...(params.token && { Authorization: `Bearer ${params.token}` }),
+      ...(params.token && { Authorization: `Bearer ${params.token()}` }),
     },
     // body: JSON.stringify(data === undefined ? {} : data),
     ...(data && { body: JSON.stringify(data) }),
   };
-  return await fetch(staticURL, fetchinit);
+
+  try {
+    const response = await fetch(staticURL, fetchinit);
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(
+        errorData.message || `Error al procesar la solicitud: ${params.method}`
+      );
+    }
+    return response;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 };
