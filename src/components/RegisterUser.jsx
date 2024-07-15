@@ -28,43 +28,84 @@ export default function RegisterUser() {
         });
         return;
       }
-    
-  
-    fetch('http://localhost:3000/users', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(userData)
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new ErrorComp(data.message || 'Error al registrar usuario');
-      }
+      
+      
+  //     Me tira error Este Fetch 
+  //   fetch('http://localhost:3000/users', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify(userData)
+  //   })
+  //   .then(response => {
+  //     if (!response.ok) {
+  //       throw new Error(data.message || 'Error al registrar usuario');
+  //     }
 
-      Swal.fire({
-        title: "Usuario registrado!",
-        text: "Usuario registrado exitosamente",
-        icon: "success",
-        iconColor: "#77da7e",
-        confirmButtonColor: "#77da7e"
-      });
+  //     Swal.fire({
+  //       title: "Usuario registrado!",
+  //       text: "Usuario registrado exitosamente",
+  //       icon: "success",
+  //       iconColor: "#77da7e",
+  //       confirmButtonColor: "#77da7e"
+  //     });
 
-      login(userData); // Almacenar datos del usuario en el contexto
-      // localStorage.setItem("user", JSON.stringify(userData)); // Almacenar datos del usuario en localStorage
+  //     login(userData); // Almacenar datos del usuario en el contexto
+  //     localStorage.setItem("user", JSON.stringify(userData)); // Almacenar datos del usuario en localStorage
 
-      // Redirigir a la vista de inicio de sesión
-      navigate('/login');
-    } catch (error) {
-      Swal.fire({
-        title: "Error",
-        text: error.message || 'Error al registrar usuario',
-        icon: "error",
-        iconColor: "#1d1d1d",
-        confirmButtonColor: "#77da7e"
+  //     // Redirigir a la vista de inicio de sesión
+  //     navigate('/login');
+  //   } catch (error) {
+  //     Swal.fire({
+  //       title: "Error",
+  //       text: error.message || 'Error al registrar usuario',
+  //       icon: "error",
+  //       iconColor: "#1d1d1d",
+  //       confirmButtonColor: "#77da7e"
+  //     });
+  //   }
+  // };
+  //Fin del Fetch qque tirar error
+  fetch('http://localhost:3000/users', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(userData)
+  })
+  .then(response => {
+    if (!response.ok) {
+      return response.json().then(data => {
+        throw new Error(data.message || 'Error al registrar usuario');
       });
     }
-  };
+    return response.json();
+  })
+  .then(data => {
+    Swal.fire({
+      title: "Usuario registrado!",
+      text: "Usuario registrado exitosamente",
+      icon: "success",
+      iconColor: "#77da7e",
+      confirmButtonColor: "#77da7e"
+    });
+  
+    login(data); // Almacenar datos del usuario en el contexto
+    localStorage.setItem("user", JSON.stringify(data)); // Almacenar datos del usuario en localStorage
+  
+    // Redirigir a la vista de inicio de sesión
+    navigate('/login');
+  })
+  .catch(error => {
+    Swal.fire({
+      title: "Error",
+      text: error.message || 'Error al registrar usuario',
+      icon: "error",
+      iconColor: "#1d1d1d",
+      confirmButtonColor: "#77da7e"
+    });
+  });
 
   const mensaje = "Crear Usuario";
 
@@ -179,4 +220,5 @@ export default function RegisterUser() {
       </div>
     </div>
   );
+  }
 }
