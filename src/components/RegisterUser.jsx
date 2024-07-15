@@ -66,7 +66,7 @@ export default function RegisterUser() {
   //     });
   //   }
   // };
-  //Fin del Fetch qque tirar error
+  //Fin del Fetch que tirar error
   fetch('http://localhost:3000/users', {
     method: 'POST',
     headers: {
