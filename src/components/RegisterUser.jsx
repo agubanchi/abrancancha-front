@@ -1,5 +1,4 @@
 import React from "react";
-import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { FaUser, FaLock, FaEnvelope, FaPhoneAlt } from "react-icons/fa";
@@ -15,6 +14,7 @@ export default function RegisterUser() {
 
   const onSubmit = async (userData) => {
     // Verificar si el email ya está registrado
+    //este chequeo de email repetido, Ya lo hace la api
     const emailExists = users.some(user => user.email === userData.email);
 
     if (emailExists) {
@@ -49,7 +49,7 @@ export default function RegisterUser() {
       });
 
       login(userData); // Almacenar datos del usuario en el contexto
-      localStorage.setItem("user", JSON.stringify(userData)); // Almacenar datos del usuario en localStorage
+      // localStorage.setItem("user", JSON.stringify(userData)); // Almacenar datos del usuario en localStorage
 
       // Redirigir a la vista de inicio de sesión
       navigate('/login');

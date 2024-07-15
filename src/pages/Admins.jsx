@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { useAuth } from '../context/AuthContext';
-import { Endpoint, HttpMethod, fetchAll } from "../services/fetchs";
-import Swal from 'sweetalert2';
 import DashboardAdmins from '../components/DashboardAmins';
+import { useAuth } from '../context/AuthContext';
+import { Endpoint } from "../services/fetchs";
+import Swal from 'sweetalert2';
 
 export default function Admins() {
   const { users, setUsers, fetchGet, fetchDelete, fetchUpdate } = useAuth();

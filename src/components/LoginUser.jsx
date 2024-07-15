@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { FaEnvelope, FaLock } from "react-icons/fa";
 import ErrorComp from "./Error";
-import { useAuth } from "../context/AuthContext";
+import { Role, useAuth } from "../context/AuthContext";
 import { Endpoint } from "../services/fetchs";
 export default function LoginUser() {
   const { login, fetchCreate } = useAuth();
@@ -19,20 +19,17 @@ export default function LoginUser() {
   const onSubmit = async (formData) => {
     // formData.preventDefault()
     try {
-  
       const response = await fetchCreate({
         endPoint: Endpoint.login,
-      // data: { email: "marioepatronelli@gmail.com", password: "Ab*12345" },
-      data: formData
+        // data: { email: "marioepatronelli@gmail.com", password: "Ab*12345" },
+        data: formData,
       });
       const data = await response.json();
       if (!response.ok) {
-      
         throw new Error(data.message);
-        
       }
-      login(data.user,data.token);
-      const profile = { "user": "/reservas", "admin": "/reservations" };
+      login(data.user, data.token);
+      const profile = { [Role.User]: "/reservas", [Role.Admin]: "/reservations" };
       const role = data.user.role;
       navigate(profile[role]);
     } catch (error) {
@@ -41,13 +38,15 @@ export default function LoginUser() {
     }
   };
 
-  const mensaje =  'Ingresa los datos de acceso';
+  const mensaje = "Ingresa los datos de acceso";
 
   return (
     <div className="flex items-center justify-center h-screen px-5">
       <div className="bg-white shadow-md rounded-lg py-10 px-5 mb-10 md:w-1/2 w-full">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <h1 className='font-black text-2xl py-4 text-center text-textColor'>{mensaje}</h1>
+          <h1 className="font-black text-2xl py-4 text-center text-textColor">
+            {mensaje}
+          </h1>
           <div className="mb-5 font-Onest font-normal flex items-center gap-2">
             <FaEnvelope className="w-4 text-textColor" />
             <input

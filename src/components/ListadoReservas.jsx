@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import DetalleReserva from "./DetalleReserva";
-import useStore from "../userStore";
+// import useStore from "../userStore";
 import { useAuth } from "../context/AuthContext";
 import { Endpoint, HttpMethod, fetchAll } from "../services/fetchs";
 
@@ -11,11 +11,12 @@ export default function ListadoReservas({ onEdit }) {
     const fetchReservations = async () => {
       try {
         if (currentUser && currentUser.id) {
-          const response = await fetchAll({
-            method: HttpMethod.GET,
-            endPoint: `${Endpoint.reservations}?userId=${currentUser.id}`, // Endpoint modificado para filtrar por userId
-            token: token,
-          });
+          const response = await fetchGet({ endPoint: `${Endpoint.reservations}?userId=${currentUser.id}` });
+          // const response = await fetchAll({
+          //   method: HttpMethod.GET,
+          //   endPoint: `${Endpoint.reservations}?idUser=${currentUser.id}`, // Endpoint modificado para filtrar por userId
+          //   token: token,
+          // });
 
           if (!response.ok) {
             throw new Error('Error al obtener las reservas');

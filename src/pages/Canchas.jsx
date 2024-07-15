@@ -6,17 +6,18 @@ import Modal from '../components/Modal';
 import { Endpoint, HttpMethod, fetchAll } from '../services/fetchs'; // Asegúrate de importar correctamente
 
 export default function Canchas() {
-  const { reservations, setReservations,fetchDelete, token } = useAuth();
+  const { reservations, setReservations,fetchDelete, token, fetchGet } = useAuth();
   const [editingReservation, setEditingReservation] = useState(null);
   const [showModal, setShowModal] = useState(false);
   useEffect(() => {
     const fetchReservations = async () => {
       try {
-        const response = await fetchAll({
-          method: HttpMethod.GET,
-          endPoint: Endpoint.reservations,
-          token: token, // Incluye el token en la solicitud GET
-        });
+        const response = await fetchGet({ endPoint: Endpoint.reservations });
+        // const response = await fetchAll({
+        //   method: HttpMethod.GET,
+        //   endPoint: Endpoint.reservations,
+        //   token: token, // Incluye el token en la solicitud GET
+        // });
 
         if (!response.ok) {
           throw new Error('Error al obtener las reservas');
