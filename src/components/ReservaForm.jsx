@@ -41,6 +41,7 @@ export default function ReservaForm({
     setReservations,
     fetchCreate,
     fetchUpdate,
+    fetchDelete,
   } = useAuth();
   const today = new Date();
   const maxDate = new Date(today);
@@ -93,7 +94,7 @@ export default function ReservaForm({
     'Cancha 2': 'Cancha cubierta',
     'Cancha 3': 'Cancha con cesped sintético',
     'Cancha 4': 'Cancha Iluminación Nocturna',
-    'Cancha 5': 'Cancha al aire libre, Cesped Sintético'
+    'Cancha 5': 'Cancha al aire libre, Cesped Sintético',
   };
 
   const porcentajeAnticipo = 0.3;
@@ -129,10 +130,6 @@ export default function ReservaForm({
 
   const onSubmit = async (data) => {
     try {
-      const method = editingReservation ? HttpMethod.PATCH : HttpMethod.POST;
-      const endpoint = Endpoint.reservations;
-      const idData = editingReservation ? editingReservation.id : undefined;
-
       // Combina fecha y hora
       const combinedDateTime = combinarFechaYHora(data.date, data.hour);
       const formattedDate = combinedDateTime.toISOString();
@@ -151,13 +148,25 @@ export default function ReservaForm({
         price,
         idCourt: canchaSeleccionada,  // Suponiendo que tienes un campo idCourt
       };
-
-      const response = await fetchAll({
-        method,
-        endPoint: endpoint,
-        idData,
-        data: reservationData,
-      });
+      const response = editingReservation
+      ? await fetchUpdate({
+          endPoint: Endpoint.reservations,
+          data: data,
+          idData: editingReservation.id,
+        })
+      : await fetchCreate({
+          endPoint: Endpoint.reservations,
+          data: data,
+        });
+      // const method = editingReservation ? HttpMethod.PATCH : HttpMethod.POST;
+      // // const endpoint = Endpoint.reservations;
+      // const idData = editingReservation ? editingReservation.id : undefined;
+      // const response = await fetchAll({
+      //   method,
+      //   endPoint: Endpoint.reservations,
+      //   idData,
+      //   data: reservationData,
+      // });
 
       if (!response.ok) {
         throw new ErrorComp('Error al almacenar la reserva');
@@ -184,18 +193,24 @@ export default function ReservaForm({
 
   const onDelete = async () => {
     try {
-      const response = await fetchAll({
-        method: HttpMethod.DELETE,
+      const response = await fetchDelete({
         endPoint: Endpoint.reservations,
         idData: editingReservation.id,
       });
+      // const response = await fetchAll({
+      //   method: HttpMethod.DELETE,
+      //   endPoint: Endpoint.reservations,
+      //   idData: editingReservation.id,
+      // });
 
       if (!response.ok) {
         throw new Error('Error al eliminar la reserva');
       }
 
-      setReservations(prevReservations => 
-        prevReservations.filter(reserva => reserva.id !== editingReservation.id)
+      setReservations((prevReservations) =>
+        prevReservations.filter(
+          (reserva) => reserva.id !== editingReservation.id
+        )
       );
 
       reset();
@@ -217,21 +232,24 @@ export default function ReservaForm({
           <label htmlFor="cancha" className="text-sm uppercase font-bold">
             Cancha
           </label>
-                    
-                {/* <select id='cancha' className="w-full p-3 rounded-md border-acentColor border-2" defaultValue="Elige Deporte" */}
-                  {/* // onChange={(event) => updateFiltroTipoCancha(Number(event.target.value))} */}
-                  {/* // {...register("cancha", { required: "Selecciona una Cancha" })}> */}
-                  {/* <option disabled value=" ">              {" "}              -- selecciona una opción --{" "}            </option> */}
-                  {/* <option value={0} > Elige Deporte </option> */}
-                  {/* <SelectGenerico endPoint={Endpoint.typesOfCourt} /> */}
-                {/* </select>           */}
-         
+
+          {/* <select id='cancha' className="w-full p-3 rounded-md border-acentColor border-2" defaultValue="Elige Deporte" */}
+          {/* // onChange={(event) => updateFiltroTipoCancha(Number(event.target.value))} */}
+          {/* // {...register("cancha", { required: "Selecciona una Cancha" })}> */}
+          {/* <option disabled value=" ">              {" "}              -- selecciona una opción --{" "}            </option> */}
+          {/* <option value={0} > Elige Deporte </option> */}
+          {/* <SelectGenerico endPoint={Endpoint.typesOfCourt} /> */}
+          {/* </select>           */}
+
           <select
             id="cancha"
             className="w-full p-3 rounded-md border-acentColor border-2"
             {...register('cancha', { required: 'Selecciona una Cancha' })}
           >
-            <option disabled value=""> -- selecciona una opción -- </option>
+            <option disabled value="">
+              {' '}
+              -- selecciona una opción --{' '}
+            </option>
             <option value="Cancha 1">Cancha 1</option>
             <option value="Cancha 2">Cancha 2</option>
             <option value="Cancha 3">Cancha 3</option>
@@ -259,7 +277,10 @@ export default function ReservaForm({
             className="w-full p-3 rounded-md border-acentColor border-2"
             {...register('tipo', { required: 'Selecciona un Tipo de Cancha' })}
           >
-            <option disabled value=""> -- selecciona una opción -- </option>
+            <option disabled value="">
+              {' '}
+              -- selecciona una opción --{' '}
+            </option>
             <option value="Futbol 5">Futbol 5</option>
             <option value="Futbol 7">Futbol 7</option>
             <option value="Futbol 9">Futbol 9</option>
@@ -298,7 +319,10 @@ export default function ReservaForm({
             className="w-full p-3 rounded-md border-acentColor border-2"
             {...register('hour', { required: 'Selecciona una hora' })}
           >
-            <option disabled value=""> -- selecciona una opción -- </option>
+            <option disabled value="">
+              {' '}
+              -- selecciona una opción --{' '}
+            </option>
             <option value="08:00">08:00hs</option>
             <option value="08:30">08:30hs</option>
             <option value="09:00">09:00hs</option>

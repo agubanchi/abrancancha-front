@@ -11,8 +11,10 @@ import Logueo from './Layouts/Logueo';
 import PrivateRoute from './components/utils/PrivateRoute';
 import Layout from './Layouts/Layout';
 import Users from './pages/Users';
+import DetailsTables from './pages/DetailsTables';
 import Admins from './pages/Admins';
 import Canchas from './pages/Canchas';
+import { Endpoint } from './services/fetchs';
 
 const AppRouter = () => {
   return (
@@ -35,8 +37,14 @@ const AppRouter = () => {
                 element={<Reservations />}
                 roles={[Role.Admin]}
               />
-              <Route path="/users" element={<Users />} roles={[Role.Admin]} />
-              <Route path="/admins" element={<Admins />} roles={[Role.Admin]} />
+              {/* <Route path="/users" element={<Users />} roles={[Role.Admin]} />
+              <Route path="/admins" element={<Admins />} roles={[Role.Admin]} /> */}
+              <Route path="/users" element={<Users endPoint={Endpoint.users} />} />
+              <Route path="/admins" element={<Users endPoint={Endpoint.administrators} />} />
+              <Route path="/tiposCanchas" element={<DetailsTables endPoint={Endpoint.typesOfCourt}/>} />
+              <Route path="/estadosCanchas" element={<DetailsTables endPoint={Endpoint.statusOfCourt}/>} />
+              <Route path="/estadosReservas" element={<DetailsTables endPoint={Endpoint.statusOfReservation}/>} />
+              <Route path="/estadosUsuarios" element={<DetailsTables endPoint={Endpoint.statusOfUser}/>} />
             </Route>
           </Route>
           {/* <Route path='*' element={<Missing/>} /> */}
