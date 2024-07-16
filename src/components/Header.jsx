@@ -6,6 +6,7 @@ import { IoClose } from "react-icons/io5";
 import { RiFootballFill } from "react-icons/ri";
 import { useAuth } from "../context/AuthContext";
 import ButtonCerrarSesion from "./ButtonCerrarSesion";
+import ButtonLogin from "./ButtonLogin";
 
 const Header = () => {
   const { currentUser, logout } = useAuth();
@@ -46,7 +47,9 @@ const Header = () => {
               {currentUser ? (
                 <ButtonCerrarSesion/>
               ) : (
-                <NavLink to="/login" className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor">Iniciar Sesión</NavLink>
+                <ButtonLogin/>
+                // <NavLink to="/login" className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor">Iniciar Sesión</NavLink>
+
               )}
             </div>
           </nav>
@@ -80,7 +83,8 @@ const Header = () => {
                 {currentUser ? (
                   <ButtonCerrarSesion/>
                 ) : (
-                  <NavLink to="/login" className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor">Iniciar Sesión</NavLink>
+                  <ButtonLogin/>
+                  // <NavLink to="/login" className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor">Iniciar Sesión</NavLink>
                 )}
               </div>
             </nav>

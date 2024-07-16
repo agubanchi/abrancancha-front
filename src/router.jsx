@@ -16,6 +16,8 @@ import Users from "./pages/Users";
 import DetailsTables from "./pages/DetailsTables";
 import Canchas from "./pages/Canchas";
 import { Endpoint } from "./services/fetchs";
+// import Configuracion from "./pages/Configuracion";
+import LayoutConfig from "./Layouts/LayoutConfig";
 
 const AppRouter = () => {
   return (
@@ -42,11 +44,15 @@ const AppRouter = () => {
               {/* <Route path="/users" element={<Users />} roles={[Role.Admin]} />
               <Route path="/admins" element={<Admins />} roles={[Role.Admin]} /> */}
               <Route path="/users" element={<Users endPoint={Endpoint.users} />} />
+              {/* <Route path="/configuracion" element={<Configuracion  />} /> */}
+              <Route element={<LayoutConfig />}>
               <Route path="/admins" element={<Users endPoint={Endpoint.administrators} />} />
               <Route path="/tiposCanchas" element={<DetailsTables endPoint={Endpoint.typesOfCourt}/>} />
               <Route path="/estadosCanchas" element={<DetailsTables endPoint={Endpoint.statusOfCourt}/>} />
               <Route path="/estadosReservas" element={<DetailsTables endPoint={Endpoint.statusOfReservation}/>} />
               <Route path="/estadosUsuarios" element={<DetailsTables endPoint={Endpoint.statusOfUser}/>} />
+              {/* tarifas, horarios, agendas, exepciones, club */}
+              </Route>
             </Route>
           </Route>
           {/* <Route path='*' element={<Missing/>} /> */}
