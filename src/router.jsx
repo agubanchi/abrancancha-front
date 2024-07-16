@@ -6,14 +6,15 @@ import LoginUser from "./components/LoginUser";
 import Dashboard from "./pages/Dashboard";
 import Reservations from "./pages/Reservations"
 import Reservas from "./pages/Reservas";
-import ProtectedRoute from "./components/utils/ProtectedRoute"; // Importar ProtectedRoute
+// import ProtectedRoute from "./components/utils/ProtectedRoute"; // Importar ProtectedRoute
 import Home from "./pages/Home";
 import Logueo from "./Layouts/Logueo";
 import PrivateRoute from "./components/utils/PrivateRoute";
 import Layout from "./Layouts/Layout";
 import Users from "./pages/Users";
-import Admins from "./pages/Admins";
+// import Admins from "./pages/Admins";
 import DetailsTables from "./pages/DetailsTables";
+import Canchas from "./pages/Canchas";
 import { Endpoint } from "./services/fetchs";
 
 const AppRouter = () => {
@@ -37,6 +38,7 @@ const AppRouter = () => {
                 element={<Reservations />}
                 roles={[Role.Admin]}
               />
+              <Route path="/canchas" element={<Canchas />} roles={[Role.Admin]} />
               {/* <Route path="/users" element={<Users />} roles={[Role.Admin]} />
               <Route path="/admins" element={<Admins />} roles={[Role.Admin]} /> */}
               <Route path="/users" element={<Users endPoint={Endpoint.users} />} />

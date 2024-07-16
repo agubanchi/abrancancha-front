@@ -1,54 +1,57 @@
-import React from "react";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { FaUser, FaLock, FaEnvelope, FaPhoneAlt } from "react-icons/fa";
-import Swal from "sweetalert2";
-import ErrorComp from "./Error";
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { FaUser, FaLock, FaEnvelope, FaPhoneAlt } from 'react-icons/fa';
+import Swal from 'sweetalert2';
+import ErrorComp from './Error';
 import { useAuth } from '../context/AuthContext';
-import { Endpoint } from "../services/fetchs";
+import { Endpoint } from '../services/fetchs';
 
 export default function RegisterUser() {
-  const { users, login, fetchCreate } = useAuth();
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const {  login, fetchCreate } = useAuth();
+  // const { users, login, fetchCreate } = useAuth();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const navigate = useNavigate();
 
-  const onSubmit = (userData) => {
-    setUsers([...users, userData]); // Establecer los datos del contacto en el state
-      // Verificar si el email ya está registrado
-      //este chequeo de email repetido, Ya lo hace la api
-    const emailExists = users.some(user => user.email === userData.email);
+  const onSubmit = async (userData) => {
+    // setUsers([...users, userData]); // Establecer los datos del contacto en el state
+    // Verificar si el email ya está registrado
+    //este chequeo de email repetido, Ya lo hace la api
+    // const emailExists = users.some((user) => user.email === userData.email);
 
-      if (emailExists) {
-        Swal.fire({
-          title: "Error",
-          text: "El correo electrónico ya está registrado",
-          icon: "error",
-          color:"#1d1d1d",
-          iconColor:"#1d1d1d",
-          confirmButtonColor:"#77da7e"
-        });
-        return;
-      }
-    
-  
-    fetch('http://localhost:3000/users', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(userData)
-    })
-    .then(response => {
+    // if (emailExists) {
+    //   Swal.fire({
+    //     title: 'Error',
+    //     text: 'El correo electrónico ya está registrado',
+    //     icon: 'error',
+    //     color: '#1d1d1d',
+    //     iconColor: '#1d1d1d',
+    //     confirmButtonColor: '#77da7e',
+    //   });
+    //   return;
+    // }
+    try {
+      const response = await fetchCreate({
+        endPoint: Endpoint.register,
+        data: userData,
+      });
+
+      const data = await response.json();
+
       if (!response.ok) {
         throw new ErrorComp(data.message || 'Error al registrar usuario');
       }
 
       Swal.fire({
-        title: "Usuario registrado!",
-        text: "Usuario registrado exitosamente",
-        icon: "success",
-        iconColor: "#77da7e",
-        confirmButtonColor: "#77da7e"
+        title: 'Usuario registrado!',
+        text: 'Usuario registrado exitosamente',
+        icon: 'success',
+        iconColor: '#77da7e',
+        confirmButtonColor: '#77da7e',
       });
 
       login(userData); // Almacenar datos del usuario en el contexto
@@ -58,16 +61,16 @@ export default function RegisterUser() {
       navigate('/login');
     } catch (error) {
       Swal.fire({
-        title: "Error",
+        title: 'Error',
         text: error.message || 'Error al registrar usuario',
-        icon: "error",
-        iconColor: "#1d1d1d",
-        confirmButtonColor: "#77da7e"
+        icon: 'error',
+        iconColor: '#1d1d1d',
+        confirmButtonColor: '#77da7e',
       });
     }
   };
 
-  const mensaje = "Crear Usuario";
+  const mensaje = 'Crear Usuario';
 
   return (
     <div className="flex items-center justify-center h-screen px-5">
@@ -85,8 +88,8 @@ export default function RegisterUser() {
               className="w-full p-3 rounded-md border-acentColor border-2"
               type="text"
               placeholder="Nombre completo"
-              {...register("fullname", {
-                required: "El Nombre de usuario es Obligatorio",
+              {...register('fullname', {
+                required: 'El Nombre de usuario es Obligatorio',
                 pattern: {
                   value: /^[a-zA-Z]{2,40}( [a-zA-Z]{2,40})+$/,
                   message: 'El Nombre de usuario no es correcto',
@@ -98,9 +101,8 @@ export default function RegisterUser() {
                 maxLength: {
                   value: 45,
                   message: 'Máximo 45 caracteres',
-                },                  
                 },
-              )}
+              })}
             />
           </div>
           {errors.fullname && <ErrorComp>{errors.fullname.message}</ErrorComp>}
@@ -108,7 +110,7 @@ export default function RegisterUser() {
           <div className="mb-5 font-Onest font-normal flex items-center gap-2">
             <FaPhoneAlt className="w-4 text-textColor" />
             <input
-            name='phone'
+              name="phone"
               id="phone"
               className="w-full p-3 rounded-md border-acentColor border-2"
               type="tel"

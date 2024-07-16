@@ -5,9 +5,14 @@ import Swal from 'sweetalert2';
 import { Endpoint } from '../services/fetchs';
 
 export default function Users({ endPoint }) {
-  const { currentUser, users, setUsers, fetchGet, fetchDelete, fetchUpdate } =
-    useAuth();
+  const {
+    currentUser,
+    /* users, setUsers, */ fetchGet,
+    fetchDelete,
+    fetchUpdate,
+  } = useAuth();
   const [editingUser, setEditingUser] = useState(null);
+  const [users, setUsers] = useState(null);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -18,14 +23,16 @@ export default function Users({ endPoint }) {
           throw new Error('Error al obtener los usuarios');
         }
         const data = await response.json();
-        setUsers(data, token);
+        setUsers(data);
+        // setUsers(data, token);
       } catch (error) {
         console.error('Error fetching users:', error);
       }
     };
 
     fetchUsers();
-  }, [setUsers, token]);
+  }, [setUsers, endPoint]);
+  // }, [setUsers, token]);
 
   const removeUser = async (id) => {
     //     if (endPoint=== Endpoint.administrators){
@@ -35,17 +42,17 @@ export default function Users({ endPoint }) {
     //       }
     //     }
 
-//si esta en vista administradores, habriaque preguntar si 
-// quiere quitarle permisos o eliminarlo directamente
+    //si esta en vista administradores, habriaque preguntar si
+    // quiere quitarle permisos o eliminarlo directamente
 
     Swal.fire({
       title: '¿Estás seguro?',
       text: 'Esta acción eliminará el usuario',
       icon: 'warning',
       showCancelButton: true,
-      color: "#1d1d1d",
-      iconColor: "#1d1d1d",
-      confirmButtonColor: "#77da7e",
+      color: '#1d1d1d',
+      iconColor: '#1d1d1d',
+      confirmButtonColor: '#77da7e',
       cancelButtonColor: '#1d1d1d',
       confirmButtonText: 'Sí, eliminar',
       cancelButtonText: 'Cancelar',
@@ -60,13 +67,13 @@ export default function Users({ endPoint }) {
           if (!response.ok) {
             throw new Error('Error al eliminar el usuario');
           }
-          setUsers(prevUsers => prevUsers.filter(user => user.id !== id));
+          setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
           Swal.fire({
             title: 'Eliminado!',
             text: 'El usuario ha sido eliminado.',
-            icon:  'success',
+            icon: 'success',
             color: '#1d1d1d',
-            iconColor: "#1d1d1d",
+            iconColor: '#1d1d1d',
             confirmButtonColor: '#77da7e',
             cancelButtonColor: '#1d1d1d',
           });
@@ -136,7 +143,7 @@ export default function Users({ endPoint }) {
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => (
+          {users?.map((user) => (
             <DashboardUsers
               key={user.id}
               user={user}

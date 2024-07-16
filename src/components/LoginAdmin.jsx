@@ -22,7 +22,6 @@ export default function LoginAdmin() {
 
   const onSubmit = async (data) => {
     const formData = getValues();
-    // fetch('http://localhost:3000/admin')
     fetchGet({ endPoint: Endpoint.administrators })
       .then((response) => {
         if (!response.ok) {

@@ -3,6 +3,7 @@ import DashboardReservations from '../components/DashboardReservations';
 import { useAuth } from '../context/AuthContext';
 import Swal from 'sweetalert2';
 import Modal from '../components/Modal';
+import { Endpoint } from '../services/fetchs';
 
 export default function Dashboard() {
   const { reservations, setReservations, fetchGet } = useAuth();
@@ -31,7 +32,8 @@ export default function Dashboard() {
     };
 
     fetchReservations();
-  }, [setReservations, token]);
+  }, [setReservations]);
+  // }, [setReservations, token]);
 
   const removeReservation = (id) => {
     Swal.fire({
@@ -48,12 +50,7 @@ export default function Dashboard() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const response = await fetch(`http://localhost:3000/reservations/${id}`, {
-            method: 'DELETE',
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          });
+          await fetchDelete({ endPoint: `${Endpoint.reservations}/${id}` });  // Asegúrate de pasar el token aquí
           if (!response.ok) {
             throw new Error('Error al eliminar la reserva');
           }
