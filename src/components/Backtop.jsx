@@ -8,7 +8,7 @@ const top = ()=>{
 
   return (
     <>
-    <div onClick={top} className='rounded-md bg-white/70 py-4 px-4 fixed top-auto bottom-0 left-auto right-0 mb-4 mr-4 cursor-pointer'>
+    <div onClick={top} className='rounded-md bg-white py-4 px-4 fixed top-auto bottom-0 left-auto right-0 mb-4 mr-4 cursor-pointer'>
     <FaChevronUp className=' text-acentColor'/> 
     </div>
     </>

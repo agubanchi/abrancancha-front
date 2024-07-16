@@ -23,7 +23,7 @@ const HeaderLogueo = () => {
             {/* <button onClick={handleLogout} className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor">Cerrar Sesión</button> */}
           </div>
         </div>
-      </div>
+      </div><h1></h1>
     </header>
   );
 }

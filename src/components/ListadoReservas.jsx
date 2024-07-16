@@ -33,16 +33,15 @@ export default function ListadoReservas({ onEdit }) {
     fetchReservations();
   }, [currentUser, setReservations, token]);
 
-  const removeReservation = async (id) => {
-    // Función para eliminar la reserva, similar a tu implementación actual
-  };
+
 
   const handleEditar = (id) => {
-    // Función para editar la reserva, similar a tu implementación actual
+    const reservaEdit = reservations.find(reserva => reserva.id === id);
+    onEdit(reservaEdit); // Pasar la reserva a editar al formulario
   };
 
   return (
-    <div className="md:w-1/2 lg:3/5 md:h-screen overflow-y-scroll">
+    <div className="md:w-1/2 lg:3/5 md:h-screen overflow-y-scroll ">
       {reservations.length ? (
         <>
           <h2 className="font-black text-3xl text-center text-acentColor">Listado de Reservas</h2>
@@ -50,7 +49,7 @@ export default function ListadoReservas({ onEdit }) {
             <span className="text-acentColor font-bold">Reservas</span>
           </p>
           {reservations.map((reserva) => (
-            <DetalleReserva key={reserva.id} reserva={reserva} removeReservation={removeReservation} handleEditar={handleEditar} />
+            <DetalleReserva key={reserva.id} reserva={reserva}  handleEditar={handleEditar} />
           ))}
         </>
       ) : (

@@ -53,8 +53,57 @@
       "url": "./gallery/img13.jpg"
     }
   ],
-  "users": [],
-  "reservations": [],
+  "users": [
+    {
+      "id": "f41f",
+      "fullname": "Juan Carlos",
+      "phone": "2244445599",
+      "email": "correo@correo.com",
+      "password": "Milanga"
+    }
+  ],
+  "reservations": [
+    {
+      "id": "a5be",
+      "cancha": "Cancha 1",
+      "tipo": "Futbol 7",
+      "date": "2024-07-06",
+      "hour": "10:30",
+      "userId": "48e7",
+      "precio": 32000,
+      "anticipo": 9600
+    },
+    {
+      "id": "3423",
+      "cancha": "Cancha 1",
+      "tipo": "Futbol 7",
+      "date": "2024-07-06",
+      "hour": "09:00",
+      "userId": "48e7",
+      "precio": 32000,
+      "anticipo": 9600
+    },
+    {
+      "id": "16ce",
+      "cancha": "Cancha 1",
+      "tipo": "Futbol 5",
+      "date": "2024-07-06",
+      "hour": "8:30",
+      "userId": "48e7",
+      "precio": 20000,
+      "anticipo": 6000
+    },
+    {
+      "id": "bb6d",
+      "cancha": "Cancha 1",
+      "tipo": "Futbol 7",
+      "date": "2024-07-06",
+      "hour": "8:30",
+      "userId": "48e7",
+      "precio": 32000,
+      "anticipo": 9600
+    }
+  ],
   "admin": [
     {
       "id": "8aca",

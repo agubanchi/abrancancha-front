@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { Endpoint, fetchAll, HttpMethod } from '../services/fetchs';
+import React, { createContext, useContext, useState, useEffect } from "react";
+import { Endpoint, fetchAll, HttpMethod } from "../services/fetchs";
+
 const AuthContext = createContext();
 export const Role = {
   User: 'user',
@@ -25,13 +26,8 @@ export const AuthProvider = ({ children }) => {
   });
 
   const [users, setUsers] = useState(() => {
-    const storedUsers = localStorage.getItem("users");
+    const storedUsers = localStorage.getItem('users');
     return storedUsers ? JSON.parse(storedUsers) : [];
-  });
-
-  const [token, setToken] = useState(() => {
-    const storedToken = localStorage.getItem("token");
-    return storedToken;
   });
 
   const [reservations, setReservations] = useState(() => {
@@ -102,15 +98,13 @@ export const AuthProvider = ({ children }) => {
   // const {fetchCreate} = useFetch(Endpoint.login); //<-esta la puse yo: mario
 
   useEffect(() => {
-    localStorage.setItem('typesOfCourt', JSON.stringify(typesOfCourt)); // Guardar Reservas en el almacenamiento local
-    localStorage.setItem('typesOfCourt', JSON.stringify(typesOfCourt)); // Guardar Reservas en el almacenamiento local
     localStorage.setItem('reservations', JSON.stringify(reservations));
     localStorage.setItem('users', JSON.stringify(users));
   }, [reservations, users, typesOfCourt]);
-  
+
   const login = (userData, token) => {
-    localStorage.setItem('user', JSON.stringify(userData));
-    localStorage.setItem("token", token)
+    localStorage.setItem("user", JSON.stringify(userData));
+    localStorage.setItem("token", token); // Aquí se almacena el token como una string.
     setCurrentUser(userData);
     setToken(token);
     setUsers((prevUsers) => [...prevUsers, userData]);
@@ -124,27 +118,17 @@ export const AuthProvider = ({ children }) => {
   };
 
   const confirmReservation = (reservationId) => {
-    const updatedReservations = reservations.map(reservation => {
-      if (reservation.id === reservationId) {
-        return { ...reservation, statusOfReservation: 'Confirmada' };
+    const updatedReservations = reservations.map(res => {
+      if (res.id === reservationId) {
+        return { ...res, status: 'confirmada' };
       }
-      return reservation;
-    });
-    setReservations(updatedReservations);
-  };
-
-  const cancelReservation = (reservationId) => {
-    const updatedReservations = reservations.map(reservation => {
-      if (reservation.id === reservationId) {
-        return { ...reservation, statusOfReservation: 'Cancelada' };
-      }
-      return reservation;
+      return res;
     });
     setReservations(updatedReservations);
   };
 
   const removeReservation = (reservationId) => {
-    const updatedReservations = reservations.filter(reservation => reservation.id !== reservationId);
+    const updatedReservations = reservations.filter(res => res.id !== reservationId);
     setReservations(updatedReservations);
   };
 
@@ -185,23 +169,24 @@ const fetchDelete = async ({ endPoint, idData, token }) => {
 };
 
   return (
-     <AuthContext.Provider value={{
-      currentUser,
-      users,
-      setUsers,
-      token,
-      reservations,
-      setReservations,
-      login,
-      logout,
-      confirmReservation,
-      cancelReservation,
-      removeReservation,
-      fetchGet,
-      fetchCreate,
-      fetchUpdate,
-      fetchDelete      
-    }}>
+    <AuthContext.Provider
+      value={{
+        currentUser,
+        token,
+        users,
+        setUsers,
+        reservations,
+        setReservations,
+        login,
+        logout,
+        confirmReservation,
+        removeReservation,
+        fetchGet,
+        fetchCreate,
+        fetchUpdate,
+        fetchDelete,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

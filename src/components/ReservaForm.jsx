@@ -101,25 +101,26 @@ export default function ReservaForm({
 
   useEffect(() => {
     if (editingReservation) {
-      setValue('cancha', editingReservation.cancha);
-      setValue('tipo', editingReservation.tipo);
-      setValue('date', editingReservation.date.split('T')[0]); // Extract only date part
-      setValue('hour', editingReservation.date.split('T')[1].slice(0, 5)); // Extract only time part
-      setPrice(precios[editingReservation.tipo] || 0);
-      setObservations(observaciones[editingReservation.cancha] || "");
+      setValue('court', editingReservation.court);
+      setValue('idType', editingReservation.idType);
+      setValue('timedate', editingReservation.timedate.split('T')[0]); // Extract only date part
+      setValue('hour', editingReservation.timedate.split('T')[1].slice(0, 5)); // Extract only time part
+      setPrice(precios[editingReservation.idType] || 0);
+      setObservations(observaciones[editingReservation.court] || "");
     }
   }, [editingReservation, setValue]);
 
-  const tipoSeleccionado = watch('tipo');
-
+  const tipoSeleccionado = watch('idType');
+  
   useEffect(() => {
     if (tipoSeleccionado) {
       const nuevoPrecio = precios[tipoSeleccionado] || 0;
       setPrice(nuevoPrecio);
+
     }
   }, [tipoSeleccionado]);
 
-  const canchaSeleccionada = watch('cancha');
+  const canchaSeleccionada = watch('court');
   
   useEffect(() => {
     if (canchaSeleccionada) {
@@ -135,15 +136,9 @@ export default function ReservaForm({
       const formattedDate = combinedDateTime.toISOString();
 
       const reservationData = {
-          // timedate: new Date(`${data.date} ${data.hour}`),
-          // price: data.court.tariff.price /* 5000 */,
-          // idCourt: data.court.id,
-          // idUser: currentUser.id,
-          // idStatus: 1,
-          //   ...(editingReservation && {id: editingReservation}),
-        cancha: data.cancha,
-        tipo: data.tipo,
-        date: formattedDate,
+        court: data.court,
+        idType: data.idType,
+        timedate: formattedDate,
         idUser: editingReservation ? editingReservation.idUser : currentUser.id,
         price,
         idCourt: canchaSeleccionada,  // Suponiendo que tienes un campo idCourt
@@ -223,13 +218,13 @@ export default function ReservaForm({
   };
 
   return (
-    <div className="md:w-full mx-0">
+    <div className="md:w-full mx-5">
       <form
         className="bg-white shadow-md rounded-lg py-10 px-5 mb-10"
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className="mb-5">
-          <label htmlFor="cancha" className="text-sm uppercase font-bold">
+          <label htmlFor="court" className="text-sm uppercase font-bold">
             Cancha
           </label>
 
@@ -242,9 +237,9 @@ export default function ReservaForm({
           {/* </select>           */}
 
           <select
-            id="cancha"
+            id="court"
             className="w-full p-3 rounded-md border-acentColor border-2"
-            {...register('cancha', { required: 'Selecciona una Cancha' })}
+            {...register("court", { required: "Selecciona una Cancha" })}
           >
             <option disabled value="">
               {' '}
@@ -256,13 +251,13 @@ export default function ReservaForm({
             <option value="Cancha 4">Cancha 4</option>
             <option value="Cancha 5">Cancha 5</option>
           </select>
-          {errors.cancha && (
-            <ErrorComp>{errors.cancha?.message.toString()}</ErrorComp>
+          {errors.court && (
+            <ErrorComp>{errors.court?.message.toString()}</ErrorComp>
           )}
         </div>
 
         <div className="mb-5">
-          <label htmlFor="tipo" className="text-sm uppercase font-bold">
+          <label htmlFor="idType" className="text-sm uppercase font-bold">
             Tipo
           </label>
           {/* <select id='tipo' className="w-full p-3 rounded-md border-acentColor border-2" defaultValue=" "
@@ -273,9 +268,9 @@ export default function ReservaForm({
           {/* <SelectGenerico endPoint={Endpoint.typesOfCourt} />
                 </select>    */}
           <select
-            id="tipo"
+            id="idType"
             className="w-full p-3 rounded-md border-acentColor border-2"
-            {...register('tipo', { required: 'Selecciona un Tipo de Cancha' })}
+            {...register("idType", { required: "Selecciona un Tipo de Cancha" })}
           >
             <option disabled value="">
               {' '}
@@ -286,8 +281,8 @@ export default function ReservaForm({
             <option value="Futbol 9">Futbol 9</option>
             <option value="Futbol 11">Futbol 11</option>
           </select>
-          {errors.tipo && (
-            <ErrorComp>{errors.tipo?.message.toString()}</ErrorComp>
+          {errors.idType && (
+            <ErrorComp>{errors.idType?.message.toString()}</ErrorComp>
           )}
         </div>
 
@@ -354,26 +349,13 @@ export default function ReservaForm({
           </label>
         </div>
 
-        <div className="mb-5">
-          <label className="text-sm uppercase font-bold">
-            Observaciones: {observations}
-          </label>
-        </div>
-
         <input
           type="submit"
           className="bg-acentColor w-full p-3 text-textColor uppercase font-bold hover:bg-textColor hover:text-acentColor cursor-pointer transition-colors"
           value="Guardar Reserva"
         />
       </form>
-      {editingReservation && (
-        <button
-          onClick={onDelete}
-          className="bg-red-600 w-full p-3 text-textColor uppercase font-bold hover:bg-red-800 cursor-pointer transition-colors mt-3"
-        >
-          Eliminar Reserva
-        </button>
-      )}
+  
     </div>
   );
 }

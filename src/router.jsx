@@ -1,20 +1,20 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { AuthProvider, Role } from './context/AuthContext';
-import RegisterUser from './components/RegisterUser';
-import LoginUser from './components/LoginUser';
-import Reservations from './pages/Reservations';
-import Reservas from './pages/Reservas';
-import ProtectedRoute from './components/utils/ProtectedRoute'; // Importar ProtectedRoute
-import Home from './pages/Home';
-import Logueo from './Layouts/Logueo';
-import PrivateRoute from './components/utils/PrivateRoute';
-import Layout from './Layouts/Layout';
-import Users from './pages/Users';
-import DetailsTables from './pages/DetailsTables';
-import Admins from './pages/Admins';
-import Canchas from './pages/Canchas';
-import { Endpoint } from './services/fetchs';
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider, Role } from "./context/AuthContext";
+import RegisterUser from "./components/RegisterUser";
+import LoginUser from "./components/LoginUser";
+import Dashboard from "./pages/Dashboard";
+import Reservations from "./pages/Reservations"
+import Reservas from "./pages/Reservas";
+import ProtectedRoute from "./components/utils/ProtectedRoute"; // Importar ProtectedRoute
+import Home from "./pages/Home";
+import Logueo from "./Layouts/Logueo";
+import PrivateRoute from "./components/utils/PrivateRoute";
+import Layout from "./Layouts/Layout";
+import Users from "./pages/Users";
+import Admins from "./pages/Admins";
+import DetailsTables from "./pages/DetailsTables";
+import { Endpoint } from "./services/fetchs";
 
 const AppRouter = () => {
   return (
@@ -31,7 +31,7 @@ const AppRouter = () => {
               <Route path="/reservas" element={<Reservas />} roles={[Role.User]} />
             </Route>
             <Route element={<Layout />}>
-              <Route path="/canchas" element={<Canchas />} roles={[Role.Admin]} />
+              <Route path="/dashboard" element={<Dashboard />} roles={[Role.Admin]} />
               <Route
                 path="/reservations"
                 element={<Reservations />}

@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import DashboardReservations from '../components/DashboardReservations';
 import { useAuth } from '../context/AuthContext';
 import Swal from 'sweetalert2';
 import Modal from '../components/Modal';
-import { Endpoint, HttpMethod, fetchAll } from '../services/fetchs'; // Asegúrate de importar correctamente
 
-export default function Reservations() {
-  const { reservations, setReservations,fetchDelete, token, fetchGet } = useAuth();
+export default function Dashboard() {
+  const { reservations, setReservations, fetchGet } = useAuth();
   const [editingReservation, setEditingReservation] = useState(null);
   const [showModal, setShowModal] = useState(false);
+
   useEffect(() => {
     const fetchReservations = async () => {
       try {
@@ -33,44 +33,52 @@ export default function Reservations() {
     fetchReservations();
   }, [setReservations, token]);
 
-  const removeReservation = async (id) => {
+  const removeReservation = (id) => {
     Swal.fire({
       title: '¿Estás seguro?',
       text: 'Esta acción eliminará la reserva',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#77da7e',
+      color: "#1d1d1d",
+      iconColor: "#1d1d1d",
+      confirmButtonColor: "#77da7e",
       cancelButtonColor: '#1d1d1d',
       confirmButtonText: 'Sí, eliminar',
       cancelButtonText: 'Cancelar',
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await fetchDelete({ endPoint: `${Endpoint.reservations}/${id}`, token });  // Asegúrate de pasar el token aquí
-          setReservations(prevReservations =>
-            prevReservations.filter(reserva => reserva.id !== id)
-          );
-  
+          const response = await fetch(`http://localhost:3000/reservations/${id}`, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+          if (!response.ok) {
+            throw new Error('Error al eliminar la reserva');
+          }
+          setReservations(prevReservations => prevReservations.filter(reserva => reserva.id !== id));
           Swal.fire({
-            title: 'Eliminado!',
+           title: 'Eliminado!',
             text: 'La reserva ha sido eliminada.',
-            icon: 'success',
+            icon:  'success',
+            color: '#1d1d1d',
+            iconColor: "#1d1d1d",
             confirmButtonColor: '#77da7e',
             cancelButtonColor: '#1d1d1d',
+              
           });
         } catch (error) {
-          console.error('Error al eliminar la reserva:', error);
+          console.error("Error al eliminar la reserva:", error);
           Swal.fire('Error', 'Hubo un problema al eliminar la reserva.', 'error');
         }
       }
     });
   };
-  
-  
 
   const handleEdit = (reservation) => {
-    setShowModal(true);
     setEditingReservation(reservation);
+    setShowModal(true);
   };
 
   const handleCloseModal = () => {
@@ -86,7 +94,7 @@ export default function Reservations() {
       <table className="w-full h-screen">
         <thead>
           <tr className='text-center text-white flex justify-between gap-2 w-full bg-acentColor px-4'>
-            <th className='w-40'>Nombre y Apellido</th>
+          <th className='w-40'>Nombre y Apellido</th>
             <th className='w-40'>Email</th>
             <th className='w-40'>Teléfono</th>
             <th className='w-40'>Cancha</th>
