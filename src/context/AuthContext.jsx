@@ -102,10 +102,7 @@ export const AuthProvider = ({ children }) => {
     return storedToken || null; // Aquí no se debe usar JSON.parse ya que el token es una string.
   });
 
-  const [typesOfCourt, setTypesOfCourt] = useState(() => {
-    const storedTypesOfCourt = localStorage.getItem("typesOfCourt");
-    return storedTypesOfCourt ? JSON.parse(storedTypesOfCourt) : [];
-  });
+  
 
   useEffect(() => {
     localStorage.setItem('typesOfCourt', JSON.stringify(typesOfCourt));
