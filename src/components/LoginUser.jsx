@@ -86,7 +86,7 @@ export default function LoginUser() {
             </button>
           </div>
           <div className="text-center py-2">
-            <a className="text-ms border-b-2 border-acentColor" href="#">
+            <a className="text-ms border-b-2 border-acentColor" href="/reset">
               ¿Olvidaste tu Contraseña?
             </a>
           </div>

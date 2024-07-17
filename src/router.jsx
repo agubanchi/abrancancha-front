@@ -18,6 +18,7 @@ import Canchas from "./pages/Canchas";
 import { Endpoint } from "./services/fetchs";
 // import Configuracion from "./pages/Configuracion";
 import LayoutConfig from "./Layouts/LayoutConfig";
+import LoginReset from "./components/LoginReset";
 
 const AppRouter = () => {
   return (
@@ -28,6 +29,8 @@ const AppRouter = () => {
           <Route element={<Logueo />}>
             <Route path="/login" element={<LoginUser />} />
             <Route path="/registrar" element={<RegisterUser />} />
+            <Route path="/reset" element={<LoginReset />} />
+            <Route path="/reset/:resetPassToken" element={<LoginReset />} />
           </Route>
           <Route element={<PrivateRoute roles={[Role.User, Role.Admin]} />}>
             <Route element={<Logueo />}>
