@@ -77,8 +77,6 @@ export default function LoginReset() {
     }
   };
 
-  const mensaje = 'Ingresa su email ' + params.resetPassToken + ' ---';
-
   return (
     <div className="flex items-center justify-center h-screen px-5">
       <div className="bg-white shadow-md rounded-lg py-10 px-5 mb-10 md:w-1/2 w-full">
@@ -86,7 +84,7 @@ export default function LoginReset() {
           {!params.resetPassToken ? (
             <>
               <h1 className="font-black text-2xl py-4 text-center text-textColor">
-                {mensaje}
+                Ingrese su email
               </h1>
               <div className="mb-5 font-Onest font-normal flex items-center gap-2">
                 <FaEnvelope className="w-4 text-textColor" />
@@ -109,6 +107,9 @@ export default function LoginReset() {
             </>
           ) : (
             <>
+            <h1 className="font-black text-2xl py-4 text-center text-textColor">
+                Ingrese su nueva contraseña
+              </h1>
               <div className="mb-5 font-Onest font-normal flex items-center gap-2">
                 <FaLock className="w-4 text-textColor" />
                 <input
