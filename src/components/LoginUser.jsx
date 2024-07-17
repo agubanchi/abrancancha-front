@@ -17,7 +17,7 @@ export default function LoginUser() {
   
       const response = await fetchCreate({
         endPoint: Endpoint.login,
-      // data: { email: "marioepatronelli@gmail.com", password: "Ab*12345" },
+       data: { email: "marioepatronelli@gmail.com", password: "Ab*12345" },
       data: formData
       });
       const data = await response.json();
