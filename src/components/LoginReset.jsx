@@ -39,9 +39,12 @@ export default function LoginReset() {
         throw new Error(data.message);
       }
       if (!params.resetPassToken) {
-        const YOUR_SERVICE_ID = 'service_iitxbl8';
-        const YOUR_TEMPLATE_ID = 'template_zajvr7v';
-        const YOUR_PUBLIC_KEY = { publicKey: 'JkLlSZwhcfHdeEeYF' };
+        // crear archivo .env.local en la raiz del proyecto con estas variables
+        const YOUR_SERVICE_ID = import.meta.env.VITE_YOUR_SERVICE_ID;
+        const YOUR_TEMPLATE_ID = import.meta.env.VITE_YOUR_TEMPLATE_ID;
+        const YOUR_PUBLIC_KEY = {
+          publicKey: import.meta.env.VITE_YOUR_PUBLIC_KEY,
+        };
 
         emailjs.send(
           YOUR_SERVICE_ID,
@@ -81,6 +84,9 @@ export default function LoginReset() {
     <div className="flex items-center justify-center h-screen px-5">
       <div className="bg-white shadow-md rounded-lg py-10 px-5 mb-10 md:w-1/2 w-full">
         <form onSubmit={handleSubmit(onSubmit)}>
+          <h1 className="font-black text-3xl py-4 text-center text-textColor">
+            Reseteo de contraseña
+          </h1>
           {!params.resetPassToken ? (
             <>
               <h1 className="font-black text-2xl py-4 text-center text-textColor">
@@ -107,7 +113,7 @@ export default function LoginReset() {
             </>
           ) : (
             <>
-            <h1 className="font-black text-2xl py-4 text-center text-textColor">
+              <h1 className="font-black text-2xl py-4 text-center text-textColor">
                 Ingrese su nueva contraseña
               </h1>
               <div className="mb-5 font-Onest font-normal flex items-center gap-2">

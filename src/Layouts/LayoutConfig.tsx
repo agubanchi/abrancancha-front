@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import React from 'react';
-import MenuLateral from '../pages/MenuLateral';
+import MenuLateral from '../components/MenuLateral';
 
 export default function LayoutConfig() {
   return (

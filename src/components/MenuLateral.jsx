@@ -4,7 +4,7 @@ import React from 'react';
 // import { RiFootballFill } from "react-icons/ri";
 import { NavLink, useNavigate } from 'react-router-dom';
 // import { useAuth } from '../context/AuthContext'; // Importa el contexto de autenticación
-import ButtonCerrarSesion from '../components/ButtonCerrarSesion';
+import ButtonCerrarSesion from './ButtonCerrarSesion';
 
 export default function MenuLateral() {
   const class_Name =
