@@ -11,7 +11,7 @@ export default function MenuLateral() {
     'hover:text-acentColor border-b-2 border-transparent hover:border-acentColor py-2';
 
   return (
-    <div className="flex flex-col h-full bg-gray-900 text-white">
+    <div className="flex flex-col h-full  text-white">
       <nav className="flex flex-col gap-4 p-4">
         {/* <div className="flex flex-col gap-4"> */}
           <NavLink to="/rarifas" className={class_Name}>
