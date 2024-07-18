@@ -42,7 +42,7 @@ export default function Users({ endPoint }) {
     //       }
     //     }
 
-    //si esta en vista administradores, habriaque preguntar si
+    //si esta en vista administradores, habria que preguntar si
     // quiere quitarle permisos o eliminarlo directamente
 
     Swal.fire({
@@ -132,6 +132,20 @@ export default function Users({ endPoint }) {
           : ' Usuarios'}
       </h1>
       <table className="w-full h-screen">
+        {endPoint === Endpoint.administrators && (
+          <div className="items-center justify-around text-center flex py-4 gap-2">
+            <button className="bg-white rounded-md text-textColor px-6 py-3 md:text-[.9rem] font-Onest uppercase hover:bg-acentColor hover:text-textColor hover:font-bold">
+              Agregar Usuario
+            </button>
+            {/* <NavLink
+              to="/registrar"
+              className="bg-white hover:bg-acentColor hover:text-textColor border px-2 py-2  border-acentColor rounded-md"
+            >
+              Agregar Usuario
+            </NavLink> */}
+          </div>
+        )}
+
         <thead>
           <tr className="text-center text-white flex justify-between gap-2 w-full bg-acentColor px-4">
             <th className="w-10">ID</th>

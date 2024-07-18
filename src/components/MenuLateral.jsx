@@ -11,10 +11,10 @@ export default function MenuLateral() {
     'hover:text-acentColor border-b-2 border-transparent hover:border-acentColor py-2';
 
   return (
-    <div className="flex flex-col h-full bg-gray-900 text-white">
+    <div className="flex flex-col h-full text-white">
       <nav className="flex flex-col gap-4 p-4">
         {/* <div className="flex flex-col gap-4"> */}
-          <NavLink to="/rarifas" className={class_Name}>
+          {/* <NavLink to="/tarifas" className={class_Name}>
             Tarifas**
           </NavLink>
           <NavLink to="/horarios" className={class_Name}>
@@ -22,7 +22,7 @@ export default function MenuLateral() {
           </NavLink>
           <NavLink to="/excepciones" className={class_Name}>
             Excepciones**
-          </NavLink>
+          </NavLink> */}
           <NavLink to="/tiposCanchas" className={class_Name}>
             Tipos de cancha
           </NavLink>
@@ -38,9 +38,9 @@ export default function MenuLateral() {
           <NavLink to="/admins" className={class_Name}>
             Administradores
           </NavLink>
-          <NavLink to="/club" className={class_Name}>
+          {/* <NavLink to="/club" className={class_Name}>
             Club**
-          </NavLink>
+          </NavLink> */}
         {/* </div> */}
       </nav>
     </div>

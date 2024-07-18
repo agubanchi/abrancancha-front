@@ -37,7 +37,7 @@ const HeaderDashboard = () => {
             <NavLink to="/estadosUsuarios" className="hover:text-acentColor border px-2 py-2  border-acentColor rounded-md">Tarifas</NavLink>
             <NavLink to="/estadosUsuarios" className="hover:text-acentColor border px-2 py-2  border-acentColor rounded-md">Club</NavLink>
             <NavLink to="/estadosUsuarios" className="hover:text-acentColor border px-2 py-2  border-acentColor rounded-md">Horarios</NavLink> */}
-            <NavLink to="/estadosReservas" className="hover:text-acentColor border px-2 py-2  border-acentColor rounded-md">Configuracion</NavLink>
+            <NavLink to="/admins" className="hover:text-acentColor border px-2 py-2  border-acentColor rounded-md">Configuracion</NavLink>
             </div>
             <div className='gap-2 flex items-center'>
               {/* <button onClick={handleLogout} className="bg-acentColor font-Bebas text-2xl text-textColor py-3 px-12 rounded-full hover:bg-white hover:text-acentColor">Cerrar Sesión</button> */}
