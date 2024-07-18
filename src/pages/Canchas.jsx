@@ -81,7 +81,11 @@ export default function Canchas() {
   return (
     <>
       <h1 className="mb-2 font-Bebas text-center py-2 text-acentColor lg:text-[5.7rem] lg:leading-[5.2rem] text-[4.7rem] leading-[4.9rem] uppercase">
+<<<<<<< HEAD
         Canchas
+=======
+        Lista de Canchas
+>>>>>>> 1f124851b1a0a0ea768287aecfca36e37d2a9d9b
       </h1>
       <table className="w-full h-screen">
         <thead>
