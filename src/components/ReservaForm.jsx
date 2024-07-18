@@ -5,6 +5,7 @@ import { useAuth } from "../context/AuthContext";
 
 export default function ReservaForm({ editingReservation,setEditingReservation, onClose }) {
   const { register, handleSubmit, setValue, formState: { errors }, reset, watch } = useForm();
+
   const { currentUser, reservations, setReservations } = useAuth();
   const today = new Date();
   const maxDate = new Date(today);
@@ -52,6 +53,7 @@ export default function ReservaForm({ editingReservation,setEditingReservation, 
     'Futbol 11': 48000,
   };
 
+
   const porcentajeAnticipo = 0.3;
 
   useEffect(() => {
@@ -70,6 +72,10 @@ export default function ReservaForm({ editingReservation,setEditingReservation, 
   useEffect(() => {
     if (tipoSeleccionado) {
       const nuevoPrecio = precios[tipoSeleccionado] || 0;
+
+      setPrecio(nuevoPrecio);
+      setAnticipo(nuevoPrecio * porcentajeAnticipo);
+
       setPrice(nuevoPrecio);
 
     }
@@ -85,6 +91,9 @@ export default function ReservaForm({ editingReservation,setEditingReservation, 
   }, [canchaSeleccionada]);
 
   const onSubmit = async (data) => {
+
+   
+  
     try {
       const method = editingReservation ? 'PATCH' : 'POST';
       const endpoint = editingReservation 
@@ -97,7 +106,7 @@ export default function ReservaForm({ editingReservation,setEditingReservation, 
         timedate: formattedDate,
         idUser: editingReservation ? editingReservation.idUser : currentUser.id,
         price,
-        idCourt: canchaSeleccionada,  // Suponiendo que tienes un campo idCourt
+        observations
       };
 
       const response = await fetch(endpoint, {
@@ -124,7 +133,10 @@ export default function ReservaForm({ editingReservation,setEditingReservation, 
       });
 
       reset();
+
+
       setEditingReservation(null);
+
       onClose();
     } catch (error) {
       console.error("Error al guardar la reserva:", error);
@@ -254,12 +266,19 @@ export default function ReservaForm({ editingReservation,setEditingReservation, 
         
         <div className="mb-5">
           <label className="text-sm uppercase font-bold">
+
+            Precio: ${precio}
+
             Precio: ${price}
+
           </label>
         </div>
 
         <div className="mb-5">
           <label className="text-sm uppercase font-bold">
+
+            Seña/Anticipo: ${anticipo}
+
             Seña/Anticipo: ${price * porcentajeAnticipo}
           </label>
         </div>
