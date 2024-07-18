@@ -81,7 +81,7 @@ export default function Canchas() {
   return (
     <>
       <h1 className="mb-2 font-Bebas text-center py-2 text-acentColor lg:text-[5.7rem] lg:leading-[5.2rem] text-[4.7rem] leading-[4.9rem] uppercase">
-        Lista de Reservas
+        Canchas
       </h1>
       <table className="w-full h-screen">
         <thead>
