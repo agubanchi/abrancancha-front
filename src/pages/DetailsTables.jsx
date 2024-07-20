@@ -3,14 +3,15 @@ import DashboardDetailsTables from '../components/DashboardDetailsTables';
 import { useAuth } from '../context/AuthContext';
 import Swal from 'sweetalert2';
 import { Endpoint } from '../services/fetchs';
+import ButtonAdd from '../components/ButtonAdd';
 
 export default function DetailsTables({ endPoint }) {
-  const { fetchGet, fetchDelete, fetchUpdate } = useAuth();
+  const { fetchGet, fetchCreate, fetchDelete, fetchUpdate } = useAuth();
   const [table, setTable] = useState(null);
   const [editingItem, setEditingItem] = useState(null);
 
   useEffect(() => {
-    const fetchTabla = async () => {      
+    const fetchTabla = async () => {
       try {
         const response = await fetchGet({ endPoint: endPoint });
         if (!response.ok) {
@@ -25,6 +26,51 @@ export default function DetailsTables({ endPoint }) {
 
     fetchTabla();
   }, [fetchGet, setTable, endPoint]);
+
+  const createItem = async (tabla) => {
+    Swal.fire({
+      title: 'Ingrese un nombre',
+      input: 'text',
+      inputAttributes: {
+        autocapitalize: 'off',
+      },
+      showCancelButton: true,
+      confirmButtonText: 'Aceptar',
+      showLoaderOnConfirm: true,
+      preConfirm: async (name) => {
+        try {
+          const response = await fetchCreate({
+            endPoint: endPoint,
+            data: {name: name},
+          });
+          const data = await response.json();
+          // debugger
+          if (!response.ok) {
+            return Swal.showValidationMessage(`
+              ${JSON.stringify(data.message|| 'Error al agregar el dato')}
+            `);
+          }
+          setTable(prev => [ ...prev, (data) ]);
+          // return response.json();
+        } catch (error) {
+          Swal.showValidationMessage(`
+            Request failed: ${error}
+          `);
+        }
+      },
+      allowOutsideClick: () => !Swal.isLoading(),
+    }).then((result) => {
+      debugger
+      if (result.isConfirmed) {
+          Swal.fire('Agregado!', 'El dato ha sido agregado.', 'success');
+
+        // Swal.fire({
+        //   title: `${result.value.login}'s avatar`,
+        //   imageUrl: result.value.avatar_url,
+        // });
+      }
+    });
+  };
 
   const removeItem = async (id) => {
     Swal.fire({
@@ -98,6 +144,7 @@ export default function DetailsTables({ endPoint }) {
         Lista de {' ' + tablaSimple[endPoint]}
       </h1>
       <table className="w-full h-screen">
+        <ButtonAdd handleAdd={createItem} caption={tablaSimple[endPoint]} />
         <thead>
           <tr className="text-center text-white flex justify-between gap-2 w-full bg-acentColor px-4">
             <th className="w-10">ID</th>

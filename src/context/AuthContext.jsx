@@ -39,11 +39,31 @@ export const AuthProvider = ({ children }) => {
     const storedToken = localStorage.getItem('token');
     return storedToken;
   });
-
+  //-----------------------------------------------------------------------------+
   const [typesOfCourt, setTypesOfCourt] = useState(() => {
     const storedTypesOfCourt = localStorage.getItem('typesOfCourt');
     return storedTypesOfCourt ? JSON.parse(storedTypesOfCourt) : [];
   });
+
+  const getTypesOfCourtNameById = (id) => {
+    // return getNameById(id, typesOfCourt);
+    const match = typesOfCourt.find((item) => item.id === id);
+    return match ? match.name : 'No encontrado';
+  };
+  const getNameById = (id, table) => {
+    const match = table.find((item) => item.id === id);
+    return match ? match.name : 'No encontrado';
+  };
+  //-----------------------------------------------------------------------------+
+  const getById = (id, array) => array.find((item) => item.id === id);
+  // const getNameById = (data) => (data ? data.name : 'No encontrado');
+  // const getPriceById = (data) => (data ? data.price : 'No encontrado');
+
+  const getTariffPriceById = (id) => {
+    const match = tariffs.find((item) => item.id === id);
+    return match ? match.price : 'No encontrado';
+  };
+
   const [courts, setCourts] = useState(() => {
     const storedCourts = localStorage.getItem('Courts');
     return storedCourts ? JSON.parse(storedCourts) : [];
@@ -146,7 +166,7 @@ export const AuthProvider = ({ children }) => {
   const fetchGet = async ({ endPoint, idData }) =>
     fetchAll({ endPoint, method: HttpMethod.GET, idData, token: getToken });
   //-----------------------------------------------------------------------------+
-  const fetchCreate = async ({ endPoint, data, token }) =>
+  const fetchCreate = async ({ endPoint, data }) =>
     await fetchAll({
       endPoint,
       method: HttpMethod.POST,
@@ -180,6 +200,7 @@ export const AuthProvider = ({ children }) => {
         // users,
         // setUsers,
         typesOfCourt,
+        getTypesOfCourtNameById,
         reservations,
         setReservations,
         login,

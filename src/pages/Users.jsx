@@ -3,16 +3,21 @@ import DashboardUsers from '../components/DashboardUsers';
 import { useAuth } from '../context/AuthContext';
 import Swal from 'sweetalert2';
 import { Endpoint } from '../services/fetchs';
+import ButtonAdd from '../components/ButtonAdd';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function Users({ endPoint }) {
   const {
     currentUser,
     /* users, setUsers, */ fetchGet,
+    fetchCreate,
     fetchDelete,
     fetchUpdate,
   } = useAuth();
   const [editingUser, setEditingUser] = useState(null);
   const [users, setUsers] = useState(null);
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -33,6 +38,16 @@ export default function Users({ endPoint }) {
     fetchUsers();
   }, [setUsers, endPoint]);
   // }, [setUsers, token]);
+
+  const createUser = async (user) => {
+    // navigate('/registrar');
+    // https://api.github.com/users/${login}
+    // https://api.github.com/users/Nicolas-Mansilla
+    // https://api.github.com/users/agubanchi
+    // https://api.github.com/users/elMarito
+    // https://api.github.com/users/JuanTomasL
+
+  };
 
   const removeUser = async (id) => {
     //     if (endPoint=== Endpoint.administrators){
@@ -133,17 +148,7 @@ export default function Users({ endPoint }) {
       </h1>
       <table className="w-full h-screen">
         {endPoint === Endpoint.administrators && (
-          <div className="items-center justify-around text-center flex py-4 gap-2">
-            <button className="bg-white rounded-md text-textColor px-6 py-3 md:text-[.9rem] font-Onest uppercase hover:bg-acentColor hover:text-textColor hover:font-bold">
-              Agregar Usuario
-            </button>
-            {/* <NavLink
-              to="/registrar"
-              className="bg-white hover:bg-acentColor hover:text-textColor border px-2 py-2  border-acentColor rounded-md"
-            >
-              Agregar Usuario
-            </NavLink> */}
-          </div>
+          <ButtonAdd handleAdd={createUser} caption="Administrador" />
         )}
 
         <thead>
