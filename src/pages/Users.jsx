@@ -155,10 +155,10 @@ export default function Users({ endPoint }) {
           <tr className="text-center text-white flex justify-between gap-2 w-full bg-acentColor px-4">
             <th className="w-10">ID</th>
             <th className="w-25">Avatar</th>
-            <th className="w-40">Nombre y Apellido</th>
-            <th className="w-50">Email</th>
-            <th className="w-40">Teléfono</th>
-            <th className="w-40">Acciones</th>
+            <th className="w-40 break-all">Nombre y Apellido</th>
+            <th className="w-50 break-all">Email</th>
+            <th className="w-40 break-all">Teléfono</th>
+            <th className="w-40 break-all">Acciones</th>
           </tr>
         </thead>
         <tbody>

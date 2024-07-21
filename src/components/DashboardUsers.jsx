@@ -8,10 +8,10 @@ const DashboardUsers = ({ user, removeUser, handleEdit, editingUser, setEditingU
   const isEditing = editingUser && editingUser.id === user.id;
 
   return (
-    <tr className='text-center text-white flex justify-between gap-2 w-full px-4 py-2 items-center'>
+    <tr className='text-center  text-white flex justify-between gap-2 w-full px-4 py-2 items-center'>
       <td className="content-start w-10">{user.id}</td>
       <td className="content-start w-25"><img className="w-full max-w-20 rounded-lg items-center justify-center" src={user.avatar} alt={user.fullname} /></td>
-     <td className='w-40'>
+     <td className='w-40 break-all'>
         {isEditing ? (
           <input
           className="text-textColor text-center my-2 py-1  border-acentColor rounded-md border-2"
@@ -23,7 +23,7 @@ const DashboardUsers = ({ user, removeUser, handleEdit, editingUser, setEditingU
           user.fullname
         )}
       </td>
-      <td className='w-40'>
+      <td className='w-40 break-all'>
         {isEditing ? (
           <input
           className="text-textColor text-center my-2 py-1  border-acentColor rounded-md border-2"
@@ -35,7 +35,7 @@ const DashboardUsers = ({ user, removeUser, handleEdit, editingUser, setEditingU
           user.email
         )}
       </td>
-      <td className='w-40'>
+      <td className='w-40 break-all'>
         {isEditing ? (
           <input
           className="text-textColor text-center my-2 py-1  border-acentColor rounded-md border-2"
@@ -47,7 +47,7 @@ const DashboardUsers = ({ user, removeUser, handleEdit, editingUser, setEditingU
           user.phone
         )}
       </td>
-      <td className='w-40 flex justify-around'>
+      <td className='w-40 flex justify-around '>
         {isEditing ? (
           <>
             <FaCheckSquare onClick={() => updateUser(editingUser)} />
