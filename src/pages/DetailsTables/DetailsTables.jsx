@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import DashboardDetailsTables from '../components/DashboardDetailsTables';
-import { useAuth } from '../context/AuthContext';
+import DashboardDetailsTables from './DashboardDetailsTables';
+import { useAuth } from '../../context/AuthContext';
 import Swal from 'sweetalert2';
-import { Endpoint } from '../services/fetchs';
-import ButtonAdd from '../components/ButtonAdd';
+import { Endpoint } from '../../services/fetchs';
+import ButtonAdd from '../../components/ButtonAdd';
 
 export default function DetailsTables({ endPoint }) {
   const { fetchGet, fetchCreate, fetchDelete, fetchUpdate } = useAuth();
