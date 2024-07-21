@@ -19,6 +19,7 @@ import { Endpoint } from "./services/fetchs";
 // import Configuracion from "./pages/Configuracion";
 import LayoutConfig from "./Layouts/LayoutConfig";
 import LoginReset from "./components/LoginReset";
+import Tarifas from "./pages/tarifas/Tarifas";
 
 const AppRouter = () => {
   return (
@@ -54,7 +55,11 @@ const AppRouter = () => {
               <Route path="/estadosCanchas" element={<DetailsTables endPoint={Endpoint.statusOfCourt}/>} />
               <Route path="/estadosReservas" element={<DetailsTables endPoint={Endpoint.statusOfReservation}/>} />
               <Route path="/estadosUsuarios" element={<DetailsTables endPoint={Endpoint.statusOfUser}/>} />
-              {/* tarifas, horarios, agendas, exepciones, club */}
+              <Route path="/tarifas" element={<Tarifas />}/>
+              {/* <Route path="/horarios" element={<Horarios />}/> */}
+              {/* <Route path="/agendas" element={<Agendas />}/> */}
+              {/* <Route path="/exepciones" element={<Exepciones />}/> */}
+              {/* <Route path="/club" element={<Club />}/> */}
               </Route>
             </Route>
           </Route>

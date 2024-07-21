@@ -14,13 +14,13 @@ export default function MenuLateral() {
     <div className="flex flex-col h-full text-white">
       <nav className="flex flex-col gap-4 p-4">
         {/* <div className="flex flex-col gap-4"> */}
-          {/* <NavLink to="/tarifas" className={class_Name}>
-            Tarifas**
+          <NavLink to="/tarifas" className={class_Name}>
+            Tarifas
           </NavLink>
-          <NavLink to="/horarios" className={class_Name}>
+          {/* <NavLink to="/horarios" className={class_Name}>
             Horarios**
-          </NavLink>
-          <NavLink to="/excepciones" className={class_Name}>
+          </NavLink> */}
+          {/* <NavLink to="/excepciones" className={class_Name}>
             Excepciones**
           </NavLink> */}
           <NavLink to="/tiposCanchas" className={class_Name}>
